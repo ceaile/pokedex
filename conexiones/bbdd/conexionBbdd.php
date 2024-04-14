@@ -9,7 +9,7 @@ $passBbdd = "";
 
 try {
     $conexionBbdd = new PDO($nombreConexion, $usuarioBbdd, $passBbdd);
-    //$conexionBbdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //autogenerado
+    $conexionBbdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //autogenerado
 } catch(PDOException $e) {
     die($e->getMessage());
 }
