@@ -1,1 +1,66 @@
 /* incluir bootstrap */
+body {
+    background-image: url("../img/fondo.jpg");
+    background-repeat: no-repeat;
+}
+
+header {
+    background-color: #ff0000; /* Red color */
+    color: #ffffff;
+    padding: 1px;
+    text-align: center;
+    border-radius: 50px;
+}
+nav {
+    background-color: #ff0000; /* Red color */
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px; /* Add rounded borders */
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+}
+
+nav ul li {
+    flex: 1;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+nav ul li input[type="text"] {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 5px;
+    flex: 2;
+}
+
+nav ul li button {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create a 4-column grid */
+    grid-gap: 10px;
+    justify-content: center;
+    align-content: center;
+    margin: 20px;
+}
+
+.redondearbordes{
+    border-radius: 50px;
+}
