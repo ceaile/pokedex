@@ -1,0 +1,13 @@
+{
+    "name": "vendor-poke/pokedex-project",
+    "description": "Project made by Celia Sanchez and Alejandro Ayala as Final Project for their Higher Degree in Web Development",
+    "type": "project",
+    "license": "n",
+    "autoload": {
+        "psr-4": {
+            "VendorPoke\\PokedexProject\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
