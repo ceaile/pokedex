@@ -17,13 +17,14 @@ h1 {
 
 .pokemon-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 30px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;
   margin-top: 20px;
+  
 }
 
 .pokemon-block,
@@ -107,7 +108,7 @@ h1 {
 }
 
 /* Media query para pantallas con un ancho máximo de 900px */
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .pokemon-container {
     grid-template-columns: 1fr;  /* Cambio a una sola columna */
   }
