@@ -6,16 +6,16 @@
 </head>
 <body>
     <header>
-    <nav>
-        <ul>
-            <li><a id="inicio" href="#">Inicio</a><img height=1px width=40px src="../img/spacer.gif" alt=""><a href="#">Mis Equipos</a></li>
-            <li>
-                <input class="redondearbordes" type="text" placeholder="Buscar">
-                <button class="redondearbordes"><img width=15px height=15px src="../img/filtro.gif"></button>
-            </li>
-            <li><a href="#">Login</a></li>
-        </ul>
-    </nav>
+        <nav>
+            <ul>
+                <li><a id="inicio" href="#">Inicio</a><img height=1px width=40px src="../img/spacer.gif" alt=""><a href="#">Mis Equipos</a></li>
+                <li>
+                    <input class="redondearbordes" type="text" placeholder="Buscar">
+                    <button class="redondearbordes"><img width=15px height=15px src="../img/filtro.gif"></button>
+                </li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <div class="grid">
