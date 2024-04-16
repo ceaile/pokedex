@@ -2,15 +2,17 @@
 
 namespace App\modelos;
 
-use App\conexiones\bbdd\bbdd;
+use Router;
 use Exception;
 
 class Equipo {
-    private $pdo;
-    private $id;
-    private $nombre;
+    //ddbb atributos
+    private int $id;
+    private string $nombre;
+    private int $id_user;
 
-    public $array_pokemon = [null, null, null, null, null, null]; //pathetic syntax because php
+    //atributos extra para manejar los datos
+    public $array_pokemon = [0, 0, 0, 0, 0, 0]; //pathetic syntax because php
 
     /* public $id_poke1 = null; // quiza publico para conectar con la api?
     public $id_poke2  = null; //cuidado que puede que al sacar datos en el frontend de errores por ser null
@@ -19,13 +21,12 @@ class Equipo {
     public $id_poke5  = null;
     public $id_poke6  = null; */
 
-    public function __construct() {
+    public function __construct( $nombre=null) {
+        //no me acuerdo para que se usa el $pdo aqui tbh
+        if ($nombre!=null) { $this->nombre=$nombre; }
+
     }
 
-    public function __constructor($nombre) {
-        $this->id = ; //tengo que ver como se conecta con la bbdd, ya que es autogenerado !!!!!!!!
-        $this->nombre = $nombre;
-    }
     public function getId() {
         //query de sacar el dato de bbdd?
         return $this->id;
@@ -35,7 +36,7 @@ class Equipo {
         //query de sacar el dato de bbdd?
         return $this->nombre;
     }
-    public function setNombre($nuevoNombre) {
+    public function setNombre($nuevoNombre): bool {
         if ($this->nombre != $nuevoNombre){
             $this->nombre = $nuevoNombre;
             return true;
@@ -44,13 +45,14 @@ class Equipo {
         } 
     }
 
-    public function getId_poke($posicion = null) {
-        $id_pokemon;
+    public function getId_poke($posicion = null): int {
+        $id_pokemon = 1; //a null para que no se queje
         if ($posicion == null){
-         $id_pokemon = end($array_pokemon);
+         $id_pokemon = end($this->array_pokemon);
          reset($array_pokemon);
-        } else{
-            $array_pokemon[$posicion-1];}
+        } else {
+            $id_pokemon = $this->array_pokemon[$posicion-1];
+        }
         return $id_pokemon;
     }
 
