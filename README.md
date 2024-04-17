@@ -13,3 +13,6 @@ Se necesita tener instalado PHP.
 2. Accede a localhost/public
 3. Si lo anterior no funciona accede con https: "https://localhost/public/"
 4. Si quieres que te entre sin entrar en public quitale el .old al index.php.old que está en la raiz o saca el index.php de public quitandole un dirname() en la línea 4
+
+
+test commit
