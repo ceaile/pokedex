@@ -4,6 +4,7 @@ require "../../conexiones/bbdd/conexionBbdd.php";
 
 //namespace - use
 
+$SESSION['username'] = 'userTest';
 
 
 

@@ -1,32 +1,64 @@
 <?php
 
-namespace App\modelos;
-
-use Router;
+namespace modelos;
+use conexiones\bbdd\Bbdd;
+use PDO;
 use Exception;
 
 class Equipo {
-    //ddbb atributos
     private int $id;
-    private string $nombre;
+    private string $nombre = null;
     private int $id_user;
 
     //atributos extra para manejar los datos
+    public Bbdd $bbdd;
     public $array_pokemon = [0, 0, 0, 0, 0, 0]; //pathetic syntax because php
 
-    /* public $id_poke1 = null; // quiza publico para conectar con la api?
+    public $id_poke1 = null; // quiza publico para conectar con la api?
     public $id_poke2  = null; //cuidado que puede que al sacar datos en el frontend de errores por ser null
     public $id_poke3  = null;
     public $id_poke4  = null;
     public $id_poke5  = null;
-    public $id_poke6  = null; */
+    public $id_poke6  = null;
 
-    public function __construct( $nombre=null) {
-        //no me acuerdo para que se usa el $pdo aqui tbh
-        if ($nombre!=null) { $this->nombre=$nombre; }
-
+    /**
+     * Recoge objeto bbdd para poder acceder a su atributo PDO y así poder hacer queries en el resto de metodos
+     * @param Bbdd $bbdd
+     */
+    public function __construct(Bbdd $bbdd) {
+        $this->bbdd = $bbdd;
     }
 
+    /**
+     * funcion que crea los 3 equipos vacios automaticaemente
+     * que sera usada en la funcion de creacion de usuario
+     * @param int $id_user para el equipo
+     */
+    public function crearEquipos(int $id_user) :bool {
+            $this->bbdd->conexionBbdd->exec("USE pokedex"); //no se si sera necesaria dentro del bucle
+            for ($i = 0; $i < 3; $i++){
+                $q = $this->bbdd->conexionBbdd->prepare("INSERT INTO Equipo (id_user) VALUES (:id_user);");
+                $q->bindParam(':id_user', $id_user, PDO::PARAM_STR);
+                $confirmacion = $q->execute();
+                //quiza habria que meterlo en un array y comprobar que los 3 estan confirmados
+                //pero si uno funciona, el resto segramnte tambien
+            }
+            return $confirmacion; //esto no me cuadra del todo
+    }
+
+
+    /**
+     * isnertar pokemon en equipo
+     */
+
+
+
+
+
+
+
+
+    //A BORRAR SEGURAMENTE
     public function getId() {
         //query de sacar el dato de bbdd?
         return $this->id;
