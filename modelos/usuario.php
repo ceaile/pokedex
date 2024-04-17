@@ -35,34 +35,50 @@ class Usuario {
      * @param string $pass es la password que quiere insertar en bbdd
      */
     public function insertarUser(string $name, string $pass): bool {
-        $pdo =$this->bbdd->conexionBbdd;
+        $pdo = $this->bbdd->conexionBbdd;
         $pdo->exec("USE pokedex"); //fix?
         //ejecutar funcion que aun no existe de comprobar si user existe
-        $q = $pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
-        $q->bindParam(':username', $name, PDO::PARAM_STR); //usado en la siguiente query
-        $q->bindParam(':password', $pass, PDO::PARAM_STR);
-        $confirmacionInsercion = $q->execute();
-        if ($confirmacionInsercion) {
-            //sacar el id del user que acabamos de crear para poder meterlo en esta funcion de crear equipos
-            $q2 = $pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
-            $q2->execute(); //deberia salir bien... = true
-            $id = $q2->fetch(); //parametro
-
-            $equipo = new Equipo($this->bbdd);
-            if ($equipo->crearEquipos($id)) {
-                $confirmacionCreacionEquipos = true;
+        if (!$this->userExiste($name)){
+            $q = $pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
+            $q->bindParam(':username', $name, PDO::PARAM_STR); //usado en la siguiente query
+            $q->bindParam(':password', $pass, PDO::PARAM_STR);
+            $confirmacionInsercion = $q->execute();
+            if ($confirmacionInsercion) {
+                //sacar el id del user que acabamos de crear para poder meterlo en esta funcion de crear equipos
+                $q2 = $pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
+                $q2->execute(); //deberia salir bien... = true
+                $id = $q2->fetch(); //parametro
+    
+                $equipo = new Equipo($this->bbdd);
+                if ($equipo->crearEquipos($id)) {
+                    $confirmacionCreacionEquipos = true;
+                }
             }
         }
-        return $confirmacionCreacionEquipos && $confirmacionInsercion;
+        return $confirmacionCreacionEquipos && $confirmacionInsercion; //unreachable seguramente
     }
 
 
-    //
 
 
 
-    //funcion de comprobacion de que el usuario no existe primero para antes de insertar?
-    //public function userExiste(string $name):bool{}
+    
+    /**
+     * funcion de comprobacion de que el usuario no existe primero para antes de insertar
+     * @param string $name es un username de Usuario
+     * @return bool Si el user existe o no. 
+     *              Si no hay resultados, fetch() devolverá false
+     *              O sea true: user ya existe; false: user libre
+     *              y fetchAll() devolverá un array vacío
+     */
+    public function userExiste(string $name): bool {
+        $pdo = $this->bbdd->conexionBbdd;
+        $pdo->exec("USE pokedex");
+        $q = $pdo->prepare('SELECT nombre FROM Usuario WHERE username = :username');
+        $q->bindParam(':username', $name, PDO::PARAM_STR);
+        $q->execute();
+        return $q->fetch();
+    }
 
     /*
         private function getId():int { return $this->id; }

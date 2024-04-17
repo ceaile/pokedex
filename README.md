@@ -15,4 +15,4 @@ Se necesita tener instalado PHP.
 4. Si quieres que te entre sin entrar en public quitale el .old al index.php.old que está en la raiz o saca el index.php de public quitandole un dirname() en la línea 4
 
 
-test commit
+Notas reunion 17/04/2024
