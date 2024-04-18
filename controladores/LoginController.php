@@ -3,6 +3,7 @@
 namespace Controladores;
 use Router\Enrutador; //con esto consigue hacer el renderview, si no nada
 use modelos\Usuario; 
+use controladores\PadreController;
 
 /*
 Aquí está el flujo de cómo se relacionan:
@@ -16,28 +17,29 @@ que recoge los datos del formulario
 realiza la lógica de inicio de sesión y 
 luego redirige al usuario a la página apropiada.
 */
-class LoginController {
-    public static function mostrarLogin(Enrutador $router) {
+
+/*
+clase Sesion con sus metodos de logica
+funcion de mostrar pag
+*/
+
+
+class LoginController extends PadreController{
+    public function mostrarLogin() {
         //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         $variableLocal = null; //ejemplo
-
-        $router->renderView('login.php', [
+        $this->renderView('login.php', [
             'title' => "Inicia Sesion en Pokédex",
             'otraVariable' => $variableLocal,
         ]);
     }
 
 
-
-
-    public static function Logear(Enrutador $router) {
+    public function Logear() { //
         // Recoge los datos del formulario
         $username = $_POST['username'];
         $password = $_POST['password'];
-
-        $router = new Enrutador(); //necesario??? para el siguiente arg del new usuario
-        $user = new Usuario($router->pdo); //el arg ??????????
-
+        $user = new Usuario($this->pdo);
         if ($user->loginValidado($username, $password)) { //ojo esa funcion no hace nada aun!!!!!
             session_start();
             $_SESSION['username'] = $username;

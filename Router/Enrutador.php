@@ -10,7 +10,7 @@ class Enrutador {
     public $post_routes;
 
     public function __construct() {
-        $this->pdo = new Bbdd();
+
     }
 
     public function get($path, $fn) {
@@ -31,6 +31,7 @@ class Enrutador {
         call_user_func($fn, $this);
     }
 
+    /*
     public function renderView($page, $params = []) {
         foreach ($params as $param => $value) {
             $$param = $value;
@@ -41,6 +42,7 @@ class Enrutador {
         $content = ob_get_clean();
         include_once(__ROOT__.DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."vistas".DIRECTORY_SEPARATOR."_layout.php");
     }
+    */
 }
 
 ?>

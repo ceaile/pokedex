@@ -11,7 +11,7 @@ class Equipo {
     private int $id_user;
 
     //atributos extra para manejar los datos
-    public Bbdd $bbdd;
+    public PDO $pdo;
     
 
     public $id_poke1 = null; // quiza publico para conectar con la api?
@@ -27,21 +27,12 @@ class Equipo {
      * Recoge objeto bbdd para poder acceder a su atributo PDO y así poder hacer queries en el resto de metodos
      * @param Bbdd $bbdd
      */
-    public function __construct(Bbdd $bbdd) {
-        $this->bbdd = $bbdd;
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
         $this->array_pokemon = [$this->id_poke1, $this->id_poke2, $this->id_poke3, $this->id_poke4, $this->id_poke5, $this->id_poke6];
     }
 
 
-    /**
-     * setea la bbdd para no tener que repetir este codigo todo el rato
-     * en cada funcion que tenga conexion a bbdd
-     */
-    function setBbdd(): PDO {
-        $pdo = $this->bbdd->conexionBbdd;
-        $pdo->exec("USE pokedex"); //fix later cuando sepamos wtf is going on
-        return $pdo;
-    }
 
     /**
      * funcion que crea los 3 equipos vacios automaticaemente
@@ -50,9 +41,8 @@ class Equipo {
      * @return bool $confirmacion de que se creó correctamente
      */
     public function crearEquipos(int $id_user) :bool {
-            $this->bbdd->conexionBbdd->exec("USE pokedex"); //no se si sera necesaria dentro del bucle
             for ($i = 0; $i < 3; $i++){
-                $q = $this->bbdd->conexionBbdd->prepare("INSERT INTO Equipo (id_user) VALUES (:id_user);");
+                $q = $this->pdo->prepare("INSERT INTO Equipo (id_user) VALUES (:id_user);");
                 $q->bindParam(':id_user', $id_user, PDO::PARAM_STR);
                 $confirmacion = $q->execute();
                 //quiza habria que meterlo en un array y comprobar que los 3 estan confirmados
@@ -73,14 +63,13 @@ class Equipo {
      */
     public function insertarPoke(int $id_pokemon):bool { //y el id del equipo que
         $confirmacion = true;
-        $pdo = $this->setBbdd();
         $a = $this->array_pokemon;
         $huecoEncontrado = false;
 
         foreach ($a as $i=>$id_poke) {
             if (!isset($id_poke) ) {
                 $huecoEncontrado = true;
-                $q = $pdo->prepare("INSERT INTO Equipo (id_pokemon".$i.") VALUES :id_pokemon");
+                $q = $this->pdo->prepare("INSERT INTO Equipo (id_pokemon".$i.") VALUES :id_pokemon");
                 //Y EL WHERE QUE IDENTIFICA EL USER Y EL EQUIPO QUEEE CAMPEONAAAA XDDDD fix later T^T
                 $q->bindParam(":id_pokemon", $id_pokemon, PDO::PARAM_INT);
                 $q->execute();
@@ -97,10 +86,11 @@ class Equipo {
     /**
      * 
      */
+    /*
     public function sacarPokemon(int $id_pokemon, ):bool{
 
     }
-
+*/
 
 
 
@@ -173,6 +163,7 @@ class Equipo {
      * @param int id_pokemon para añadirlo al equipo
      * @param int|null posicion
      */
+    /*
     public function anadirPokemon($pdo, $idPokemon, $posicion=null) {
         $a = $this->array_pokemon;
         if ($this->setId_pokemon($idPokemon)){
@@ -180,9 +171,9 @@ class Equipo {
                 $addPokeQuery = "INSERT INTO Equipos (id_pokemon".$posicion.") VALUES ($idPokemon)";
                 return true;
             } else if($posicion===null){
-                for($i = 0; $i >= count($a)]; $i++){
+                for($i = 0; $i >= count($a); $i++){
                     if ($a[$i] == null) {
-                      $addPokemonQuery = "INSERT INTO Equipos (id_pokemon".  .") VALUES ($idPokemon)";
+                      $addPokemonQuery = "INSERT INTO Equipos (id_pokemon". $ .") VALUES ($idPokemon)";
                     }
                 }
             } else {
@@ -192,6 +183,6 @@ class Equipo {
         return false;
         }
     }
-       
+     */  
     
 }

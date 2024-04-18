@@ -7,7 +7,7 @@ use PDO;
 use Exception;
 
 class Usuario {
-    public Bbdd $bbdd;
+    public PDO $pdo;
     private int $id;
     private string $username;
     private string $password; // hashed???? habra que cambiar los metodos
@@ -17,20 +17,12 @@ class Usuario {
      * Recoge objeto bbdd para poder acceder a su atributo PDO y así poder hacer queries en el resto de metodos
      * @param Bbdd $bbdd
      */
-    public function __construct(Bbdd $bbdd) {
-        $this->bbdd = $bbdd;
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
     }
 
 
-    /**
-     * setea la bbdd para no tener que repetir este codigo todo el rato
-     * en cada funcion que tenga conexion a bbdd
-     */
-    function setBbdd(): PDO {
-        $pdo = $this->bbdd->conexionBbdd;
-        $pdo->exec("USE pokedex"); //fix later cuando sepamos wtf is going on
-        return $pdo;
-    }
+
 
     
     /**
@@ -44,21 +36,20 @@ class Usuario {
      * @param string $pass es la password que quiere insertar en bbdd
      */
     public function insertarUser(string $name, string $pass): bool {
-        $pdo = $this->setBbdd();
         if (!$this->userExiste($name)) {
             $pass = password_hash($pass, PASSWORD_DEFAULT);
-            $q = $pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
+            $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
             $q->bindParam(':username', $name, PDO::PARAM_STR); //usado en la siguiente query
             $q->bindParam(':password', $pass, PDO::PARAM_STR);
             $confirmacionInsercion = $q->execute();
 
             if ($confirmacionInsercion) { //saca el id del user que acabamos de crear para poder meterlo en esta funcion de crear equipos
-                $q2 = $pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
+                $q2 = $this->pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
                 $q2->bindParam(':username', $name, PDO::PARAM_STR);
                 $q2->execute(); //deberia salir bien... = true
                 $id = $q2->fetch(); //parametro
 
-                $equipo = new Equipo($this->bbdd); //no me acuerdo de para que esta funcion tenia que recoger como param thisbbdd :_
+                $equipo = new Equipo($this->pdo); //no me acuerdo de para que esta funcion tenia que recoger como param thisbbdd :_
                 if ($equipo->crearEquipos($id)) {
                     $confirmacionCreacionEquipos = true;
                 }
@@ -79,9 +70,7 @@ class Usuario {
      *              y fetchAll() devolverá un array vacío
      */
     public function userExiste(string $name): bool {
-        $pdo = $this->bbdd->conexionBbdd;
-        $pdo->exec("USE pokedex");
-        $q = $pdo->prepare('SELECT nombre FROM Usuario WHERE username = :username');
+        $q = $this->pdo->prepare('SELECT nombre FROM Usuario WHERE username = :username');
         $q->bindParam(':username', $name, PDO::PARAM_STR);
         $q->execute();
         return $q->fetch();

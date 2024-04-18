@@ -6,7 +6,7 @@ use conexiones\bbdd\ConfigBbdd;
 use Exception;
 
 class Bbdd{
-  public $conexionBbdd;
+  public PDO $conexionBbdd;
 
   public function __construct()
   { 
