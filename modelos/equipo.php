@@ -12,7 +12,7 @@ class Equipo {
 
     //atributos extra para manejar los datos
     public Bbdd $bbdd;
-    public $array_pokemon = [0, 0, 0, 0, 0, 0]; //pathetic syntax because php
+    
 
     public $id_poke1 = null; // quiza publico para conectar con la api?
     public $id_poke2  = null; //cuidado que puede que al sacar datos en el frontend de errores por ser null
@@ -21,18 +21,33 @@ class Equipo {
     public $id_poke5  = null;
     public $id_poke6  = null;
 
+    public $array_pokemon = []; //pathetic syntax because php
+
     /**
      * Recoge objeto bbdd para poder acceder a su atributo PDO y así poder hacer queries en el resto de metodos
      * @param Bbdd $bbdd
      */
     public function __construct(Bbdd $bbdd) {
         $this->bbdd = $bbdd;
+        $this->array_pokemon = [$this->id_poke1, $this->id_poke2, $this->id_poke3, $this->id_poke4, $this->id_poke5, $this->id_poke6];
+    }
+
+
+    /**
+     * setea la bbdd para no tener que repetir este codigo todo el rato
+     * en cada funcion que tenga conexion a bbdd
+     */
+    function setBbdd(): PDO {
+        $pdo = $this->bbdd->conexionBbdd;
+        $pdo->exec("USE pokedex"); //fix later cuando sepamos wtf is going on
+        return $pdo;
     }
 
     /**
      * funcion que crea los 3 equipos vacios automaticaemente
      * que sera usada en la funcion de creacion de usuario
      * @param int $id_user para el equipo
+     * @return bool $confirmacion de que se creó correctamente
      */
     public function crearEquipos(int $id_user) :bool {
             $this->bbdd->conexionBbdd->exec("USE pokedex"); //no se si sera necesaria dentro del bucle
@@ -48,9 +63,43 @@ class Equipo {
 
 
     /**
-     * isnertar pokemon en equipo
+     * Para insertar pokemon en equipo.
+     * Setea la conexion a bbdd y otorga acceso a la var $pdo, que es mas corta
+     * Busca un hueco en el array
+     * ejecuta la query de insert en ese hueco
+     * si lo ha conseguido devuelve true
+     * @param int $id_pokemon, que sera el de la api
+     * @return bool true si todo sucedió correctamente
      */
+    public function insertarPoke(int $id_pokemon):bool { //y el id del equipo que
+        $confirmacion = true;
+        $pdo = $this->setBbdd();
+        $a = $this->array_pokemon;
+        $huecoEncontrado = false;
 
+        foreach ($a as $i=>$id_poke) {
+            if (!isset($id_poke) ) {
+                $huecoEncontrado = true;
+                $q = $pdo->prepare("INSERT INTO Equipo (id_pokemon".$i.") VALUES :id_pokemon");
+                //Y EL WHERE QUE IDENTIFICA EL USER Y EL EQUIPO QUEEE CAMPEONAAAA XDDDD fix later T^T
+                $q->bindParam(":id_pokemon", $id_pokemon, PDO::PARAM_INT);
+                $q->execute();
+                $result = $q->fetch(PDO::FETCH_ASSOC);
+                if (!$result) $confirmacion=false; //podria ser aqui return false directamente
+                // $confirmacion = (!$result) ? false : true;
+                //(!$result) ? false : true;
+            }
+            if ($huecoEncontrado) break; //para salir del bucle si encontro el hueco. pdria hacerse un con un while
+        }
+        return $confirmacion;
+    }
+
+    /**
+     * 
+     */
+    public function sacarPokemon(int $id_pokemon, ):bool{
+
+    }
 
 
 
@@ -114,8 +163,7 @@ class Equipo {
         return true;
     }
 
-    //and so on and on con el resto de variables
-    //y luego el añadir de la bbdd el pokemon habra que ver si aqui o en Equipo
+ 
 
     /**
      * Añade pokemon al equipo
@@ -125,16 +173,16 @@ class Equipo {
      * @param int id_pokemon para añadirlo al equipo
      * @param int|null posicion
      */
-    public function anadirPokemon($pdo, $id_pokemon, $posicion=null) {
+    public function anadirPokemon($pdo, $idPokemon, $posicion=null) {
         $a = $this->array_pokemon;
-        if ($this->setId_pokemon($id_pokemon)){
+        if ($this->setId_pokemon($idPokemon)){
             if ($posicion!=null && $posicion>0 && $posicion<=6){
                 $addPokeQuery = "INSERT INTO Equipos (id_pokemon".$posicion.") VALUES ($idPokemon)";
                 return true;
             } else if($posicion===null){
-                for($i = 0; i >= $a[acount($a)]; $i++){
+                for($i = 0; $i >= count($a)]; $i++){
                     if ($a[$i] == null) {
-                      $addPokemonQuery = "INSERT INTO Equipos (id_pokemon".$a[$i].") VALUES ($idPokemon)";
+                      $addPokemonQuery = "INSERT INTO Equipos (id_pokemon".  .") VALUES ($idPokemon)";
                     }
                 }
             } else {

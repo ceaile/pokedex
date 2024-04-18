@@ -23,46 +23,53 @@ class Usuario {
 
 
     /**
-     * Inserta user en bbdd
+     * setea la bbdd para no tener que repetir este codigo todo el rato
+     * en cada funcion que tenga conexion a bbdd
+     */
+    function setBbdd(): PDO {
+        $pdo = $this->bbdd->conexionBbdd;
+        $pdo->exec("USE pokedex"); //fix later cuando sepamos wtf is going on
+        return $pdo;
+    }
+
+    
+    /**
+     * Setea bbdd, comprueba si el user que queremos meter existe
+     * si no existe, lo crea, junto a sus 3 equipos.
      * No recoge param $id porque es autoincremental
-     * COMPROBADA QUE FUNCIONA
-     * de momento si el user ya existe devuelve una excepcion
-     * en el futuro: usa otra funcion que compruebe primero que existe e user
-     * y hashea la contraseña antes de insertarla en bbdd
-     * 
+     * COMPROBADA QUE FUNCIONA(BA) en su version anterior xdddd
+     * en el futuro: hashea la contraseña antes de insertarla en bbdd <----
      * Cuando se crea un usuario, se crean los 3 equipos automaticamente
      * @param string $name es un username
      * @param string $pass es la password que quiere insertar en bbdd
      */
     public function insertarUser(string $name, string $pass): bool {
-        $pdo = $this->bbdd->conexionBbdd;
-        $pdo->exec("USE pokedex"); //fix?
-        //ejecutar funcion que aun no existe de comprobar si user existe
-        if (!$this->userExiste($name)){
+        $pdo = $this->setBbdd();
+        if (!$this->userExiste($name)) {
+            $pass = password_hash($pass, PASSWORD_DEFAULT);
             $q = $pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
             $q->bindParam(':username', $name, PDO::PARAM_STR); //usado en la siguiente query
             $q->bindParam(':password', $pass, PDO::PARAM_STR);
             $confirmacionInsercion = $q->execute();
-            if ($confirmacionInsercion) {
-                //sacar el id del user que acabamos de crear para poder meterlo en esta funcion de crear equipos
+
+            if ($confirmacionInsercion) { //saca el id del user que acabamos de crear para poder meterlo en esta funcion de crear equipos
                 $q2 = $pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
+                $q2->bindParam(':username', $name, PDO::PARAM_STR);
                 $q2->execute(); //deberia salir bien... = true
                 $id = $q2->fetch(); //parametro
-    
-                $equipo = new Equipo($this->bbdd);
+
+                $equipo = new Equipo($this->bbdd); //no me acuerdo de para que esta funcion tenia que recoger como param thisbbdd :_
                 if ($equipo->crearEquipos($id)) {
                     $confirmacionCreacionEquipos = true;
                 }
             }
+        } else {
+            return false;
         }
-        return $confirmacionCreacionEquipos && $confirmacionInsercion; //unreachable seguramente
+        return $confirmacionCreacionEquipos && $confirmacionInsercion; //unreachable seguramente?
     }
 
 
-
-
-
-    
     /**
      * funcion de comprobacion de que el usuario no existe primero para antes de insertar
      * @param string $name es un username de Usuario
@@ -80,21 +87,36 @@ class Usuario {
         return $q->fetch();
     }
 
-    /*
-        private function getId():int { return $this->id; }
-        public function getUsername():string { return $this->username; }
-        private function setUsername($nuevoUsername):void { $this->username=$nuevoUsername; }
-    */
+    /**
+     * funcion para el login controller
+     * que coja un user y una contraseña y devuelva true si existe
+     * PENDIENTEEEEEEEEEEEEEEEE
+     */
+    public function loginValidado($username, $passwd):bool {
+
+        return true;
+    }
+
+
+    public function getPassword(): string {
+        return $this->password;
+    }
+
+
+
+
+
+
+
+
+
 
     /**
-     * No en funcionamiento, ni en uso
-     * ni siquiera terminada!!!! olvidar por ahora!!!
-     * Cambia el nombre de user en la bbdd usando el setter
-     * utiliza la conexion a bbdd
-     * crea queries con los parametros bindeados para updatear la bbdd
+     * Para V2. No en funcionamiento
      * @param string $nuevoNombre
      * @return bool Si retorna false es que el username es el mismo y por lo tanto no puede cambiarlo
      */
+    /*
     public function cambiarUsername(string $nombreActual, string $nuevoNombre, string $id): bool {
         $pdo = $this->bbdd->conexionBbdd;
         $pdo->exec("USE pokedex");
@@ -120,36 +142,8 @@ class Usuario {
         }
 
     }
+    */
 
-
-
-
-
-    public function getPassword(): string {
-        return $this->password;
-    }
-
-
-    /**
-     * no realmmente necesaria
-     */
-    private function setPassword($nuevaPassword): void {
-        $this->password = $nuevaPassword;
-    }
-
-    /**
-     * no realemente necesaria
-     */
-    public function cambiarContrasena($nuevaPassword): bool {
-        //pdo global? la recoge del archivo bbdd
-
-        if ($this->password != $nuevaPassword) {
-            $this->setPassword($nuevaPassword);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 }

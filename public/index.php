@@ -7,12 +7,25 @@ Autoload::register();
 
 //Añadimos los espacios de nombres a utilizar
 use Router\Enrutador;
-use Controladores\PrincipalController;
+use Controladores\HomeController; //se usan todos los controladores necesarios
 
 //Cargamos las rutas que vamos a usar
 $router = new Enrutador();
-$router->get('/', [PrincipalController::class, 'index']);
+
+/*
+El primer argumento del get de abajo es la ruta que el user pone y adonde le lleva
+lo siguiente es el controlador que va a manejar la pag que quieres.
+el segundo arg del array es el nombre del metodo
+ese metodo por dentro tiene el renderView() del archivo html o php que es la pag en si
+o sea aqui no se pone por ningun lado la pag en si que quieres que cargue
+aunque muchas veces se le pone el mismo nombre al metodo y a la pag, entonces puede parecerlo
+Ejemplos:
+$router->get('/', [PrincipalController::class, '']);
 $router->get('/lista', [PrincipalController::class, 'lista']);
+
+
+El PrincipalController tiene un metodo, llamado index, que renderiza "index.php", que NO es este index.php, y que de hecho no existe lol
+*/
+$router->get('/', [HomeController::class, 'home']); //este va a ser de verdad
 $router->resolve();
 
-?>
