@@ -112,6 +112,10 @@ h1 {
   .pokemon-container {
     grid-template-columns: 1fr;  /* Cambio a una sola columna */
   }
+  #filtro {
+    width: 11px; 
+    height: 11px;
+  }
 }
 body {
   background-image: url("fondo_pc_pokeballs.jpg"); /* Cambia esta URL por la ruta correcta a tu imagen de fondo */
