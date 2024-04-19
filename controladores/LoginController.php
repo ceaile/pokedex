@@ -1,7 +1,6 @@
 <?php
 
 namespace Controladores;
-use Router\Enrutador; //con esto consigue hacer el renderview, si no nada
 use modelos\Usuario; 
 use controladores\PadreController;
 
@@ -24,7 +23,7 @@ funcion de mostrar pag
 */
 
 
-class LoginController extends PadreController{
+class LoginController extends PadreController {
     public function mostrarLogin() {
         //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         $variableLocal = null; //ejemplo

@@ -34,6 +34,7 @@ class Usuario {
      * Cuando se crea un usuario, se crean los 3 equipos automaticamente
      * @param string $name es un username
      * @param string $pass es la password que quiere insertar en bbdd
+     * @return bool true si lo consiguio
      */
     public function insertarUser(string $name, string $pass): bool {
         if (!$this->userExiste($name)) {
@@ -73,17 +74,30 @@ class Usuario {
         $q = $this->pdo->prepare('SELECT nombre FROM Usuario WHERE username = :username');
         $q->bindParam(':username', $name, PDO::PARAM_STR);
         $q->execute();
-        return $q->fetch();
+        return $q->fetch(); //tengo que comprobar qué está devolviendo, si bool o resultado
     }
 
     /**
-     * funcion para el login controller
-     * que coja un user y una contraseña y devuelva true si existe
-     * PENDIENTEEEEEEEEEEEEEEEE
+     * Comprueba que el user existe
+     * Saca la contraseñá hasheada de ese user
+     * comprueba que la contraseña hasheada y la que se introdujo por parametro son la misma
+     * @param string $name es un username
+     * @param string $pass es la password sin hashear
      */
-    public function loginValidado($username, $passwd):bool {
-
-        return true;
+    public function loginValidado(string $username, string $passwd):bool {
+        $conf = false;
+        if ($this->userExiste($username)) {
+            $q = $this->pdo->prepare('SELECT password FROM Usuario WHERE username = :username');
+            $q->bindParam(':username', $username, PDO::PARAM_STR);
+            $q->execute();
+            if ($q->fetch()){
+                $contrasenaHasheada = $q->fetch();
+                if (password_verify($passwd, $contrasenaHasheada)) {
+                    $conf = true;
+                }
+            }
+        }
+        return $conf;
     }
 
 

@@ -5,7 +5,7 @@ define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . DIRECTORY_SEPARATOR . 'Autoload.php');
 Autoload::register();
 
-//Añadimos los espacios de nombres a utilizar
+
 use Router\Enrutador;
 use Controladores\HomeController; //se usan todos los controladores necesarios
 use Controladores\LoginController;
@@ -23,10 +23,8 @@ aunque muchas veces se le pone el mismo nombre al metodo y a la pag, entonces pu
 Ejemplos:
 $router->get('/', [PrincipalController::class, '']);
 $router->get('/lista', [PrincipalController::class, 'lista']);
-
-
-El PrincipalController tiene un metodo, llamado index, que renderiza "index.php", que NO es este index.php, y que de hecho no existe lol
 */
+
 $router->get('/', [HomeController::class, 'home']); //este va a ser de verdad
 $router->get('/login', [LoginController::class, 'mostrarLogin']);
 $router->post('/logear', [LoginController::class, 'logear']);

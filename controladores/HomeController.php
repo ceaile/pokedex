@@ -7,7 +7,7 @@ use controladores\PadreController;
 //use modelos\Usuario;   cuando use una entidad pues la añado
 
 class HomeController extends PadreController{
-    public function home(Enrutador $router) {
+    public function home() {
         if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         
         $variableLocal = null; //ejemplo
