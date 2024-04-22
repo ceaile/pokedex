@@ -25,7 +25,8 @@ $router->get('/', [PrincipalController::class, '']);
 $router->get('/lista', [PrincipalController::class, 'lista']);
 */
 
-$router->get('/', [HomeController::class, 'home']); //este va a ser de verdad
+$router->get('/', [HomeController::class, 'home']); 
+$router->get('/misequipos', [HomeController::class, 'home']);
 $router->get('/login', [LoginController::class, 'mostrarLogin']);
 $router->post('/logear', [LoginController::class, 'logear']);
 $router->resolve();

@@ -14,9 +14,19 @@ class Sesion {
      * Inicia la sesion y crea la $_SESSION['username] con un string en blanco.
      */
     public function __construct() {
-        session_start();
-        $this->crearSesionUser("");
+
     }
+
+    public function crear():void {
+        session_start();
+    }
+
+public function sessionStarted(){
+    if (session_status() == PHP_SESSION_NONE) {
+        return false;
+        //session_start();
+    }
+}
 
     public function existe(string $nombreSesion): bool {
         return (isset($_SESSION[$nombreSesion])) ? true : false;
@@ -26,7 +36,7 @@ class Sesion {
         return $_SESSION[$nombreSesion] = $valor;
     }
 
-    public function obtenerSesion(string $nombreSesion): bool {
+    public function obtenerSesion(string $nombreSesion): string {
         return $_SESSION[$nombreSesion];
     }
 

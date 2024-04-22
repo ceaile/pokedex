@@ -71,18 +71,20 @@ class Usuario {
      *              y fetchAll() devolverá un array vacío
      */
     public function userExiste(string $name): bool {
-        $q = $this->pdo->prepare('SELECT nombre FROM Usuario WHERE username = :username');
+        $q = $this->pdo->prepare('SELECT username FROM Usuario WHERE username = :username');
         $q->bindParam(':username', $name, PDO::PARAM_STR);
         $q->execute();
-        return $q->fetch(); //tengo que comprobar qué está devolviendo, si bool o resultado
+        return (bool)$q->fetch();
     }
-
     /**
      * Comprueba que el user existe
      * Saca la contraseñá hasheada de ese user
      * comprueba que la contraseña hasheada y la que se introdujo por parametro son la misma
      * @param string $name es un username
      * @param string $pass es la password sin hashear
+     * YA FUNCIONAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     * OJO CUIDADO que en el if del password_verify hay otra comparacion para las pass sin hashear
+     * que se quitará pero sigue ahí porque aún no se ha hecho el sign in
      */
     public function loginValidado(string $username, string $passwd):bool {
         $conf = false;
@@ -90,9 +92,9 @@ class Usuario {
             $q = $this->pdo->prepare('SELECT password FROM Usuario WHERE username = :username');
             $q->bindParam(':username', $username, PDO::PARAM_STR);
             $q->execute();
-            if ($q->fetch()){
-                $contrasenaHasheada = $q->fetch();
-                if (password_verify($passwd, $contrasenaHasheada)) {
+            $contrasenaHasheada = $q->fetch();
+            if ((bool)$contrasenaHasheada){
+                if ( (password_verify($passwd, $contrasenaHasheada['password']) || ($passwd==$contrasenaHasheada['password']))) {
                     $conf = true;
                 }
             }

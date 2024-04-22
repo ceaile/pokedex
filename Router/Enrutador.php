@@ -5,6 +5,7 @@ namespace Router;
 use conexiones\bbdd\Bbdd;
 use Controladores\HomeController;
 use Controladores\LoginController;
+use Controladores\PadreController;
 
 //Lee la URL y carga el controlador y el método definido en esa ruta en el public/index.php
 class Enrutador {
@@ -42,9 +43,13 @@ class Enrutador {
             $fn = $this->post_routes[$path];
         }
 
+        /*
         if (!$fn) { // Si la clase Controlador para la ruta no existe
-            header('Location: /404.php');
+            $c = new PadreController();
+            $c->renderView('404.php');
+            //header('Location: /404.php');
         }
+        */
         //mismo codigo pero mas ilegible :_
         //$fn = $method === 'GET'? $this->get_routes[$path] : $this->post_routes[$path];
         //if(!$fn) header('Location: /404.php');
@@ -59,11 +64,22 @@ class Enrutador {
         if ($path == "/") {
             $c = new HomeController();
             $c->home();
-            
+
         } else if ($path == "/login") {
             $c = new LoginController();
             $c->mostrarLogin();
-        } //etc con mas else ifs
+        } else if ($path == "/logear") {
+            $c = new LoginController();
+            $c->logear(); //????? no deberia funcionar sin esto????
+        } else if ($path == "/misequipos") {
+            $c = new HomeController();
+            $c->home();
+
+        } else { //?????
+            $c = new PadreController();
+            $c->renderView('404.php');
+        }
+        //etc con mas else ifs
         //call_user_func($fn, $this); //TENGO QUE ARREGLARLO CON IFS 
     }
 

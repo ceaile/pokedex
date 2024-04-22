@@ -1,5 +1,5 @@
 <?php
-namespace Controladores;
+namespace controladores;
 use conexiones\bbdd\Bbdd;
 use modelos\Sesion;
 Use PDO;
@@ -32,6 +32,7 @@ public function __construct(){
             $$param = $value;
         }
     
+        //complicado pero esto es lo que hace que $content funcione
         ob_start();
         include_once(__ROOT__.DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."vistas".DIRECTORY_SEPARATOR.$page);
         $content = ob_get_clean();
@@ -40,4 +41,3 @@ public function __construct(){
 
 }
 
-?>

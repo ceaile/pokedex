@@ -1,9 +1,11 @@
 <?php
 
-namespace Controladores;
-use modelos\Usuario; 
-use modelos\Sesion; 
+namespace controladores;
+
+use modelos\Usuario;
+use modelos\Sesion;
 use controladores\PadreController;
+use Exception;
 
 /*
 Aquí está el flujo de cómo se relacionan el controlador y las pags:
@@ -26,21 +28,41 @@ class LoginController extends PadreController {
 
 
     public function logear() { //
-        // Recoge los datos del formulario
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $user = new Usuario($this->pdo);
-        $s = new Sesion();
-
-        if ($user->loginValidado($username, $password)) { //ojo esta funcion ya hace pero esta sin testear
-            $s->crearSesionUser($username);
-            header('Location: MisEquipos.php'); //aqui para testear podria haber una pag que muestre lo que salio por post y session
-            exit();
-        } else {
-            header('Location: Login.php');
-            exit();
+        try {
+            // Recoge los datos del formulario
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $user = new Usuario($this->pdo);
+            //crea sesion si no la había
+            $s = new Sesion();
+            if (!$s->sessionStarted()) {
+                $s->crear();
+            }
+            //valida user y pass y reenvía donde deba
+            if ($user->loginValidado($username, $password)) { //ojo esta funcion ya hace pero esta sin testear
+                 $s->crearSesionUser($username);
+                 //quiza en lugar de usar un this renderview
+                 //deberia ser un obj del controlador en cuestion
+                 //que use su metodo home() ????
+                $this->renderView('misequipos.php', [
+                    'sesion' => $s->obtenerSesion('username'),
+                ]);
+                exit();
+            } else {
+                $this->renderView('login.php', [
+                    'username' => $username,
+                    'password' => $password,
+                ]);
+                exit();
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
+
+
+
     }
 
+    //user2 password2
 
 }

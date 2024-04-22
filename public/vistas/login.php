@@ -1,6 +1,3 @@
-
-
-
 <!-- form temporal sin estilos ni nada 
 tengo que ver como implementar la estructura_main (antiguo layout)
 y si hay que modificar el index.php y alguna cosa mas
