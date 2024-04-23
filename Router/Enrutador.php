@@ -6,6 +6,7 @@ use conexiones\bbdd\Bbdd;
 use Controladores\HomeController;
 use Controladores\LoginController;
 use Controladores\PadreController;
+use Controladores\SignupController;
 
 //Lee la URL y carga el controlador y el método definido en esa ruta en el public/index.php
 class Enrutador {
@@ -37,6 +38,7 @@ class Enrutador {
         //lo mismo pero con sintaxis dificil T^T
         //$path = $_SERVER['PATH_INFO'] ?? "/";
         $method = $_SERVER['REQUEST_METHOD'];
+        
         if ($method === 'GET') {
             $fn = $this->get_routes[$path];
         } else {
@@ -68,12 +70,20 @@ class Enrutador {
         } else if ($path == "/login") {
             $c = new LoginController();
             $c->mostrarLogin();
-        } else if ($path == "/logear") {
+        } else if ($path == "/loggedin") {
             $c = new LoginController();
-            $c->logear(); //????? no deberia funcionar sin esto????
+            $c->login(); //????? no deberia funcionar sin esto????
+
         } else if ($path == "/misequipos") {
             $c = new HomeController();
             $c->home();
+
+        } else if ($path == "/signup") {
+            $c = new SignupController();
+            $c->mostrarSignup();
+        } else if ($path == "/signedin") {
+            $c = new SignupController();
+            $c-> signup();
 
         } else { //?????
             $c = new PadreController();
@@ -85,4 +95,3 @@ class Enrutador {
 
 }
 
-?>

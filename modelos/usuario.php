@@ -24,45 +24,41 @@ class Usuario {
 
 
 
-    
+
     /**
-     * Setea bbdd, comprueba si el user que queremos meter existe
-     * si no existe, lo crea, junto a sus 3 equipos.
-     * No recoge param $id porque es autoincremental
+     * SIN TESTEAR
+     * comprueba si el user que queremos meter existe
+     * si no existe, lo crea, junto a sus 3 equipos automaticamente.
      * COMPROBADA QUE FUNCIONA(BA) en su version anterior xdddd
-     * en el futuro: hashea la contraseña antes de insertarla en bbdd <----
-     * Cuando se crea un usuario, se crean los 3 equipos automaticamente
      * @param string $name es un username
      * @param string $pass es la password que quiere insertar en bbdd
      * @return bool true si lo consiguio
      */
     public function insertarUser(string $name, string $pass): bool {
+        $confirmacionCreacionEquipos = false;
+        $insercionConfirmada = false;
         if (!$this->userExiste($name)) {
             $pass = password_hash($pass, PASSWORD_DEFAULT);
             $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
             $q->bindParam(':username', $name, PDO::PARAM_STR); //usado en la siguiente query
             $q->bindParam(':password', $pass, PDO::PARAM_STR);
-            $confirmacionInsercion = $q->execute();
+            $insercionConfirmada = $q->execute();
 
-            if ($confirmacionInsercion) { //saca el id del user que acabamos de crear para poder meterlo en esta funcion de crear equipos
-                $q2 = $this->pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
-                $q2->bindParam(':username', $name, PDO::PARAM_STR);
-                $q2->execute(); //deberia salir bien... = true
-                $id = $q2->fetch(); //parametro
-
-                $equipo = new Equipo($this->pdo); //no me acuerdo de para que esta funcion tenia que recoger como param thisbbdd :_
-                if ($equipo->crearEquipos($id)) {
+            if ($insercionConfirmada) { 
+                $id = $this->getId($name);
+                $equipo = new Equipo($this->pdo);
+                if ($equipo->crearEquipos($id))
                     $confirmacionCreacionEquipos = true;
-                }
             }
         } else {
             return false;
         }
-        return $confirmacionCreacionEquipos && $confirmacionInsercion; //unreachable seguramente?
+        return $confirmacionCreacionEquipos && $insercionConfirmada;
     }
 
 
     /**
+     * COMPROBADA QUE FUNCIONAA
      * funcion de comprobacion de que el usuario no existe primero para antes de insertar
      * @param string $name es un username de Usuario
      * @return bool Si el user existe o no. 
@@ -74,27 +70,49 @@ class Usuario {
         $q = $this->pdo->prepare('SELECT username FROM Usuario WHERE username = :username');
         $q->bindParam(':username', $name, PDO::PARAM_STR);
         $q->execute();
-        return (bool)$q->fetch();
+        return (bool) $q->fetch();
     }
+
+
     /**
+     * SIN TESTEAR
+     * funcion para usar en la insercion de User y
+     * para sacar el parametro necesario para la funcion de creacion de equipos
+     * que está en la entidad Equipo
+     * @param string username
+     * @return int $id
+     */
+    public function getId(string $username): int {
+        $q2 = $this->pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
+        $q2->bindParam(':username', $username, PDO::PARAM_STR);
+        if ($q2->execute())
+            $id = $q2->fetch()['id'];
+        return $id;
+    }
+
+
+
+
+
+    /**
+     * FUNCIONA, AL MENOS CON LA VERSION PROVISIONAL DE PASS SIN HASHEAR (donde el OR).
      * Comprueba que el user existe
      * Saca la contraseñá hasheada de ese user
      * comprueba que la contraseña hasheada y la que se introdujo por parametro son la misma
      * @param string $name es un username
      * @param string $pass es la password sin hashear
-     * YA FUNCIONAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
      * OJO CUIDADO que en el if del password_verify hay otra comparacion para las pass sin hashear
      * que se quitará pero sigue ahí porque aún no se ha hecho el sign in
      */
-    public function loginValidado(string $username, string $passwd):bool {
+    public function loginValidado(string $username, string $passwd): bool {
         $conf = false;
         if ($this->userExiste($username)) {
             $q = $this->pdo->prepare('SELECT password FROM Usuario WHERE username = :username');
             $q->bindParam(':username', $username, PDO::PARAM_STR);
             $q->execute();
             $contrasenaHasheada = $q->fetch();
-            if ((bool)$contrasenaHasheada){
-                if ( (password_verify($passwd, $contrasenaHasheada['password']) || ($passwd==$contrasenaHasheada['password']))) {
+            if ((bool) $contrasenaHasheada) {
+                if ((password_verify($passwd, $contrasenaHasheada['password']) || ($passwd == $contrasenaHasheada['password']))) {
                     $conf = true;
                 }
             }

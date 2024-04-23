@@ -2,7 +2,7 @@
 tengo que ver como implementar la estructura_main (antiguo layout)
 y si hay que modificar el index.php y alguna cosa mas
 -->
-<form method="POST" action="/logear"> <!-- va en el index -->
+<form method="POST" action="/loggedin"> <!-- va en el index -->
     <label for="username">Nombre de usuario:</label><br>
     <input type="text" id="username" name="username"><br>
     <label for="password">Contraseña:</label><br>

@@ -1,7 +1,11 @@
 <?php
-namespace Controladores;
-use modelos\Usuario; 
+namespace controladores;
+
+use modelos\Usuario;
+use modelos\Sesion;
 use controladores\PadreController;
+use Exception;
+
 
 class SignupController extends PadreController{
     public function mostrarSignup() {
@@ -16,7 +20,38 @@ class SignupController extends PadreController{
 
 
     public function signup() {
-        //hacer cosas
+        try{
+            //guardar datos de post
+            //comparar contraseñas
+            //crear sesion
+            //insertarUser()
+            //
+            $username = $_POST['username'];
+            $password1 = $_POST['password1'];
+            $password2 = $_POST['password2'];
+
+            if ($password1==$password2) {
+                $u = new Usuario($this->pdo);
+                //$s = new Sesion();
+                //if (!$s->sessionStarted()) $s->crear();
+            
+                if ($u->insertarUser($username, $password1)) {
+                    $this->renderView('home.html', [ //esta ruta cambiará seguramente
+                        //'sesion' => $s->obtenerSesion('username'),
+                    ]);
+
+                } else {
+                    $this->renderView('signup.php');
+                }
+
+            } else{
+                throw new Exception('Passwords are not the same.');
+            }
+
+        } catch(Exception $e){
+            echo $e->getMessage();
+        }
+            
     }
 
 

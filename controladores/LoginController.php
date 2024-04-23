@@ -27,7 +27,7 @@ class LoginController extends PadreController {
     }
 
 
-    public function logear() { //
+    public function login() { //
         try {
             // Recoge los datos del formulario
             $username = $_POST['username'];

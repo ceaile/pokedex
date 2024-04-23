@@ -12,7 +12,7 @@ class HomeController extends PadreController {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET')
             exit; //set 404
 
-        $this->renderView('misequipos.php', [
+        $this->renderView('home.html', [
             'title'=> "Mis Equipos Pokémon",
         ]); //que en futuro seguramente sera home.html o listaPokemon.html .php $router->renderView('home.php', ['title' => 'Pokédex Home']);
     }
