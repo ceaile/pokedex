@@ -21,18 +21,14 @@ class SignupController extends PadreController{
 
     public function signup() {
         try{
-            //guardar datos de post
-            //comparar contraseñas
-            //crear sesion
-            //insertarUser()
-            //
+
             $username = $_POST['username'];
             $password1 = $_POST['password1'];
             $password2 = $_POST['password2'];
 
             if ($password1==$password2) {
                 $u = new Usuario($this->pdo);
-                //$s = new Sesion();
+                $s = new Sesion();
                 //if (!$s->sessionStarted()) $s->crear();
             
                 if ($u->insertarUser($username, $password1)) {

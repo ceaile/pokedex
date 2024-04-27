@@ -11,7 +11,7 @@ class Usuario {
     public PDO $pdo;
     private int $id;
     private string $username;
-    private string $password; // hashed???? habra que cambiar los metodos
+    private string $password; // sin hashear, la hasheada va en los metodos
 
 
     /**

@@ -34,18 +34,15 @@ class LoginController extends PadreController {
             $password = $_POST['password'];
             $user = new Usuario($this->pdo);
             //crea sesion si no la había
-            $s = new Sesion();
-            if (!$s->sessionStarted()) {
-                $s->crear();
-            }
+            
             //valida user y pass y reenvía donde deba
             if ($user->loginValidado($username, $password)) { //ojo esta funcion ya hace pero esta sin testear
-                 $s->crearSesionUser($username);
+                 $this->s->crearSesionUser($username);
                  //quiza en lugar de usar un this renderview
                  //deberia ser un obj del controlador en cuestion
                  //que use su metodo home() ????
                 $this->renderView('misequipos.php', [
-                    'sesion' => $s->obtenerSesion('username'),
+                    'sesion' => $this->s->obtenerSesion('username'),
                 ]);
                 exit();
             } else {

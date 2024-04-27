@@ -72,7 +72,7 @@ class Enrutador {
             $c->mostrarLogin();
         } else if ($path == "/loggedin") {
             $c = new LoginController();
-            $c->login(); //????? no deberia funcionar sin esto????
+            $c->login();
 
         } else if ($path == "/misequipos") {
             $c = new HomeController();
@@ -85,7 +85,7 @@ class Enrutador {
             $c = new SignupController();
             $c-> signup();
 
-        } else { //?????
+        } else {
             $c = new PadreController();
             $c->renderView('404.php');
         }
