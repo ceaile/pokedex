@@ -28,12 +28,12 @@ class SignupController extends PadreController{
 
             if ($password1==$password2) {
                 $u = new Usuario($this->pdo);
-                $s = new Sesion();
+             
                 //if (!$s->sessionStarted()) $s->crear();
             
                 if ($u->insertarUser($username, $password1)) {
                     $this->renderView('home.html', [ //esta ruta cambiará seguramente
-                        //'sesion' => $s->obtenerSesion('username'),
+                        'sesion' => $this->s->obtenerSesion('username'),
                     ]);
 
                 } else {

@@ -18,7 +18,6 @@ class PadreController {
     public function __construct() {
         $objBbdd = new Bbdd();
         $this->s = new Sesion();
-
         if (!$this->s->sessionStarted()) {
             $this->s->crear();
         }
