@@ -1,4 +1,5 @@
 <?php
+
 namespace modelos;
 
 use conexiones\bbdd\Bbdd;
@@ -26,10 +27,9 @@ class Usuario {
 
 
     /**
-     * SIN TESTEAR
+     * FUNCIONA
      * comprueba si el user que queremos meter existe
      * si no existe, lo crea, junto a sus 3 equipos automaticamente.
-     * COMPROBADA QUE FUNCIONA(BA) en su version anterior xdddd
      * @param string $name es un username
      * @param string $pass es la password que quiere insertar en bbdd
      * @return bool true si lo consiguio
@@ -37,23 +37,33 @@ class Usuario {
     public function insertarUser(string $name, string $pass): bool {
         $confirmacionCreacionEquipos = false;
         $insercionConfirmada = false;
-        if (!$this->userExiste($name)) {
-            $pass = password_hash($pass, PASSWORD_DEFAULT);
-            $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
-            $q->bindParam(':username', $name, PDO::PARAM_STR); //usado en la siguiente query
-            $q->bindParam(':password', $pass, PDO::PARAM_STR);
-            $insercionConfirmada = $q->execute();
-
-            if ($insercionConfirmada) { 
-                $id = $this->getId($name);
-                $equipo = new Equipo($this->pdo);
-                if ($equipo->crearEquipos($id))
-                    $confirmacionCreacionEquipos = true;
+        try {
+            $this->pdo->beginTransaction();
+            if (!$this->userExiste($name)) {
+                $pass = password_hash($pass, PASSWORD_DEFAULT);
+                $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
+                $q->bindParam(':username', $name, PDO::PARAM_STR);
+                $q->bindParam(':password', $pass, PDO::PARAM_STR);
+                $insercionConfirmada = $q->execute();
+                if ($insercionConfirmada) {
+                    $id = $this->getId($name);
+                    if ($id > 0) { // Asegura que se obtuvo un id válido
+                        $equipo = new Equipo($this->pdo);
+                        $confirmacionCreacionEquipos = $equipo->crearEquipos($id);
+                    }
+                }
             }
-        } else {
+            if ($insercionConfirmada && $confirmacionCreacionEquipos) {
+                $this->pdo->commit();
+                return true;
+            } else {
+                $this->pdo->rollback();
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
             return false;
         }
-        return $confirmacionCreacionEquipos && $insercionConfirmada;
     }
 
 
@@ -75,18 +85,21 @@ class Usuario {
 
 
     /**
-     * SIN TESTEAR
+     * TESTEADA. FUNCIONA
      * funcion para usar en la insercion de User y
      * para sacar el parametro necesario para la funcion de creacion de equipos
      * que está en la entidad Equipo
      * @param string username
-     * @return int $id
+     * @return int $id que si no encuentra, será 0
      */
     public function getId(string $username): int {
+        $id = 0; //esto equivaldría a error, user no encontrado
         $q2 = $this->pdo->prepare('SELECT id FROM Usuario WHERE username = :username');
         $q2->bindParam(':username', $username, PDO::PARAM_STR);
-        if ($q2->execute())
-            $id = $q2->fetch()['id'];
+        if ($q2->execute()) {
+            $resultado = $q2->fetch();
+            if ($resultado) $id = $resultado['id'];
+        }
         return $id;
     }
 
@@ -95,7 +108,7 @@ class Usuario {
 
 
     /**
-     * FUNCIONA, AL MENOS CON LA VERSION PROVISIONAL DE PASS SIN HASHEAR (donde el OR).
+     * FUNCIONA PERO QUEDA MEJORARLA, POR EL HASHEADO
      * Comprueba que el user existe
      * Saca la contraseñá hasheada de ese user
      * comprueba que la contraseña hasheada y la que se introdujo por parametro son la misma
@@ -124,49 +137,6 @@ class Usuario {
     public function getPassword(): string {
         return $this->password;
     }
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Para V2. No en funcionamiento
-     * @param string $nuevoNombre
-     * @return bool Si retorna false es que el username es el mismo y por lo tanto no puede cambiarlo
-     */
-    /*
-    public function cambiarUsername(string $nombreActual, string $nuevoNombre, string $id): bool {
-        $pdo = $this->bbdd->conexionBbdd;
-        $pdo->exec("USE pokedex");
-        $querySacarUser = $pdo->prepare("SELECT username FROM Usuario WHERE username = :username");
-        $querySacarUser->bindParam(":username", $nuevoNombre);
-        $userEncontrado = $querySacarUser->execute(); //bool
-        $userSacado = $querySacarUser->fetch(PDO::FETCH_ASSOC);
-        if (!$userEncontrado) {
-
-        }
-        //si no lo ha encontrado, o sea no existe u
-        //hay que comprobar que ese ese username sacado no esta vacio, antes de compararlo
-        //devuelve una excepcion si no encuentra nada?
-        //modificar despues:
-        if ($this->username != $nuevoNombre) {
-            $this->setUsername($nuevoNombre);
-            $query = $pdo->prepare("UPDATE Usuarios SET username = :username WHERE id = :id");
-            $query->bindParam(':username', $nuevoNombre);
-            $query->execute();
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-    */
-
 
 
 }

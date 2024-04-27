@@ -8,7 +8,7 @@ use Exception;
 
 class Equipo {
     private int $id;
-    private string $nombre = null;
+    private string $nombre;
     private int $id_user;
 
     public PDO $pdo;
@@ -25,38 +25,20 @@ class Equipo {
 
 
     /**
+     * TESTEADA: FUNCIONA
      * funcion que crea los 3 equipos vacios automaticaemente
      * que sera usada en la funcion de creacion de usuario
      * @param int $id_user para el equipo
      * @return bool $confirmacion de que se creó correctamente
      */
     public function crearEquipos(int $id_user): bool {
-        $confirmacion = false;
+        $confirmaciones = [];
         for ($i = 0; $i < 3; $i++) {
             $q = $this->pdo->prepare("INSERT INTO Equipo (id_user) VALUES (:id_user);");
-            $q->bindParam(':id_user', $id_user, PDO::PARAM_STR);
-            $confirmacion = $q->execute();
-            //quiza habria que meterlo en un array y comprobar que los 3 estan confirmados
+            $q->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $confirmaciones[] = $q->execute(); //almacena las tres confirmaciones
         }
-        return $confirmacion;
+        return !in_array(false, $confirmaciones);//!in_array(false, $confirmaciones) devolverá true solo si in_array() devuelve false, es decir, si no se encontró ningún valor false en el array $confirmaciones.
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
