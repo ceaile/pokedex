@@ -138,5 +138,8 @@ class Usuario {
         return $this->password;
     }
 
-
+    /*
+    Quedan hacer comprobaciones con respecto al hasheado
+    Y después, funciones que comprueben longitud de la contraseña mínimo
+    */
 }

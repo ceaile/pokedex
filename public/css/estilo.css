@@ -64,3 +64,20 @@ nav ul li button {
 .redondearbordes{
     border-radius: 50px;
 }
+
+
+
+/* Estilos para las imágenes de los Pokémon */
+/* sacado de chatgpt, simplemente para ir tirando hasta que tengamos
+verdaderamente el diseño */
+
+.pokemon-img { /* miniaturas para pag mis equipos, que en realidad quiero que sean
+las miniaturas de la api de pixel art */
+width: 50px;
+height: 50px;
+}
+.pokemon-img:hover::after { /* para que cuando pase el raton por encima
+salga el simbolo - de quitar pokemon del equipo */
+content: '-';
+position: absolute;
+}

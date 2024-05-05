@@ -1,3 +1,7 @@
+<?php
+//testeo de parametros de sesion
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

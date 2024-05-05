@@ -38,7 +38,10 @@ class Equipo {
             $q->bindParam(':id_user', $id_user, PDO::PARAM_INT);
             $confirmaciones[] = $q->execute(); //almacena las tres confirmaciones
         }
-        return !in_array(false, $confirmaciones);//!in_array(false, $confirmaciones) devolverá true solo si in_array() devuelve false, es decir, si no se encontró ningún valor false en el array $confirmaciones.
+        return !in_array(false, $confirmaciones); //!in_array(false, $confirmaciones) devolverá true solo si in_array() devuelve false, es decir, si no se encontró ningún valor false en el array $confirmaciones.
 
+    }
+
+    public function verEquipos() {
     }
 }

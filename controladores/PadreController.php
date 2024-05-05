@@ -18,9 +18,7 @@ class PadreController {
     public function __construct() {
         $objBbdd = new Bbdd();
         $this->s = new Sesion();
-        if (!$this->s->sessionStarted()) {
-            $this->s->crear();
-        }
+
         $this->pdo = $objBbdd->conexionBbdd;
         $this->pdo->exec("USE pokedex");
         $this->userLogeado = $this->s->userLogeado(); // 

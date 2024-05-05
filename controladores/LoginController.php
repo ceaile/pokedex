@@ -5,6 +5,7 @@ namespace controladores;
 use modelos\Usuario;
 use modelos\Sesion;
 use controladores\PadreController;
+use controladores\EquiposController;
 use Exception;
 
 /*
@@ -20,7 +21,6 @@ que es el que ejecuta el login
 class LoginController extends PadreController {
     public function mostrarLogin() {
         //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
-        $variableLocal = null; //ejemplo
         $this->renderView('login.php', [
             'title' => "Inicia Sesion en Pokédex",
         ]);
@@ -33,24 +33,23 @@ class LoginController extends PadreController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $user = new Usuario($this->pdo);
-            //crea sesion si no la había
             
             //valida user y pass y reenvía donde deba
-            if ($user->loginValidado($username, $password)) { //ojo esta funcion ya hace pero esta sin testear
+            if ($user->loginValidado($username, $password)) {
                  $this->s->crearSesionUser($username);
-                 //quiza en lugar de usar un this renderview
-                 //deberia ser un obj del controlador en cuestion
-                 //que use su metodo home() ????
-                $this->renderView('misequipos.php', [
+                 
+                 $c = new EquiposController();
+                 $c->misEquipos(); //renderiza la otra pag a la que debe ir despues
+                /* $this->renderView('misequipos.php', [
                     'sesion' => $this->s->obtenerSesion('username'),
-                ]);
-                exit();
+                ]); */
+           
             } else {
                 $this->renderView('login.php', [
                     'username' => $username,
                     'password' => $password,
                 ]);
-                exit();
+           
             }
         } catch (Exception $e) {
             echo $e->getMessage();

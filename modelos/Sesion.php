@@ -1,33 +1,22 @@
 <?php
+
 namespace modelos;
 
 class Sesion {
-
-    //$_SESSION['username'] es nuestro estandar de datos de sesion
-
-    /* notas para mejorar la clase que ahora mismo no entiendo lol:
-    clase Sesion con sus metodos de logica
-    funcion de mostrar pag
-    */
-
-    /**
-     * Inicia la sesion y crea la $_SESSION['username] con un string en blanco.
-     */
+    //tengo que revisar cosillas que ahora mismo no me cuadran
     public function __construct() {
-
+        if (!isset($_SESSION)) {
+            session_start();
+        }
     }
 
-    public function crear():void {
-        session_start();
+    /*
+    public function sessionStarted() {
+        if (session_status() == PHP_SESSION_NONE) {
+            return false;
+        }
     }
-
-public function sessionStarted(){
-    if (session_status() == PHP_SESSION_NONE) {
-        return false;
-        //session_start();
-    }
-}
-
+*/
     public function existe(string $nombreSesion): bool {
         return (isset($_SESSION[$nombreSesion])) ? true : false;
     }
@@ -50,7 +39,6 @@ public function sessionStarted(){
         } else {
             return false;
         }
-
     }
 
     /**
@@ -68,6 +56,4 @@ public function sessionStarted(){
     public function userLogeado(): bool {
         return $this->existe("username") && $_SESSION["username"] != "" ? true : false;
     }
-
-
 }

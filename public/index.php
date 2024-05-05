@@ -4,10 +4,12 @@ define('__ROOT__', dirname(dirname(__FILE__)));
 require_once(__ROOT__ . DIRECTORY_SEPARATOR . 'Autoload.php');
 Autoload::register();
 
+
 use Router\Enrutador;
 use Controladores\HomeController;
 use Controladores\LoginController;
 use Controladores\SignupController;
+use Controladores\EquiposController;
 
 //Cargamos las rutas que vamos a usar
 $router = new Enrutador(); //se pasa a los metodos estaticos
@@ -24,10 +26,10 @@ $router->get('/', [PrincipalController::class, '']);
 $router->get('/lista', [PrincipalController::class, 'lista']);
 */
 
-$router->get('/', [HomeController::class, 'home']); 
-$router->get('/misequipos', [HomeController::class, 'home']);
+$router->get('/', [HomeController::class, 'home']);
 
-//aquuiiiiiiiiiiiiiiiiiiii
+$router->get('/misequipos', [EquiposController::class, 'misEquipos']);
+
 $router->get('/login', [LoginController::class, 'mostrarLogin']);
 $router->post('/loggedin', [LoginController::class, 'login']);
 

@@ -7,6 +7,7 @@ use Controladores\HomeController;
 use Controladores\LoginController;
 use Controladores\PadreController;
 use Controladores\SignupController;
+use Controladores\EquiposController;
 
 //Lee la URL y carga el controlador y el método definido en esa ruta en el public/index.php
 class Enrutador {
@@ -75,8 +76,8 @@ class Enrutador {
             $c->login();
 
         } else if ($path == "/misequipos") {
-            $c = new HomeController();
-            $c->home();
+            $c = new EquiposController();
+            $c->misEquipos();
 
         } else if ($path == "/signup") {
             $c = new SignupController();
