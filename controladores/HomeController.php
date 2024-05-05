@@ -9,13 +9,15 @@ use controladores\PadreController;
 
 class HomeController extends PadreController {
     public function home() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
-            exit; //set 404
-
         $this->renderView('home.php', [
-            'title'=> "Lista Pokédex",
+            'title' => "Lista Pokédex",
         ]); //que en futuro seguramente sera home.html o listaPokemon.html .php $router->renderView('home.php', ['title' => 'Pokédex Home']);
     }
 
-}
 
+    public function notFound() {
+        $this->renderView('404.php', [
+            'title' => "Page Not Found",
+        ]);
+    }
+}

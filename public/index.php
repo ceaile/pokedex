@@ -27,7 +27,7 @@ $router->get('/lista', [PrincipalController::class, 'lista']);
 */
 
 $router->get('/', [HomeController::class, 'home']);
-
+$router->get('/404', [HomeController::class, 'notFound']);
 $router->get('/misequipos', [EquiposController::class, 'misEquipos']);
 
 $router->get('/login', [LoginController::class, 'mostrarLogin']);

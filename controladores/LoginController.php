@@ -19,10 +19,12 @@ que es el que ejecuta el login
 
 
 class LoginController extends PadreController {
+    public string $title = "Inicia Sesion en Pokédex";
+
     public function mostrarLogin() {
         //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         $this->renderView('login.php', [
-            'title' => "Inicia Sesion en Pokédex",
+            'title' => $this->title,
         ]);
     }
 
@@ -37,15 +39,10 @@ class LoginController extends PadreController {
             //valida user y pass y reenvía donde deba
             if ($user->loginValidado($username, $password)) {
                  $this->s->crearSesionUser($username);
-                 
-                 $c = new EquiposController();
-                 $c->misEquipos(); //renderiza la otra pag a la que debe ir despues
-                /* $this->renderView('misequipos.php', [
-                    'sesion' => $this->s->obtenerSesion('username'),
-                ]); */
-           
+                 header("Location: misequipos"); //los datos de sesion no se envian por aqui
             } else {
                 $this->renderView('login.php', [
+                    'title' => $this->title,
                     'username' => $username,
                     'password' => $password,
                 ]);

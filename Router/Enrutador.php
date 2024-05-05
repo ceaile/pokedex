@@ -46,13 +46,18 @@ class Enrutador {
             $fn = $this->post_routes[$path];
         }
 
-        /*
         if (!$fn) { // Si la clase Controlador para la ruta no existe
-            $c = new PadreController();
-            $c->renderView('404.php');
-            //header('Location: /404.php');
+            header('Location: /404');
         }
-        */
+
+        $class = $fn[0];
+        $methodName = $fn[1];
+
+        $instance = new $class();
+        call_user_func([$instance, $methodName]);
+        
+  
+        
         //mismo codigo pero mas ilegible :_
         //$fn = $method === 'GET'? $this->get_routes[$path] : $this->post_routes[$path];
         //if(!$fn) header('Location: /404.php');
@@ -64,32 +69,7 @@ class Enrutador {
         Como es una chapucilla pues hay que hacer algo parecido aqui y mantenerlos ambos "iguales"
         porque antes los metodos eran estaticos y con la ultima linea (ahora comentada) valía
         */
-        if ($path == "/") {
-            $c = new HomeController();
-            $c->home();
 
-        } else if ($path == "/login") {
-            $c = new LoginController();
-            $c->mostrarLogin();
-        } else if ($path == "/loggedin") {
-            $c = new LoginController();
-            $c->login();
-
-        } else if ($path == "/misequipos") {
-            $c = new EquiposController();
-            $c->misEquipos();
-
-        } else if ($path == "/signup") {
-            $c = new SignupController();
-            $c->mostrarSignup();
-        } else if ($path == "/signedin") {
-            $c = new SignupController();
-            $c-> signup();
-
-        } else {
-            $c = new PadreController();
-            $c->renderView('404.php');
-        }
         //etc con mas else ifs
         //call_user_func($fn, $this); //TENGO QUE ARREGLARLO CON IFS 
     }
