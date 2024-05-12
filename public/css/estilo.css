@@ -1,33 +1,78 @@
 /* incluir bootstrap */
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+:root {
+    --rojo: #ff3432;
+    --azul: #5cafee;
+    --amarillo: #f3ab33;
+    --grisClaro: #c1cce3;
+    --grisMuyClaro: #e2ecfa;
+    --blanco: #ffffff;
+    --negro: #2a2c30;
+}
+
+html,
 body {
+    color: var(--negro);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
     background-image: url("../img/fondo.jpg");
     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0%;
+}
+
+/* Estilos base */
+p, h1, h2, h3, label, a {
+    color: var(--negro); 
+}
+
+button, input[type="submit"] {
+    background-color: var(--amarillo);
+}
+
+
+button, input[type="submit"] {
+    background-color: var(--amarillo);
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #ffaa00; /* Cambia el color de fondo al hacer hover */
+    color: var(--negro); /* Cambia el color del texto a blanco */
 }
 
 header {
-    background-color: #ff0000; /* Red color */
-    color: #ffffff;
-    padding: 1px;
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 10px 0;
     text-align: center;
-    border-radius: 50px;
 }
+
 nav {
-    background-color: #ff0000; /* Red color */
-    color: #ffffff;
-    padding: 10px;
-    text-align: center;
-    border-radius: 50px; /* Add rounded borders */
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 0 10px;
 }
 
 nav ul {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
-    align-items: left;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
     flex: 1;
+    text-align: center;
 }
 
 nav ul li a {
@@ -40,7 +85,8 @@ nav ul li input[type="text"] {
     border-radius: 5px;
     padding: 5px;
     margin-right: 5px;
-    flex: 2;
+    width: 100%;
+    max-width: 200px;
 }
 
 nav ul li button {
@@ -49,19 +95,57 @@ nav ul li button {
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    flex: 1;
+}
+
+@media (max-width: 452px) {
+    nav ul li {
+        flex: 0 1 auto;
+        text-align: center;
+    }
+
+    nav ul li input[type="text"] {
+        width: 80%;
+        max-width: none;
+    }
+
+    nav ul li button {
+        display: block;
+        margin-top: 5px;
+        width: 80%;
+    }
+}
+
+
+footer {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 30px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+a:link,
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Create a 4-column grid */
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     justify-content: center;
     align-content: center;
     margin: 20px;
 }
 
-.redondearbordes{
+.redondearbordes {
     border-radius: 50px;
 }
 
@@ -71,13 +155,16 @@ nav ul li button {
 /* sacado de chatgpt, simplemente para ir tirando hasta que tengamos
 verdaderamente el diseño */
 
-.pokemon-img { /* miniaturas para pag mis equipos, que en realidad quiero que sean
+.pokemon-img {
+    /* miniaturas para pag mis equipos, que en realidad quiero que sean
 las miniaturas de la api de pixel art */
-width: 50px;
-height: 50px;
+    width: 50px;
+    height: 50px;
 }
-.pokemon-img:hover::after { /* para que cuando pase el raton por encima
+
+.pokemon-img:hover::after {
+    /* para que cuando pase el raton por encima
 salga el simbolo - de quitar pokemon del equipo */
-content: '-';
-position: absolute;
+    content: '-';
+    position: absolute;
 }
