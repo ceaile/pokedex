@@ -10,6 +10,7 @@ class Equipo {
     private int $id;
     private string $nombre;
     private int $id_user;
+    private array $ids_equipos_user = []; //los id de los tres equipos asignados a ese user
 
     public PDO $pdo;
 
@@ -38,10 +39,24 @@ class Equipo {
             $q->bindParam(':id_user', $id_user, PDO::PARAM_INT);
             $confirmaciones[] = $q->execute(); //almacena las tres confirmaciones
         }
-        return !in_array(false, $confirmaciones); //!in_array(false, $confirmaciones) devolverá true solo si in_array() devuelve false, es decir, si no se encontró ningún valor false en el array $confirmaciones.
-
+        return !in_array(false, $confirmaciones);
     }
 
-    public function verEquipos() {
+
+    /**
+     * Para usar en el controlador FichaController y saber
+     * qué equipos tiene cada pokemon, dado que luego hay que guardar
+     * en esos id el dato de que id de equipo-pokemon se mete
+     */
+    public function verEquipos(string $username): array {
+        $u = new Usuario($this->pdo);
+        $id_user = $u->getId($username);
+        if ($id_user != 0) {
+            $q = $this->pdo->prepare("SELECT id, nombre FROM equipo WHERE id_user = :id_user");
+            $q->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+            $q->execute();
+            $result = $q->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $result;
     }
 }

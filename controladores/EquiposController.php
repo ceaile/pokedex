@@ -10,11 +10,15 @@ use modelos\Equipo;
 class EquiposController extends PadreController {
     public function misEquipos() { //deberia obtener de parametros la sesion
         //if ($_SERVER['REQUEST_METHOD'] !== 'GET')
-          //  exit; //set 404
+        //  exit; //set 404
 
         $this->renderView('misequipos.php', [
-            'title'=> "Mis Equipos Pokémon",
+            'title' => "Mis Equipos Pokémon",
         ]);
     }
 
+    private function quitarPokemon() {
+    }
+    private function renombrarEquipo() {
+    }
 }

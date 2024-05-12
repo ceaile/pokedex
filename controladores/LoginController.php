@@ -35,10 +35,11 @@ class LoginController extends PadreController {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $user = new Usuario($this->pdo);
+            $s = new Sesion();
             
             //valida user y pass y reenvía donde deba
             if ($user->loginValidado($username, $password)) {
-                 $this->s->crearSesionUser($username);
+                 $s->poner('username', $username);
                  header("Location: misequipos"); //los datos de sesion no se envian por aqui
             } else {
                 $this->renderView('login.php', [

@@ -3,7 +3,10 @@
 namespace modelos;
 
 class Sesion {
-    //tengo que revisar cosillas que ahora mismo no me cuadran
+/* Sesiones que usaré
+string $_SESSION['username]
+int $_SESSION['id_user] ???
+*/
     public function __construct() {
         if (!isset($_SESSION)) {
             session_start();

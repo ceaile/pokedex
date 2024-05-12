@@ -2,12 +2,13 @@
 
 namespace Router;
 
+/*
 use conexiones\bbdd\Bbdd;
 use Controladores\HomeController;
 use Controladores\LoginController;
 use Controladores\PadreController;
 use Controladores\SignupController;
-use Controladores\EquiposController;
+use Controladores\EquiposController; */
 
 //Lee la URL y carga el controlador y el método definido en esa ruta en el public/index.php
 class Enrutador {

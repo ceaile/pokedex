@@ -10,7 +10,7 @@ use Controladores\HomeController;
 use Controladores\LoginController;
 use Controladores\SignupController;
 use Controladores\EquiposController;
-
+use Controladores\FichaController;
 //Cargamos las rutas que vamos a usar
 $router = new Enrutador(); //se pasa a los metodos estaticos
 
@@ -27,6 +27,7 @@ $router->get('/lista', [PrincipalController::class, 'lista']);
 */
 
 $router->get('/', [HomeController::class, 'home']);
+$router->get('/home', [HomeController::class, 'home']);
 $router->get('/404', [HomeController::class, 'notFound']);
 $router->get('/misequipos', [EquiposController::class, 'misEquipos']);
 
@@ -35,6 +36,10 @@ $router->post('/loggedin', [LoginController::class, 'login']);
 
 $router->get('/signup', [SignupController::class, 'mostrarSignup']);
 $router->post('/signedin', [SignupController::class, 'signup']);
+
+//test
+$router->get('/ficha', [FichaController::class, 'verFicha']);
+$router->post('/add', [FichaController::class, 'anadirPokemon']); //???
 
 $router->resolve();
 
