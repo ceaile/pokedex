@@ -10,9 +10,10 @@ use Exception;
 class SignupController extends PadreController{
 
     public function mostrarSignup() {
+        if ($this->userLogeado) header("Location: home");
         //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         $this->renderView('signup.php', [
-            'title' => "Regístrate en Pokédex",
+            'title' => "Register into Pokédex",
         ]);
     }
 
@@ -25,10 +26,9 @@ class SignupController extends PadreController{
             if ($password1==$password2) {
                 $u = new Usuario($this->pdo);
                 if ($u->insertarUser($username, $password1)) {
-                    $this->renderView('home.php', [ //esta ruta cambiará seguramente
-                        'sesion' => $this->s->obtenerSesion('username'),
+                    $this->renderView('login.php', [ //esta ruta cambiará seguramente
                     ]);
-                } else {
+                } else { //necesita un aviso de si el user ya existe
                     $this->renderView('signup.php');
                 }
             } else{

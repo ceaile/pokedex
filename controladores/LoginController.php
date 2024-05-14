@@ -22,6 +22,7 @@ class LoginController extends PadreController {
     public string $title = "Inicia Sesion en Pokédex";
 
     public function mostrarLogin() {
+        if ($this->userLogeado) header("Location: home");
         //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         $this->renderView('login.php', [
             'title' => $this->title,
@@ -40,7 +41,7 @@ class LoginController extends PadreController {
             //valida user y pass y reenvía donde deba
             if ($user->loginValidado($username, $password)) {
                  $s->poner('username', $username);
-                 header("Location: misequipos"); //los datos de sesion no se envian por aqui
+                 header("Location: myteams"); //los datos de sesion no se envian por aqui
             } else {
                 $this->renderView('login.php', [
                     'title' => $this->title,
@@ -57,6 +58,11 @@ class LoginController extends PadreController {
 
     }
 
-    //user2 password2
+    public function logout() {
+        if ($this->userLogeado){
+            $this->s->eliminarSesion('username');
+        }
+        header('Location: login'); 
+    }
 
 }

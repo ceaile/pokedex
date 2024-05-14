@@ -42,4 +42,7 @@ class PadreController {
         $content = ob_get_clean();
         include_once(__ROOT__ . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "vistas" . DIRECTORY_SEPARATOR . "estructura_main.php");
     }
+
+
+
 }

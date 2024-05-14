@@ -8,12 +8,10 @@ use controladores\PadreController;
 use modelos\Equipo;
 
 class EquiposController extends PadreController {
-    public function misEquipos() { //deberia obtener de parametros la sesion
-        //if ($_SERVER['REQUEST_METHOD'] !== 'GET')
-        //  exit; //set 404
-
+    public function misEquipos() { 
+        if (!$this->userLogeado) header("Location: login");
         $this->renderView('misequipos.php', [
-            'title' => "Mis Equipos Pokémon",
+            'title' => "My Pokémon Teams",
         ]);
     }
 

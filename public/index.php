@@ -29,16 +29,17 @@ $router->get('/lista', [PrincipalController::class, 'lista']);
 $router->get('/', [HomeController::class, 'home']);
 $router->get('/home', [HomeController::class, 'home']);
 $router->get('/404', [HomeController::class, 'notFound']);
-$router->get('/misequipos', [EquiposController::class, 'misEquipos']);
+$router->get('/myteams', [EquiposController::class, 'misEquipos']);
 
 $router->get('/login', [LoginController::class, 'mostrarLogin']);
 $router->post('/loggedin', [LoginController::class, 'login']);
+$router->get('/logout', [LoginController::class, 'logout']);
 
 $router->get('/signup', [SignupController::class, 'mostrarSignup']);
 $router->post('/signedin', [SignupController::class, 'signup']);
 
 //test
-$router->get('/ficha', [FichaController::class, 'verFicha']);
+$router->get('/card', [FichaController::class, 'verFicha']);
 $router->post('/add', [FichaController::class, 'anadirPokemon']); //???
 
 $router->resolve();

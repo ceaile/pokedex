@@ -16,13 +16,12 @@ class FichaController extends PadreController {
      * 
      */
     public function verFicha() {
-        $s = new Sesion();
-        if (!$s->existe('username')) header("Location: login");
+        if (!$this->userLogeado) header("Location: login");
         if ($_SERVER["REQUEST_METHOD"] != "GET") header("Location: misequipos");
 
         $id_pokemon = $_GET['id_pokemon'];
         $e = new Equipo($this->pdo);
-        $equiposDeUsuario = $e->verEquipos($s->obtenerSesion('username'));
+        $equiposDeUsuario = $e->verEquipos($this->s->obtenerSesion('username'));
 
         $nombresEquipos = [];
         $idsEquipos = [];
@@ -53,7 +52,8 @@ class FichaController extends PadreController {
      * 
      */
     public function anadirPokemon() {
-        //asociar url para usar el action
+        if (!$this->userLogeado) header("Location: login");
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_pokemon = $_POST['id_pokemon'];
             $array_equipos = $_POST['equipos'];
@@ -65,9 +65,9 @@ class FichaController extends PadreController {
             }
         }
         if (!in_array(false, $arrayConfirmaciones)) {
-            header("Location: home");
+            header("Location: home"); //cambio posterior a otra url, solo esta asi para saber cuando funciona y cuando no
         } else {
-            header("Location: /ficha?id_pokemon=$id_pokemon");
+            header("Location: /card?id_pokemon=$id_pokemon");
         }
     }
 }
