@@ -28,6 +28,8 @@ class Equipo {
     /**
      * TESTEADA: FUNCIONA
      * funcion que crea los 3 equipos vacios automaticaemente
+     * 
+     * METER LA CREACION DE EQUIPOSPOKEMON 6 VECES
      * que sera usada en la funcion de creacion de usuario
      * @param int $id_user para el equipo
      * @return bool $confirmacion de que se creó correctamente

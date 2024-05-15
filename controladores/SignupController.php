@@ -25,7 +25,8 @@ class SignupController extends PadreController{
             $password2 = $_POST['password2'];
             if ($password1==$password2) {
                 $u = new Usuario($this->pdo);
-                if ($u->insertarUser($username, $password1)) {
+                //if ($u->insertarUser($username, $password1)) {
+                    if ($u->insertarUserCompleto($username, $password1)) {
                     $this->renderView('login.php', [ //esta ruta cambiará seguramente
                     ]);
                 } else { //necesita un aviso de si el user ya existe

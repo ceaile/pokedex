@@ -67,6 +67,55 @@ class Usuario {
     }
 
 
+
+    /**
+     * Funcion sin testar de crear el user completo
+     * con sus 3 equipos en null
+     * y con sus 18 (3x6) entidades equipo-pokemon tambien en null
+     */
+    public function insertarUserCompleto(string $name, string $pass): bool {
+        $confirmacionCreacionEquipos = false;
+        $insercionConfirmada = false;
+        try {
+            $this->pdo->beginTransaction();
+            if (!$this->userExiste($name)) {
+                $pass = password_hash($pass, PASSWORD_DEFAULT);
+                $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
+                $q->bindParam(':username', $name, PDO::PARAM_STR);
+                $q->bindParam(':password', $pass, PDO::PARAM_STR);
+                $insercionConfirmada = $q->execute();
+                if ($insercionConfirmada) {
+                    $id = $this->getId($name);
+                    if ($id > 0) { // Asegura que se obtuvo un id válido
+                        $e = new Equipo($this->pdo);
+                        $confirmacionCreacionEquipos = $e->crearEquipos($id);
+                        if ($confirmacionCreacionEquipos) {
+                            $matrizEquiposDelUser = $e->verEquipos($name);
+                            $ids_equipos = array_column($matrizEquiposDelUser, 'id');
+                            $ep = new EquipoPokemon($this->pdo);
+                            $confirmacionCreacionEntidadesEquipos_Pokemon = $ep->crearTodosEquipos_pokemon($ids_equipos);
+                        }
+                    }
+                }
+            }
+            if ($insercionConfirmada && $confirmacionCreacionEquipos && $confirmacionCreacionEntidadesEquipos_Pokemon) {
+                $this->pdo->commit();
+                return true;
+            } else {
+                $this->pdo->rollback();
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            return false;
+        }
+    }
+
+
+
+
+
+
     /**
      * COMPROBADA QUE FUNCIONAA
      * funcion de comprobacion de que el usuario no existe primero para antes de insertar
@@ -98,11 +147,23 @@ class Usuario {
         $q2->bindParam(':username', $username, PDO::PARAM_STR);
         if ($q2->execute()) {
             $resultado = $q2->fetch();
-            if ($resultado) $id = $resultado['id'];
+            if ($resultado)
+                $id = $resultado['id'];
         }
         return $id;
     }
 
+    public function getUsernameWithId(int $id_user): string {
+        $username = null;
+        $q2 = $this->pdo->prepare('SELECT username FROM Usuario WHERE id = :id_user');
+        $q2->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        if ($q2->execute()) {
+            $resultado = $q2->fetch();
+            if ($resultado)
+                $username = $resultado['username'];
+        }
+        return $username;
+    }
 
 
 
