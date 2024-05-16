@@ -26,45 +26,7 @@ class Usuario {
 
 
 
-    /**
-     * FUNCIONA
-     * comprueba si el user que queremos meter existe
-     * si no existe, lo crea, junto a sus 3 equipos automaticamente.
-     * @param string $name es un username
-     * @param string $pass es la password que quiere insertar en bbdd
-     * @return bool true si lo consiguio
-     */
-    public function insertarUser(string $name, string $pass): bool {
-        $confirmacionCreacionEquipos = false;
-        $insercionConfirmada = false;
-        try {
-            $this->pdo->beginTransaction();
-            if (!$this->userExiste($name)) {
-                $pass = password_hash($pass, PASSWORD_DEFAULT);
-                $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
-                $q->bindParam(':username', $name, PDO::PARAM_STR);
-                $q->bindParam(':password', $pass, PDO::PARAM_STR);
-                $insercionConfirmada = $q->execute();
-                if ($insercionConfirmada) {
-                    $id = $this->getId($name);
-                    if ($id > 0) { // Asegura que se obtuvo un id válido
-                        $equipo = new Equipo($this->pdo);
-                        $confirmacionCreacionEquipos = $equipo->crearEquipos($id);
-                    }
-                }
-            }
-            if ($insercionConfirmada && $confirmacionCreacionEquipos) {
-                $this->pdo->commit();
-                return true;
-            } else {
-                $this->pdo->rollback();
-                return false;
-            }
-        } catch (Exception $e) {
-            $this->pdo->rollBack();
-            return false;
-        }
-    }
+
 
 
 
@@ -203,4 +165,48 @@ class Usuario {
     Quedan hacer comprobaciones con respecto al hasheado
     Y después, funciones que comprueben longitud de la contraseña mínimo
     */
+
+
+
+
+        /**
+     * FUNCIONA pero ya no se usa. No borrar hasta que se sepa innecesaria
+     * comprueba si el user que queremos meter existe
+     * si no existe, lo crea, junto a sus 3 equipos automaticamente.
+     * @deprecated version of insertarUserCompleto()
+     * @param string $name es un username
+     * @param string $pass es la password que quiere insertar en bbdd
+     * @return bool true si lo consiguio
+     */
+    public function insertarUser(string $name, string $pass): bool {
+        $confirmacionCreacionEquipos = false;
+        $insercionConfirmada = false;
+        try {
+            $this->pdo->beginTransaction();
+            if (!$this->userExiste($name)) {
+                $pass = password_hash($pass, PASSWORD_DEFAULT);
+                $q = $this->pdo->prepare("INSERT INTO Usuario (username, password) VALUES (:username, :password);");
+                $q->bindParam(':username', $name, PDO::PARAM_STR);
+                $q->bindParam(':password', $pass, PDO::PARAM_STR);
+                $insercionConfirmada = $q->execute();
+                if ($insercionConfirmada) {
+                    $id = $this->getId($name);
+                    if ($id > 0) { // Asegura que se obtuvo un id válido
+                        $equipo = new Equipo($this->pdo);
+                        $confirmacionCreacionEquipos = $equipo->crearEquipos($id);
+                    }
+                }
+            }
+            if ($insercionConfirmada && $confirmacionCreacionEquipos) {
+                $this->pdo->commit();
+                return true;
+            } else {
+                $this->pdo->rollback();
+                return false;
+            }
+        } catch (Exception $e) {
+            $this->pdo->rollBack();
+            return false;
+        }
+    }
 }
