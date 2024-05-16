@@ -16,23 +16,24 @@ class EquiposController extends PadreController {
         $ep = new EquipoPokemon($this->pdo);
 
         $equiposDeUsuario = $e->verEquipos($username); //array de equipos, con su id y su nombre cada uno
-        //$nombres_equipos = array_column($equiposDeUsuario, 'nombre');
-        //$ids_equipos = array_column($equiposDeUsuario, 'id');
-        //$queryCompleta = $ep->sacarDatosEquiposPokemon($username);
-        foreach($equiposDeUsuario as $equipo) {
-            $pokemonDelEquipo = $ep->saberPokemonDelEquipo($equipo['id']);
 
-            foreach($pokemonDelEquipo as $pokemon) {
-                $pokemon = [
-                    'id_equipopokemon' => $ep->getIdEquipopokemon($equipo['id'], $pokemon['id']),
-                ];
+        $i = 0;
+        foreach($equiposDeUsuario as $equipo) {
+            if ($equiposDeUsuario[$i]['nombre']==null){
+                $equiposDeUsuario[$i]['nombre'] = "My team ".$i+1;
             }
-            
-            $equiposDeUsuario[] = $pokemonDelEquipo; //meter el array de 6 pokemon dentro del array de equipos
+            $pokemonDelEquipo = $ep->saberPokemonDelEquipo($equipo['id']);
+            $equiposDeUsuario[$i]['seisPokemons'] = $pokemonDelEquipo; //meter el array de 6 pokemon dentro del array de equipos
+            $i++;
+            /*
+            por cada pokemon llamar a la api y añadir
+            en el array de pokemon los datos de nombre, sprite, etc
+            tengo que llamar a la api si el id pokemon no es 0
+            */
         }
         
+
         
-       
         
      
 

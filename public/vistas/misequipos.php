@@ -1,27 +1,47 @@
 <h1>My Teams</h1>
 <?php
-var_dump($datosCompletos);
-echo "<br>";
-print_r($datosCompletos);
-
+//echo '<pre>' . var_export($equiposDeUsua, true) . '</pre>';
 /*
-array equipos
-
-  cadaequipo  = [
-    'id' => int $id_equipo
-    'nombre' => string $nombre
-    'pokemon' => $6pokemon[]
-  ]
+array (
+  0 => 
+  array (
+    'id' => 4,
+    'nombre' => NULL,
+    'seisPokemons' => 
+    array (
+      0 => 
+      array (
+        'id_equipopokemon' => 5,
+        'id_pokemon' => 0,
+      ),
+      1 => 
+      array (
+        'id_equipopokemon' => 6,
+        'id_pokemon' => 0,
+      ),
+      2 => 
+      array (
+        'id_equipopokemon' => 7,
+        'id_pokemon' => 0,
+      ),
+      3 => 
+      array (
+        'id_equipopokemon' => 8,
+        'id_pokemon' => 0,
+      ),
+      4 => 
+      array (
+        'id_equipopokemon' => 9,
+        'id_pokemon' => 0,
+      ),
+      5 => 
+      array (
+        'id_equipopokemon' => 10,
+        'id_pokemon' => 0,
+      ),
+    ),
+  ),
   
-  cadapokemon =[
-    'id_pokemon' => int $id_pokemon,
-    'id_equipopokemon' => funcion(id_equipo, id_pokemon)
-  ]
-
-*/
-
-
-
 
 
 ?>
@@ -37,30 +57,23 @@ array equipos
 </div>
 <?php  }*/ ?>
 
+<?php foreach ($equipos as $equipo) : ?>
 
+  <div class="equipo" id="" value="">
 
+    <h3><?= $equipo['nombre'] ?></h3>
 
-echo "<br>";
-echo "<br>";
-<?php foreach ($equipos as $equipo): ?>
+    <?php foreach ($equipo['seisPokemons'] as $pokemon) : ?>
 
-  <div class="equipo" id="<?=$equipo['id']?>" value="<?=$equipo['id']?>">
-
-    <h3><?=$equipo['nombre']?></h3>
-
-    <?php foreach ($equipo['pokemon'] as $pokemon): ?>
-
-      <img 
-        src="sprite?id=25.png" 
-        id="<?php echo $pokemon['id_equipoPokemon']; ?>"
-        name="<?php echo $pokemon['id_equipoPokemon']; ?>" 
-        value="<?php echo $pokemon['id_pokemon']; ?>"
-        alt="<?php echo $pokemon['nombre']; ?>">
+      <img src="https://dummyimage.com/100" 
+      id="<?php echo $pokemon['id_equipopokemon']; ?>" 
+      name="" 
+      alt="">
 
     <?php endforeach; ?>
 
   </div>
-  
+
 <?php endforeach; ?>
 
 
@@ -73,18 +86,12 @@ echo "<br>";
 <div>
   <h3>Mi equipo <span onclick="editarNombre()">editar</span></h3>
   <div>
-    <img src="pokemon1.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)"
-      onclick="borrarPokemon(1)">
-    <img src="pokemon2.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)"
-      onclick="borrarPokemon(2)">
-    <img src="pokemon3.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)"
-      onclick="borrarPokemon(3)">
-    <img src="pokemon4.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)"
-      onclick="borrarPokemon(4)">
-    <img src="pokemon5.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)"
-      onclick="borrarPokemon(5)">
-    <img src="pokemon6.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)"
-      onclick="borrarPokemon(6)">
+    <img src="pokemon1.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)" onclick="borrarPokemon(1)">
+    <img src="pokemon2.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)" onclick="borrarPokemon(2)">
+    <img src="pokemon3.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)" onclick="borrarPokemon(3)">
+    <img src="pokemon4.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)" onclick="borrarPokemon(4)">
+    <img src="pokemon5.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)" onclick="borrarPokemon(5)">
+    <img src="pokemon6.png" class="pokemon-img" onmouseover="mostrarBoton(this)" onmouseout="ocultarBoton(this)" onclick="borrarPokemon(6)">
 
   </div>
 </div>

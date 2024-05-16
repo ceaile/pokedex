@@ -65,10 +65,10 @@ class EquipoPokemon {
      * @return bool false si no
      */
     public function saberPokemonDelEquipo(int $id_equipo) {
-        $q = $this->pdo->prepare("SELECT ep.id_pokemon, ep.id as id_equipopokemon
+        $q = $this->pdo->prepare("SELECT ep.id as id_equipopokemon, ep.id_pokemon
                                     FROM `equipo-pokemon` ep
                                     JOIN equipo e ON ep.id_equipo = e.id
-                                    WHERE e.id = :id_equipo);");
+                                    WHERE e.id = :id_equipo;");
         $q->bindParam(":id_equipo", $id_equipo, PDO::PARAM_INT);
         (bool) $confirmacion = $q->execute();
         return $confirmacion ? $q->fetchAll(PDO::FETCH_ASSOC) : false;
