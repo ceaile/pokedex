@@ -51,12 +51,12 @@ function filterPokemons() {
 
 //PARA PAG MIS EQUIPOS, SIN TESTEAR SI VA
 function mostrarBoton(img) {
-    img.style.cursor = "pointer";
-    img.src = "menos.png";
+    //img.style.cursor = "pointer";
+    //;
   }
 
   function ocultarBoton(img) {
-    img.src = "pokemonX.png"; // Cambiar a la imagen original del Pokémon
+    //img.src = "pokemonX.png"; // Cambiar a la imagen original del Pokémon
   }
 
   function borrarPokemon(id) {

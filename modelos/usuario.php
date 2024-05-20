@@ -31,7 +31,7 @@ class Usuario {
 
 
     /**
-     * Funcion sin testar de crear el user completo
+     * Funcion QUE FUNCIONA
      * con sus 3 equipos en null
      * y con sus 18 (3x6) entidades equipo-pokemon tambien en null
      */

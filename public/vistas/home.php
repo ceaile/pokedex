@@ -10,8 +10,27 @@ ejemplo: /ficha?id_pokemon=25
 
 
 
-<div class="pokemon-container"></div>
+<div class="pokemon-container">
+    <?php foreach ($pokedex as $pokemon) { ?>
+        <div>
+            <a href="/ficha?id_pokemon=<?=$pokemon['id']?>">
+                <img id="<?= $pokemon['id'] ?>" src="<?= $pokemon['art'] ?>">
+            </a>
+            <?php /*foreach ($pokemon['tipos'] as $tipo) { ?>
+                <p><?= $tipo ?></p>
+            <?php } */?>
+        </div>
+    <?php } ?>
+
+
+
+</div>
 
 <div id="spinner" class="spinner-border text-light" role="status">
     <span class="visually-hidden">Loading...</span>
+
+
+
+
+
 </div>

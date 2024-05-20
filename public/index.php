@@ -29,7 +29,9 @@ $router->get('/lista', [PrincipalController::class, 'lista']);
 $router->get('/', [HomeController::class, 'home']);
 $router->get('/home', [HomeController::class, 'home']);
 $router->get('/404', [HomeController::class, 'notFound']);
+
 $router->get('/myteams', [EquiposController::class, 'misEquipos']);
+$router->post('/remove', [EquiposController::class, 'quitarPokemon']);
 
 $router->get('/login', [LoginController::class, 'mostrarLogin']);
 $router->post('/loggedin', [LoginController::class, 'login']);

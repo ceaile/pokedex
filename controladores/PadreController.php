@@ -3,11 +3,13 @@
 namespace controladores;
 
 use conexiones\bbdd\Bbdd;
+use conexiones\api\PokeApi;
 use modelos\Sesion;
 use PDO;
 
 class PadreController {
     public PDO $pdo;
+    public PokeApi $pokeapi;
     public Sesion $s;
 
     /**
@@ -21,7 +23,9 @@ class PadreController {
 
         $this->pdo = $objBbdd->conexionBbdd;
         $this->pdo->exec("USE pokedex");
-        $this->userLogeado = $this->s->userLogeado(); // 
+        $this->userLogeado = $this->s->userLogeado();
+
+        $this->pokeapi = new PokeApi();
     }
 
 
