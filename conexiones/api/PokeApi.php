@@ -11,7 +11,7 @@ fetch('https://pokeapi.co/api/v2/pokemon/ditto')
 */
 class PokeApi {
     private $curl = null;
-    private string $URLBase = 'http://pokeapi.co/api/v2/pokemon/';
+    private string $URLBase = 'https://pokeapi.co/api/v2/pokemon/';
     public ?array $response = null; // Propiedad pública para almacenar la respuesta
     public ?string $error = null;   // Propiedad pública para almacenar el error
 
@@ -34,20 +34,21 @@ class PokeApi {
      * @return response Y TRUE! para poder compararlo y saber si va bien
      */
     public function llamarApi() {
-        // Ejecuta la solicitud y obtiene la respuesta
         $responseRaw = curl_exec($this->curl);
         $this->error = curl_error($this->curl);
         //var_dump($this->error, $responseRaw);die;
-
         // Cierra la sesión cURL
         curl_close($this->curl);
-
-        // Verifica si hubo algún error
         if ($this->error) {
             $this->error = "Hubo un error al llamar a la API: {$this->error}";
         } else {
             $this->response = json_decode($responseRaw, true);
         }
+    }
+
+
+
+    public function getResponse(){
     }
 }
 

@@ -12,15 +12,16 @@ class HomeController extends PadreController {
     public function home() {
         $i = 0;
         $pokedex=[];
-        $p = new Pokemon($this->pokeapi, $this->pdo);
+        $p = new Pokemon($this->pokeapi);
         for ($id = 906; $id < 1026; $id++) {
             $p->llamarPokemon($id);
             $pokedex[$i] =
             [
                 'id' => $id,
                 'nombre' => $p->getNombre(),
-                //'tipos' => $p->getTipos(), //str array
+                'tipos' => $p->getTipos(), //str array
                 'art' => $p->getArt(),
+                
             ];
             $i++;
         }

@@ -13,12 +13,13 @@ ejemplo: /ficha?id_pokemon=25
 <div class="pokemon-container">
     <?php foreach ($pokedex as $pokemon) { ?>
         <div>
-            <a href="/ficha?id_pokemon=<?=$pokemon['id']?>">
-                <img id="<?= $pokemon['id'] ?>" src="<?= $pokemon['art'] ?>">
+            <a href="/card?id_pokemon=<?=$pokemon['id']?>">
+                <img id="<?= $pokemon['id'] ?>" src="<?= $pokemon['art']?>">
             </a>
-            <?php /*foreach ($pokemon['tipos'] as $tipo) { ?>
-                <p><?= $tipo ?></p>
-            <?php } */?>
+            <?php foreach ($pokemon['tipos'] as $tipo) { ?>
+                <p> <?= $tipo ?> </p>
+            <?php } ?>
+            <br>
         </div>
     <?php } ?>
 

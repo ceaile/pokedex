@@ -16,18 +16,18 @@ class Pokemon {
     private $respuesta;
     private int $id;
     private string $nombre;
-    private string $descripcion;
+    private string $descripcion; //tengo que hacer una llamada aparte
     private string $art;
     private string $sprite;
-    private array $tipos;
+    private array $tipos; //
     private string $grito;
     private int $altura;
     private int $peso;
 
 
-    public function __construct(PokeApi $pokeapi, PDO $pdo = null) {
+    public function __construct(PokeApi $pokeapi/*, PDO $pdo = null*/) {
         $this->pokeapi = $pokeapi;
-        if (!$pdo) $this->pdo = $pdo;
+        //if (!$pdo) $this->pdo = $pdo;
     }
 
 
@@ -42,17 +42,18 @@ class Pokemon {
 
     private function setPokemonInfo() {
         $this->setNombre($this->respuesta['name']);
-        //$this->tipos = $this->respuesta['types']; //queda procesar esto
-        $this->setArt($this->respuesta['sprites']['other']['official-artwork']['front_default']); //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png";
-        $this->setSprite($this->respuesta['sprites']['front_default']);
-        $this->setDescripcion($this->respuesta['flavor_text_entries'][9]['flavor_text']);
-        $this->setGrito($this->respuesta['cries']['latest']); //.ogg
         $this->setPeso($this->respuesta['weight']);
         $this->setAltura($this->respuesta['height']);
+        $this->setTipos($this->respuesta['types']); //queda procesar esto
+        $this->setArt($this->respuesta['sprites']['other']['official-artwork']['front_default']); //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png";
+        $this->setSprite($this->respuesta['sprites']['front_default']);
+        //$this->setDescripcion($this->respuesta['species']['flavor_text_entries']);
+        $this->setGrito($this->respuesta['cries']['latest']); //.ogg
+
     }
 
 
-    
+
 
     // Getter and Setter for $respuesta
     public function getRespuesta() {
@@ -86,14 +87,25 @@ class Pokemon {
         return $this->descripcion;
     }
 
-    public function setDescripcion(string $descripcion): void {
-        $this->descripcion = $descripcion;
+
+    /**
+     * @param array response['flavor_text_entries'] matriz
+     */
+    public function setDescripcion($entries): void {
+        foreach ($entries as $entry) {
+            if ($entry['language']['name'] == 'en') {
+                $this->descripcion = $entry['flavor_text'];
+                exit;
+            }
+        }
     }
 
     // Getter and Setter for $art
+
     public function getArt(): string {
         return $this->art;
     }
+
 
     public function setArt(string $art): void {
         $this->art = $art;
@@ -109,20 +121,23 @@ class Pokemon {
     }
 
     // Getter and Setter for $tipos
+
+
+    /**
+     * Hay que entrar en el Types y luego buscar los nombres
+     * para guardarlos en un array que simplemente tenga (ejemplo)
+     * [bicho, tierra]
+     * @param array response['types'] matriz
+     */
+    public function setTipos(array $types): void {
+        $tipos = array_map(function ($typeEntry) {
+            return $typeEntry['type']['name'];
+        }, $types);
+        $this->tipos = $tipos;
+    }
+
     public function getTipos(): array {
         return $this->tipos;
-    }
-
-    public function formatearTipos(): array {
-        $arrayTipos=[];
-        foreach ($this->tipos as $tipo ){
-        $arrayTipos[]= $tipo['type'];
-        }
-        return $arrayTipos;
-    }
-
-    public function setTipos(array $tipos): void {
-        $this->tipos = $tipos;
     }
 
     // Getter and Setter for $grito
@@ -152,6 +167,3 @@ class Pokemon {
         $this->peso = $peso;
     }
 }
-
-
-
