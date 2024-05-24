@@ -6,20 +6,33 @@ use controladores\PadreController;
 use Router\Enrutador;
 use modelos\Sesion;
 use modelos\Equipo;
+use modelos\Pokemon;
 use modelos\EquipoPokemon;
 
 class FichaController extends PadreController {
-
+    
     /**
      * saca los id de los equipos para poder ponerlos en el html del modal ??
      * saca los nombres de los equipos para poder ponerlos en el html
      * 
+     * 
+     * sacar datos del pokemon e insertarlos para acceder desde la vista
      */
     public function verFicha() {
         if (!$this->userLogeado) header("Location: login");
         if ($_SERVER["REQUEST_METHOD"] != "GET") header("Location: misequipos");
 
         $id_pokemon = $_GET['id_pokemon'];
+        $p = new Pokemon($this->pokeapi);
+        $p->llamarPokemon($id_pokemon);
+            $pokemon =
+            [
+                'id' => $id_pokemon,
+                'nombre' => $p->getNombre(),
+                'tipos' => $p->getTipos(), //str array
+                'art' => $p->getArt(),
+                
+            ];
         $e = new Equipo($this->pdo);
         $equiposDeUsuario = $e->verEquipos($this->s->obtenerSesion('username'));
 
@@ -42,7 +55,7 @@ class FichaController extends PadreController {
             'nombreEquipo1' => $arrayNombresEquiposIndexado[0],
             'nombreEquipo2' => $arrayNombresEquiposIndexado[1],
             'nombreEquipo3' => $arrayNombresEquiposIndexado[2],
-
+            'pokemon' => $pokemon,
         ]);
     }
 

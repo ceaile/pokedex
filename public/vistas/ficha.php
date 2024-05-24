@@ -9,7 +9,7 @@ se va desplazando el contenido de la web: la foto, la descripcion, el nombre del
 <audio id="pokemonAudio" src="gritopokemon.mp3" preload="auto"></audio>
 
 <div class="container text-center mt-5">
-    <img src="https://th.bing.com/th/id/R.f4699df7bc717c9f8996da48bfec7879?rik=pj8nIL3ZZC8leQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2fpokemon%2fpokemon_PNG14.png&ehk=2ojy1p4%2f0QPeqLqFkJ144kuBrWdBOqSkVEdGuWWIf7s%3d&risl=&pid=ImgRaw&r=0" alt="Pokemon" style="width: 200px; height: 200px;">
+    <img src="<?=$pokemon['art']?>" alt="Pokemon" style="width: 200px; height: 200px;">
     <p id="id-pokemon" name="id_pokemon"><?=$id_pokemon?></p>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-pokemon-modal">+</button>
 </div>
