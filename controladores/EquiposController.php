@@ -11,21 +11,14 @@ use modelos\Pokemon;
 class EquiposController extends PadreController {
     public function misEquipos() {
         if (!$this->userLogeado) header("Location: login");
-        $username = $this->s->obtenerSesion('username');
+
         $e = new Equipo($this->pdo);
-        $ep = new EquipoPokemon($this->pdo);
+        $ep = new EquipoPokemon($this->pdo, $this->pokeapi);
 
-        $equiposDeUsuario = $e->verEquipos($username); //array de equipos, con su id y su nombre cada uno
+        //array de equipos, con su id y su nombre cada uno, y sus pokemon dentro etc
+        $equiposDeUsuario = $ep->getBucleEquipoConPokemon($this->s->obtenerSesion('username'));
 
-        $i = 0;
-        foreach ($equiposDeUsuario as $equipo) {
-            if ($equiposDeUsuario[$i]['nombre'] == null) {
-                $equiposDeUsuario[$i]['nombre'] = "My team " . $i + 1;
-            }
-            $pokemonDelEquipo = $ep->saberPokemonDelEquipo($equipo['id']);
-            $equiposDeUsuario[$i]['seisPokemons'] = $pokemonDelEquipo; //meter el array de 6 pokemon dentro del array de equipos
-            $i++;
-            /* nota:
+        /* nota: añadir datos de la pokeapi al array para acceder??
             por cada pokemon llamar a la api y añadir
             en el array de pokemon los datos de nombre, sprite, etc
             tengo que llamar a la api si el id pokemon no es 0.
@@ -33,14 +26,13 @@ class EquiposController extends PadreController {
             $PokeApi->construirLlamada(1);
             $PokeApi->llamarApi();
             */
-
-            $p = new Pokemon($this->pokeapi, $this->pdo);
-
+        $p = new Pokemon($this->pokeapi);
 
 
 
-            
-        }
+
+
+
 
 
 

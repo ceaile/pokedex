@@ -2,8 +2,11 @@
 
 namespace modelos;
 
+use conexiones\api\PokeApi;
 use conexiones\bbdd\Bbdd;
 use PDO;
+use modelos\Equipo;
+use modelos\Pokemon;
 use Exception;
 
 class EquipoPokemon {
@@ -13,13 +16,30 @@ class EquipoPokemon {
 
 
     public PDO $pdo;
+    public PokeApi $pokeapi;
 
     /**
      * Recoge objeto PDO y así poder hacer queries en el resto de metodos
      * @param Bbdd $bbdd
      */
-    public function __construct(PDO $pdo) {
+    public function __construct(PDO $pdo, PokeApi $pokeapi) {
         $this->pdo = $pdo;
+        $this->pokeapi = $pokeapi;
+    }
+
+
+    /**
+     * importante el orden en el que se introducen los parametros!!!
+     * funcion para el modal FichaController.
+     * En él se mira si esté relleno
+     */
+    public function insertarPokemon(int $id_equipopokemon, $id_pokemon) {
+        $q = $this->pdo->prepare("UPDATE `equipo-pokemon` SET id_pokemon = :id_pokemon WHERE id = :id");
+        $q->bindParam(':id', $id_equipopokemon, PDO::PARAM_INT);
+        //$q->bindParam(':id_equipo', $id_equipo, PDO::PARAM_INT);
+        $q->bindParam(':id_pokemon', $id_pokemon, PDO::PARAM_INT);
+        $confirmacion = $q->execute();
+        return (bool) $confirmacion;
     }
 
 
@@ -60,7 +80,7 @@ class EquipoPokemon {
 
 
     /**
-     * sin testear. para el bucle de pag mis equipos?
+     * Testeada. Para el gigabucle de pag mis equipos
      * @return array $q->fetchAll() si $confirmacion es verdadero
      * @return bool false si no
      */
@@ -113,4 +133,52 @@ class EquipoPokemon {
     }
 
 
+    /**
+     * El GigaBucle Maestro. Cuidadín...
+     * devuelve una matriz compleja con datos del equipo y de los pokemon
+     * dentro de cada uno. estructura comentada abajo!! importante
+     */
+    public function getBucleEquipoConPokemon(string $username): array {
+        $e = new Equipo($this->pdo);
+        $p = new Pokemon($this->pokeapi);
+        $equiposDeUsuario = $e->verEquipos($username);
+        $i = 0;
+        foreach ($equiposDeUsuario as $equipo) {
+            if ($equiposDeUsuario[$i]['nombre'] == null || $equiposDeUsuario[$i]['nombre'] == '') {
+                $equiposDeUsuario[$i]['nombre'] = "My team " . $i + 1;
+            }
+            $pokemonDelEquipo = $this->saberPokemonDelEquipo($equipo['id']);
+
+            // Agregar la información de 'art' a cada Pokémon del equipo
+            foreach ($pokemonDelEquipo as &$pokemon) {
+                if ($pokemon['id_pokemon'] <= 0) break;
+                $p->llamarPokemon($pokemon['id_pokemon']);
+                $pokemon['art'] = $p->getArt(); //cambiar a sprite
+            } //todo este trozo es nuevo. cuidado!!
+
+            $equiposDeUsuario[$i]['seisPokemons'] = $pokemonDelEquipo; //meter el array de 6 pokemon dentro del array de equipos
+            $i++;
+        }
+        return $equiposDeUsuario;
+        /*
+        array (
+            0 =>  
+            array (
+                    'id' => 4,
+                    'nombre' => NULL,
+                    'seisPokemons' => 
+                        array (
+                            0 => 
+                            array (
+                                'id_equipopokemon' => 5,
+                                'id_pokemon' => 0,
+                        ),
+                            1 =>... //continúa
+
+            )
+            1=>... //continúa
+
+        )    
+        */
+    }
 }

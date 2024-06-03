@@ -54,13 +54,13 @@ array (
     <h3><?= $equipo['nombre'] ?><span onclick="editarNombre()">editar</span></h3>
 
     <?php foreach ($equipo['seisPokemons'] as $pokemon) : ?>
-
-      <img src="https://dummyimage.com/50" 
-      id="<?php echo $pokemon['id_equipopokemon']; ?>" 
-      name="" 
-      alt=""
-      >
-
+      <?php if ($pokemon['id_pokemon'] != 0) { ?>
+        <img src="<?= $pokemon['art']?>"
+              id="<?=$pokemon['id_equipopokemon']?>" 
+             name="<?=$pokemon['id_equipopokemon']?>" 
+      
+        ><!-- end img tag -->
+      <?php } ?>
     <?php endforeach; ?>
 
   </div>

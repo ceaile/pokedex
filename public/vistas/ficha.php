@@ -1,54 +1,37 @@
-<?php
-/*
-Version rapida de la ficha del pokemon. No debe ser así, porque en realidad el número del pokemon
-iria en el footer y se quedaria fijo, mientras que segun vas scrolleando para abajo, con el fondo tambien fijo,
-se va desplazando el contenido de la web: la foto, la descripcion, el nombre del pokemon... y poco mas
-*/
-?>
+<!-- <audio id="pokemonAudio" src="gritopokemon.mp3" preload="auto"></audio> -->
 
-<audio id="pokemonAudio" src="gritopokemon.mp3" preload="auto"></audio>
-
-<div class="container text-center mt-5">
-    <img src="<?=$pokemon['art']?>" alt="Pokemon" style="width: 200px; height: 200px;">
-    <p id="id-pokemon" name="id_pokemon"><?=$id_pokemon?></p>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-pokemon-modal">+</button>
+<div class="container mx-auto text-center mt-5">
+    <img src="<?= $pokemon['art'] ?>" alt="Pokemon" class="w-48 h-48 mx-auto">
+    <p id="id-pokemon" name="id_pokemon" class="mt-2 text-lg font-semibold"><?= $id_pokemon ?></p>
+    <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded" id="open-modal-btn">+</button>
 </div>
 
 
 
-<!-- ----------Modal------------------------ -->
-<div class="modal fade" id="add-pokemon-modal" tabindex="-1" role="dialog" aria-labelledby="add-pokemon-modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="add-pokemon-modal">Add Pokemon to Teams</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="equipoForm" method="post" action="/add">
-                    <div class="form-group">
-                        <label for="nombreEquipo1"><?=$nombreEquipo1?></label>
-                        <input type="checkbox" value="<?=$idEquipo1?>" class="form-control" id="equipo1" name="equipos[]">
-                    </div>
-                    <div class="form-group">
-                        <label for="nombreEquipo2"><?=$nombreEquipo2?></label>
-                        <input type="checkbox" value="<?=$idEquipo2?>" class="form-control" id="equipo2" name="equipos[]">
-                    </div>
-                    <div class="form-group">
-                        <label for="nombreEquipo3"><?=$nombreEquipo3?></label>
-                        <input type="checkbox" value="<?=$idEquipo3?>" class="form-control" id="equipo3" name="equipos[]">
-                    </div>
-                    <input type="hidden" name="id_pokemon" value="<?=$id_pokemon?>"> <!-- for testing, 25. sera php$id_pokemon-->
 
-                    <button type="submit" value="idEquipo3" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+<!-- Modal -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden" id="add-pokemon-modal">
+    <div class="bg-white rounded shadow-lg max-w-md w-full">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h5 class="text-xl font-bold">Add Pokemon to Teams</h5>
+            <button type="button" class="text-gray-600 hover:text-gray-900" id="close-modal-btn">&times;</button>
+        </div>
+        <div class="p-4">
+
+            <form id="equipoForm" method="post" action="/add">
+
+                <?php foreach ($equipos as $equipo) : ?>
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" value="<?= $equipo['id'] ?>" class="form-checkbox h-5 w-5 text-blue-600" id="equipoCheckbox-<?= $equipo['id'] ?>" name="equipos[]">
+                        <label for="equipoCheckbox-<?= $equipo['id'] ?>" class="ml-2 text-red-700"><?= $equipo['nombre'] ?></label>
+                    </div>
+                <?php endforeach; ?>
+
+
+                <input type="hidden" name="id_pokemon" value="<?= $id_pokemon ?>">
+                <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Submit</button>
+            </form>
+
         </div>
     </div>
 </div>
-
-
-
-
