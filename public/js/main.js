@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * Al pulsar el boton de submit, se ejecuta la funcion que conecta con el controlador
  * mediante fetch() ajax, que recoge tambien el valor del input
  * y le envia el nombre nuevo y el id necesario mediante post.
- */
+ */ /*
 const modalRenombre = document.getElementById('renameModal');
 const closeRenameModalButton = document.getElementById('closeRenameModal');
 document.querySelector('a[href="#renameModal"]').addEventListener('click', () => {
@@ -39,10 +39,6 @@ closeRenameModalButton.addEventListener('click', () => {
   modalRenombre.classList.add('hidden'); //oculta, cierra el modal
 });
 
-/**
- * No tiene value el input hidden de php porque aqui se le añade el valor
- * del data-id del <a> que estaba fuera del modal.
- */
 let id_equipo_a_renombrar;
 const renameButton = document.querySelector('a[href="#renameModal"]');
 renameButton.addEventListener('click', (event) => {
@@ -81,7 +77,7 @@ document.getElementById('teamRenameForm').addEventListener('submit', function (e
       console.error('Error al enviar la solicitud:', error);
       modalRenombre.classList.add('hidden');
     });
-});
+}); */
 // .FUNCION DE RENOMBRE DE EQUIPO----------------------------------------
 
 

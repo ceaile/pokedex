@@ -81,3 +81,7 @@ array (
         </form>
     </div>
 </div>
+
+
+
+<script src="../js/editar-equipos.js" type="text/javascript"></script>

@@ -173,6 +173,8 @@ class EquipoPokemon {
                             array (
                                 'id_equipopokemon' => 5,
                                 'id_pokemon' => 0,
+                                'art' => ruta.jpg
+                                ... //datos de pokeapi
                         ),
                             1 =>... //continúa
 

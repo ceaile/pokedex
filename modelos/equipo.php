@@ -65,4 +65,14 @@ class Equipo {
         }
         return $result;
     }
+
+
+
+    public function renombrarEquipo(int $id_equipo, string $nuevoNombre){
+        $q = $this->pdo->prepare("UPDATE equipo SET nombre = :nombre WHERE id = :id");
+        $q->bindParam(':id', $id_equipo, PDO::PARAM_INT);
+        $q->bindParam(':nombre', $nuevoNombre, PDO::PARAM_STR);
+        $confirmacion = $q->execute();
+        return (bool) $confirmacion;
+    }
 }
