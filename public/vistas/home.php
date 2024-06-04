@@ -29,11 +29,3 @@ ejemplo: /ficha?id_pokemon=25
 
 </div>
 
-<div id="spinner" class="spinner-border text-light" role="status">
-    <span class="visually-hidden">Loading...</span>
-
-
-
-
-
-</div>

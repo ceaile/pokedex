@@ -33,9 +33,9 @@ class EquiposController extends PadreController {
         $ep = new EquipoPokemon($this->pdo, $this->pokeapi);
         $id = $_GET['id']; //id
         if ($ep->quitarPokemonDeEquipo($id)) {
-            header("Location: myteams");
+            echo json_encode(['removal_success' => true]);
         } else {
-            header("Location: home");
+            echo json_encode(['removal_success' => false, 'message' => 'Error al eliminar pokemon del equipo']);
         }
     }
 

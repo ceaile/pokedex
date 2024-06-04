@@ -1,5 +1,5 @@
 /**
- * Explicacion detallada: El user clicka en el enlace de renombrar de la vista.
+ * Explicacion detallada del renombrar: El user clicka en el enlace de renombrar de la vista.
  * El script js ejecuta la apertura del modal recogiendo ese click.
  * Hay otra funcion js esperando el click de cierre del modal tambien.
  * Y las otras funciones: una que recoge el click de enviar y el input que puso el user,
@@ -15,39 +15,88 @@
 
 //cambiar nombre de equipo
 document.addEventListener('DOMContentLoaded', () => {
-    const modalRenombre = document.getElementById('renameModal');
-    const closeRenameModalButton = document.getElementById('closeRenameModal');
-    const renameButtons = document.querySelectorAll('a[href="#renameModal"]');
-  
-    //event listeners para todos los botones de renombrar
-    renameButtons.forEach(button => {
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        id_equipo_a_renombrar = event.target.getAttribute('data-id'); //lo coge del <a data-id="">
-        document.querySelector('#teamId').value = id_equipo_a_renombrar;
-        modalRenombre.classList.remove('hidden'); //quita hidden. o sea, lo hace visible
-      });
-    });
-  
-    closeRenameModalButton.addEventListener('click', () => {
-      modalRenombre.classList.add('hidden'); //para cerrar el modal
-    });
-  
-    //event listener para el formulario de renombrar
-    document.getElementById('teamRenameForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const nuevoNombre = document.getElementById('nuevoNombreEquipo').value; //valor del input
-      const data = {
-        id_equipo_a_renombrar, //creado en la funcion anterior
-        nuevoNombre
-      };
-      fetch('/rename', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+
+  //PARA EL MODAL DE CONFIRMACION DE ELIMINACION
+  const modalConfEliminacion = document.getElementById('modal-conf-eliminacion');
+  const botonConfirm = document.getElementById('botonConfirmarModalEliminacion');
+
+  const botonX_conf = document.getElementById('botonXcerrarModalConfEliminacion');
+  const botonCancel_conf = document.getElementById('botonCancelModalConfElimin');
+  botonX_conf.addEventListener('click', () => {
+    modalConfEliminacion.classList.add('hidden'); //para cerrar el modal
+  });
+  botonCancel_conf.addEventListener('click', () => {
+    modalConfEliminacion.classList.add('hidden'); //para cerrar el modal
+  });
+
+  const linkImagen = document.getElementById('imagenLinkPokemon');
+  linkImagen.addEventListener('click', (event) => {
+    event.preventDefault();
+    modalConfEliminacion.classList.remove('hidden'); //para abrir el modal
+  });
+
+
+  /**
+   * mostrar el modal
+   * recoger el click del boton de confirmacion
+   */
+  botonConfirm.addEventListener('click', (event) => {
+    event.preventDefault();
+    const id_equipopokemon = event.target.parentElement.dataset.idEquipopokemon;
+    fetch('/remove_pokemon.php?id=' + id_equipopokemon)
+      .then(response => response.json())
+      .then(data => {
+        modalConfEliminacion.classList.add('hidden');
+        if (data.removal_success) {
+          showNotification('success', 'Your team was updated successfully.');
+          setTimeout(() => {
+            window.location.reload(); // Recarga la página después de un cambio exitoso
+          }, 1000); // Espera 2 segundos antes de recargar la página
+        } else if (data.removal_success == false) {
+          showNotification('error', 'There was a problem updating your team: ' + data.message);
+        }
       })
+      .catch(error => {
+        console.error('Error al enviar la solicitud:', error);
+        showNotification('error', 'Hubo un error en la solicitud.');
+        modalConfEliminacion.classList.add('hidden');
+      });
+  });
+
+  //PARA EL MODAL DE RENOMBRAR EQUIPOS
+  const modalRenombre = document.getElementById('renameModal');
+  const closeRenameModalButton = document.getElementById('closeRenameModal');
+  const renameButtons = document.querySelectorAll('a[href="#renameModal"]');
+
+  //event listeners para todos los botones de renombrar
+  renameButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      id_equipo_a_renombrar = event.target.getAttribute('data-id'); //lo coge del <a data-id="">
+      document.querySelector('#teamId').value = id_equipo_a_renombrar;
+      modalRenombre.classList.remove('hidden'); //quita hidden. o sea, lo hace visible
+    });
+  });
+
+  closeRenameModalButton.addEventListener('click', () => {
+    modalRenombre.classList.add('hidden'); //para cerrar el modal
+  });
+
+  //event listener para el formulario de renombrar
+  document.getElementById('teamRenameForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const nuevoNombre = document.getElementById('nuevoNombreEquipo').value; //valor del input
+    const data = {
+      id_equipo_a_renombrar, //creado en la funcion anterior
+      nuevoNombre
+    };
+    fetch('/rename', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
       .then(response => response.json())
       .then(data => {
         modalRenombre.classList.add('hidden');
@@ -55,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showNotification('success', 'Your team was renamed successfully.');
           setTimeout(() => {
             window.location.reload(); // Recarga la página después de un cambio exitoso
-          }, 2000); // Espera 2 segundos antes de recargar la página
+          }, 1000); // Espera 2 segundos antes de recargar la página
         } else {
           showNotification('error', 'There was a problem renaming your team: ' + data.message);
         }
@@ -68,16 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });//fin de func .document.addEventListener('DOMContentLoaded', ()
 
+//MOSTRAR NOTIFICACION DESPUES DE EDITAR NOMBRE DE EQUIPO O QUITAR POKEMON
 function showNotification(type, message) {
   const notification = document.getElementById('notification');
   const notificationTitle = document.getElementById('notification-title');
   const notificationMessage = document.getElementById('notification-message');
 
-  // Actualizar el contenido de la notificación
   notificationTitle.textContent = type === 'success' ? 'Success! Yay!' : 'Error! Sorry :(';
   notificationMessage.textContent = message;
 
-  // Cambiar el estilo según el tipo
   if (type === 'success') {
     notification.classList.remove('text-red-800', 'border-red-300', 'bg-red-50');
     notification.classList.add('text-green-800', 'border-green-300', 'bg-green-50');
@@ -86,16 +134,13 @@ function showNotification(type, message) {
     notification.classList.add('text-red-800', 'border-red-300', 'bg-red-50');
   }
 
-  // Mostrar la notificación
-  notification.classList.remove('hidden');
-
-  // Ocultar la notificación después de 3 segundos
+  notification.classList.remove('hidden'); //sacar la notificacion y quitarla en 3 segundos
   setTimeout(() => {
     notification.classList.add('hidden');
   }, 3000);
-} 
+}
 
-  
+
 
 
 //quitar pokemon del equipo
