@@ -32,6 +32,7 @@ $router->get('/404', [HomeController::class, 'notFound']);
 
 $router->get('/myteams', [EquiposController::class, 'misEquipos']);
 $router->get('/remove', [EquiposController::class, 'quitarPokemon']);
+$router->post('/rename', [EquiposController::class, 'renombrarEquipo']);
 
 $router->get('/login', [LoginController::class, 'mostrarLogin']);
 $router->post('/loggedin', [LoginController::class, 'login']);
