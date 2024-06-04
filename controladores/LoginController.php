@@ -35,7 +35,7 @@ class LoginController extends PadreController {
             // Recoge los datos del formulario
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $user = new Usuario($this->pdo);
+            $user = new Usuario($this->pdo, $this->pokeapi);
             $s = new Sesion();
             
             //valida user y pass y reenvía donde deba

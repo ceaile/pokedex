@@ -3,8 +3,10 @@
 namespace modelos;
 
 use conexiones\bbdd\Bbdd;
+use conexiones\api\PokeApi;
 use PDO;
 use Exception;
+
 
 class Equipo {
     private int $id;
@@ -13,14 +15,16 @@ class Equipo {
     private array $ids_equipos_user = []; //los id de los tres equipos asignados a ese user
 
     public PDO $pdo;
+    public PokeApi $pokeapi;
 
     /**
      * Recoge objeto PDO y así poder hacer queries en el resto de metodos
      * Crea el array con los pokemon en null.
      * @param Bbdd $bbdd
      */
-    public function __construct(PDO $pdo) {
+    public function __construct(PDO $pdo, PokeApi $pokeapi) {
         $this->pdo = $pdo;
+        $this->pokeapi = $pokeapi;
         //$this->array_pokemon = [$this->id_poke1, $this->id_poke2, $this->id_poke3, $this->id_poke4, $this->id_poke5, $this->id_poke6];
     }
 
@@ -51,7 +55,7 @@ class Equipo {
      * en esos id el dato de que id de equipo-pokemon se mete
      */
     public function verEquipos(string $username): array {
-        $u = new Usuario($this->pdo);
+        $u = new Usuario($this->pdo, $this->pokeapi);
         $id_user = $u->getId($username);
         if ($id_user != 0) {
             $q = $this->pdo->prepare("SELECT id, nombre FROM equipo WHERE id_user = :id_user");

@@ -47,28 +47,22 @@ array (
 <!-- Iteracion -->
 
 
-<?php foreach ($equipos as $equipo) : ?>
+<?php foreach ($equipos as $equipo): ?>
 
-  <div class="equipo" id="" value="">
+  <div class="equipo" id="">
 
     <h3><?= $equipo['nombre'] ?><span onclick="editarNombre()">editar</span></h3>
 
-    <?php foreach ($equipo['seisPokemons'] as $pokemon) : ?>
+    <?php foreach ($equipo['seisPokemons'] as $pokemon): ?>
       <?php if ($pokemon['id_pokemon'] != 0) { ?>
-        <img src="<?= $pokemon['art']?>"
-              id="<?=$pokemon['id_equipopokemon']?>" 
-             name="<?=$pokemon['id_equipopokemon']?>" 
-      
-        ><!-- end img tag -->
+        <a href="/remove?id=<?=$pokemon['id_equipopokemon']?>">
+          <img src="<?= $pokemon['art'] ?>" 
+                id="<?= $pokemon['id_equipopokemon'] ?>"
+                name="<?= $pokemon['id_equipopokemon'] ?>"><!-- end img tag -->
+        </a>
       <?php } ?>
     <?php endforeach; ?>
 
   </div>
 
 <?php endforeach; ?>
-
-
-
-
-
-

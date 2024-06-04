@@ -139,7 +139,7 @@ class EquipoPokemon {
      * dentro de cada uno. estructura comentada abajo!! importante
      */
     public function getBucleEquipoConPokemon(string $username): array {
-        $e = new Equipo($this->pdo);
+        $e = new Equipo($this->pdo, $this->pokeapi);
         $p = new Pokemon($this->pokeapi);
         $equiposDeUsuario = $e->verEquipos($username);
         $i = 0;
@@ -151,7 +151,8 @@ class EquipoPokemon {
 
             // Agregar la información de 'art' a cada Pokémon del equipo
             foreach ($pokemonDelEquipo as &$pokemon) {
-                if ($pokemon['id_pokemon'] <= 0) break;
+                if ($pokemon['id_pokemon'] <= 0)
+                    break;
                 $p->llamarPokemon($pokemon['id_pokemon']);
                 $pokemon['art'] = $p->getArt(); //cambiar a sprite
             } //todo este trozo es nuevo. cuidado!!
@@ -180,5 +181,17 @@ class EquipoPokemon {
 
         )    
         */
+    }
+
+
+
+    /**
+     * Para el controlador EquiposController, vacía el id_pokemon a 0
+     */
+    public function quitarPokemonDeEquipo(int $id_equipopokemon): bool {
+        $q = $this->pdo->prepare("UPDATE `equipo-pokemon` SET id_pokemon = 0 WHERE id = :id");
+        $q->bindParam(':id', $id_equipopokemon, PDO::PARAM_INT);
+        $confirmacion = $q->execute();
+        return (bool) $confirmacion;
     }
 }

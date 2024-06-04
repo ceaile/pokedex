@@ -33,7 +33,7 @@ class FichaController extends PadreController {
                 'art' => $p->getArt(),
 
             ];
-        $e = new Equipo($this->pdo);
+        $e = new Equipo($this->pdo, $this->pokeapi);
         $ep = new EquipoPokemon($this->pdo, $this->pokeapi); /*
         $equiposDeUsuario = $e->verEquipos($this->s->obtenerSesion('username'));
         $nombresEquipos = [];
@@ -70,7 +70,7 @@ class FichaController extends PadreController {
      */
     public function anadirPokemon() {
         $ep = new EquipoPokemon($this->pdo, $this->pokeapi);
-        $e = new Equipo($this->pdo);
+        $e = new Equipo($this->pdo, $this->pokeapi);
 
         if (!$this->userLogeado) header("Location: login");
 

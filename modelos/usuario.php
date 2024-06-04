@@ -3,12 +3,14 @@
 namespace modelos;
 
 use conexiones\bbdd\Bbdd;
+use conexiones\api\PokeApi;
 use modelos\Equipo;
 use PDO;
 use Exception;
 
 class Usuario {
     public PDO $pdo;
+    public PokeApi $pokeapi;
     private int $id;
     private string $username;
     private string $password; // sin hashear, la hasheada va en los metodos
@@ -18,8 +20,9 @@ class Usuario {
      * Recoge objeto bbdd para poder acceder a su atributo PDO y así poder hacer queries en el resto de metodos
      * @param Bbdd $bbdd
      */
-    public function __construct(PDO $pdo) {
+    public function __construct(PDO $pdo, PokeApi $pokeapi) {
         $this->pdo = $pdo;
+        $this->pokeapi = $pokeapi;
     }
 
 
@@ -49,12 +52,12 @@ class Usuario {
                 if ($insercionConfirmada) {
                     $id = $this->getId($name);
                     if ($id > 0) { // Asegura que se obtuvo un id válido
-                        $e = new Equipo($this->pdo);
+                        $e = new Equipo($this->pdo, $this->pokeapi);
                         $confirmacionCreacionEquipos = $e->crearEquipos($id);
                         if ($confirmacionCreacionEquipos) {
                             $matrizEquiposDelUser = $e->verEquipos($name);
                             $ids_equipos = array_column($matrizEquiposDelUser, 'id');
-                            $ep = new EquipoPokemon($this->pdo);
+                            $ep = new EquipoPokemon($this->pdo, $this->pokeapi);
                             $confirmacionCreacionEntidadesEquipos_Pokemon = $ep->crearTodosEquipos_pokemon($ids_equipos);
                         }
                     }
@@ -192,7 +195,7 @@ class Usuario {
                 if ($insercionConfirmada) {
                     $id = $this->getId($name);
                     if ($id > 0) { // Asegura que se obtuvo un id válido
-                        $equipo = new Equipo($this->pdo);
+                        $equipo = new Equipo($this->pdo, $this->pokeapi);
                         $confirmacionCreacionEquipos = $equipo->crearEquipos($id);
                     }
                 }
