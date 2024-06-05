@@ -46,7 +46,7 @@ array (
 ?>
 <!-- Iteracion de pokemon -->
 <?php foreach ($equipos as $equipo): ?>
-  <div class="equipo" id="">
+  <div class="equipo">
     <h3><?= $equipo['nombre'] ?>
       <a href="#renameModal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
         data-id="<?= $equipo['id'] ?>">Rename</a>
@@ -54,14 +54,14 @@ array (
 
     <?php foreach ($equipo['seisPokemons'] as $pokemon): ?>
       <?php if ($pokemon['id_pokemon'] != 0) { ?>
-
-        <a href="#modal-conf-eliminacion" 
-           data-id-equipopokemon="<?=$pokemon['id_equipopokemon'] ?>"
+        <div  
+           
+           onclick="confirmarEliminacion(<?=$pokemon['id_equipopokemon']?>)"
            ><!-- .fin a tag -->
           <img src="<?= $pokemon['art'] ?>" id="<?= $pokemon['id_equipopokemon'] ?>"
             name="<?= $pokemon['id_equipopokemon'] ?>" class="w-48 h-48 mx-auto"
             id="imagenLinkPokemon"><!-- end img tag -->
-        </a>
+      </div>
 
       <?php } ?>
 

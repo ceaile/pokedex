@@ -35,7 +35,7 @@ class EquiposController extends PadreController {
         if ($ep->quitarPokemonDeEquipo($id)) {
             echo json_encode(['removal_success' => true]);
         } else {
-            echo json_encode(['removal_success' => false, 'message' => 'Error al eliminar pokemon del equipo']);
+            echo json_encode(['removal_success' => false, 'message' => 'Error removing pokemon from team']);
         }
     }
 

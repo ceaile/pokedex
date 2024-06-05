@@ -14,6 +14,7 @@ ejemplo: /ficha?id_pokemon=25
     <?php foreach ($pokedex as $pokemon) { ?>
         <div>
             <a href="/card?id_pokemon=<?=$pokemon['id']?>">
+            
                 <img id="<?= $pokemon['id'] ?>" 
                     src="<?= $pokemon['art']?>"
                     class="w-48 h-48 mx-auto"><!-- .end of img tag -->

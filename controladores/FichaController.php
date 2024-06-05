@@ -78,8 +78,13 @@ class FichaController extends PadreController {
             $id_pokemon = $_POST['id_pokemon']; //pokemon de la ficha
             $array_equipos_checkbox = $_POST['equipos'];
         }
-
+        
+        //var_dump($id_pokemon, $array_equipos_checkbox);
+        
+        
         $equiposDeUsuario = $ep->getBucleEquipoConPokemon($this->s->obtenerSesion('username')); //se queda, y se borra el resto
+        //var_dump($equiposDeUsuario);
+        
 
         foreach ($array_equipos_checkbox as $id_equipo) {
             if ($id_equipo != null) { //o sea, si el checkbox esta marcado
@@ -97,7 +102,7 @@ class FichaController extends PadreController {
                 }
             }
         }
-        header("Location: home");
+        header("Location: myteams");
         exit();
 
 
