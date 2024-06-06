@@ -5,11 +5,27 @@ namespace Controladores;
 use Router\Enrutador;
 use controladores\PadreController;
 use modelos\Pokemon;
-
-//use modelos\Usuario;   cuando use una entidad pues la añado
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Exception\RequestException;
 
 class HomeController extends PadreController {
     public function home() {
+        
+        $pokedex = [];
+
+        for ($id = 906; $id < 1026; $id++) {
+            $pokemon = new Pokemon($this->pokeapi);
+            $pokemon->llamarPokemon($id);
+            $pokedex[] = [
+                'id' => $pokemon->getId(),
+                'nombre' => $pokemon->getNombre(),
+                'tipos' => $pokemon->getTipos(),
+                'art' => $pokemon->getArt(),
+            ];
+        }
+
+        /*
         $i = 0;
         $pokedex=[];
         $p = new Pokemon($this->pokeapi);
@@ -20,12 +36,11 @@ class HomeController extends PadreController {
                 'id' => $id,
                 'nombre' => $p->getNombre(),
                 'tipos' => $p->getTipos(), //str array
-                'art' => $p->getArt(),
+                'art' => "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/".$id.".png",
                 
             ];
             $i++;
-        }
-
+        }*/
         $this->renderView('home.php', [
             'title' => "Lista Pokédex",
             'id_primer_pokemon' => 906,
@@ -34,7 +49,6 @@ class HomeController extends PadreController {
 
         ]); 
     }
-
 
     public function notFound() {
         $this->renderView('404.php', [

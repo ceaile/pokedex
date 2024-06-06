@@ -102,7 +102,7 @@ class FichaController extends PadreController {
                 }
             }
         }
-        header("Location: myteams");
+        header("Location: /card?id_pokemon=$id_pokemon");
         exit();
 
 

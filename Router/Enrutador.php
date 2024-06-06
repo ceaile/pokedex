@@ -37,8 +37,7 @@ class Enrutador {
         } else {
             $path = "/"; // Si no existe, usa "/" como valor predeterminado
         }
-        //lo mismo pero con sintaxis dificil T^T
-        //$path = $_SERVER['PATH_INFO'] ?? "/";
+        
         $method = $_SERVER['REQUEST_METHOD'];
         
         if ($method === 'GET') {
@@ -57,22 +56,7 @@ class Enrutador {
         $instance = new $class();
         call_user_func([$instance, $methodName]);
         
-  
-        
-        //mismo codigo pero mas ilegible :_
-        //$fn = $method === 'GET'? $this->get_routes[$path] : $this->post_routes[$path];
-        //if(!$fn) header('Location: /404.php');
 
-        /*
-        NO es esto lo que enruta. O sea sí pero no.
-        Donde verdaderamente se establecen los controladores, las rutas 
-        y los metodos del cotrolador es en el index.php
-        Como es una chapucilla pues hay que hacer algo parecido aqui y mantenerlos ambos "iguales"
-        porque antes los metodos eran estaticos y con la ultima linea (ahora comentada) valía
-        */
-
-        //etc con mas else ifs
-        //call_user_func($fn, $this); //TENGO QUE ARREGLARLO CON IFS 
     }
 
 }

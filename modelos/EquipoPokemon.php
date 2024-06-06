@@ -151,10 +151,13 @@ class EquipoPokemon {
 
             // Agregar la información de 'art' a cada Pokémon del equipo
             foreach ($pokemonDelEquipo as &$pokemon) {
-                if ($pokemon['id_pokemon'] <= 0)
-                    break;
-                $p->llamarPokemon($pokemon['id_pokemon']);
-                $pokemon['art'] = $p->getArt(); //cambiar a sprite
+                if ($pokemon['id_pokemon'] > 0){
+                    $p->llamarPokemon($pokemon['id_pokemon']);
+                    $pokemon['art'] = $p->getArt();
+                } else{
+                    $pokemon['art'] = "https://dummyimage.com/400/000/fff";
+                }
+                //cambiar a sprite
             } //todo este trozo es nuevo. cuidado!!
 
             $equiposDeUsuario[$i]['seisPokemons'] = $pokemonDelEquipo; //meter el array de 6 pokemon dentro del array de equipos

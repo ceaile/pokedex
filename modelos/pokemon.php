@@ -24,21 +24,32 @@ class Pokemon {
     private int $altura;
     private int $peso;
 
-
     public function __construct(PokeApi $pokeapi/*, PDO $pdo = null*/) {
         $this->pokeapi = $pokeapi;
         //if (!$pdo) $this->pdo = $pdo;
     }
-
-
-
+/* //uso con curl
     public function llamarPokemon(int $id_pokemon): void {
         $this->pokeapi->construirLlamada($id_pokemon);
         $this->pokeapi->llamarApi();
         $this->setRespuesta($this->pokeapi->response);
         $this->setPokemonInfo();
         $this->setId($id_pokemon);
+    }*/
+
+    //uso con guzzle
+    public function llamarPokemon(int $id_pokemon): void {
+        $this->pokeapi->construirLlamada($id_pokemon);
+        $promise = $this->pokeapi->construirLlamada($id_pokemon); // Obtener la promesa
+        $response = $promise->wait(); // Esperar a que se resuelva la promesa
+
+        if ($response) {
+            $this->setRespuesta(json_decode($response->getBody(), true));
+            $this->setPokemonInfo();
+            $this->setId($id_pokemon);
+        }
     }
+ 
 
     private function setPokemonInfo() {
         $this->setNombre($this->respuesta['name']);
@@ -49,7 +60,6 @@ class Pokemon {
         $this->setSprite($this->respuesta['sprites']['front_default']);
         //$this->setDescripcion($this->respuesta['species']['flavor_text_entries']);
         $this->setGrito($this->respuesta['cries']['latest']); //.ogg
-
     }
 
 

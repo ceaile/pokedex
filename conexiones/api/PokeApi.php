@@ -1,7 +1,13 @@
 <?php
-
 namespace conexiones\api;
 use Exception;
+//para guzzle:
+require __DIR__ . '/../../vendor/autoload.php';
+use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Exception\RequestException;
+
+//para uso de curl:
 //Documentacion pokeapi v2: https://pokeapi.co/docs/v2#pokemon
 /* Prueba en navegador
 fetch('https://pokeapi.co/api/v2/pokemon/ditto')
@@ -9,7 +15,9 @@ fetch('https://pokeapi.co/api/v2/pokemon/ditto')
  .then(data => console.log(data))
  .catch(error => console.error('Error:', error));
 */
+
 class PokeApi {
+    /*//para uso de curl:
     private $curl = null;
     private string $URLBase = 'https://pokeapi.co/api/v2/pokemon/';
     public ?array $response = null; // Propiedad pública para almacenar la respuesta
@@ -29,10 +37,6 @@ class PokeApi {
             CURLOPT_POSTFIELDS => "",
         ));
     }
-
-    /**
-     * @return response Y TRUE! para poder compararlo y saber si va bien
-     */
     public function llamarApi() {
         $responseRaw = curl_exec($this->curl);
         $this->error = curl_error($this->curl);
@@ -45,10 +49,24 @@ class PokeApi {
             $this->response = json_decode($responseRaw, true);
         }
     }
+*/
 
+//uso con guzzle:
+private $client;
+private string $URLBase = 'https://pokeapi.co/api/v2/pokemon/';
+public ?array $response = null;
+public ?string $error = null;
 
-
-    public function getResponse(){
-    }
+public function __construct() {
+    $this->client = new Client();
 }
 
+public function construirLlamada(int $pokemonId) {
+    if ($pokemonId <= 0) throw new Exception("El id del pokemon no es válido: ".$pokemonId);
+    return $this->client->getAsync($this->URLBase. $pokemonId);
+}
+
+
+
+
+}

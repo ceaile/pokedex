@@ -25,8 +25,5 @@ ejemplo: /ficha?id_pokemon=25
             <br>
         </div>
     <?php } ?>
-
-
-
 </div>
 

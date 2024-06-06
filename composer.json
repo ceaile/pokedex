@@ -1,0 +1,20 @@
+{
+    "name": "admin/pokedex",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ceaile",
+            "email": "ceaile1994@protonmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Conexiones\\Api\\": "conexiones/api/",
+            "Modelos\\": "modelos/",
+            "Controladores\\": "Controladores/"
+        }
+    }
+}
