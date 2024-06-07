@@ -28,6 +28,43 @@ body {
     padding: 0%;
 }
 
+/* Estilos para el preloader */
+#preloader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1.5s ease-in-out; /* Transición de fading */
+}
+
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none; /* Evita interacciones con el preloader invisible */
+}
+
+#preloader img {
+    display: block;
+    margin: 0 auto;
+    width: 500px; /* Ajusta el tamaño del GIF aquí */
+    height: auto; /* Esto mantendrá la proporción original del GIF */
+}
+
+#preloader p {
+    font-size: 30px;
+    color: var(--rojo);
+    transition: opacity 0.5s ease-in-out; /* Transición para el texto */
+}
+
+#preloader.hidden p {
+    opacity: 0;
+}
+/* .Estilos para el preloader */
+
+
+
 /* Estilos base */
 p, h1, h2, h3, label, a {
     color: var(--negro); 

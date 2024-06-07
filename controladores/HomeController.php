@@ -11,7 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 
 class HomeController extends PadreController {
     public function home() {
-        
+
         $pokedex = [];
 
         for ($id = 906; $id < 1026; $id++) {
@@ -41,13 +41,19 @@ class HomeController extends PadreController {
             ];
             $i++;
         }*/
+
+        // Comprueba si hay datos en caché
+        $cacheFolder = '../public/cache';
+        $files = scandir($cacheFolder);
+        $hayCache = count($files) > 2; 
+
         $this->renderView('home.php', [
             'title' => "Lista Pokédex",
             'id_primer_pokemon' => 906,
             'id_ultimo_pokemon' => 1205,
             'pokedex' => $pokedex,
-
-        ]); 
+            'hayCache' => $hayCache, //no se esta usando aun
+        ]);
     }
 
     public function notFound() {
