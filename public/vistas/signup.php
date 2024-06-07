@@ -1,3 +1,4 @@
+<div class="pokemon-container" style="opacity: 0;">
 <form action="/signedin" method="post">
 
     <label for="username">Username:</label><br>
@@ -14,3 +15,4 @@
 
 </form>
 <p> Already have an account? <a href="/login">Log in here</a></p>
+</div>
