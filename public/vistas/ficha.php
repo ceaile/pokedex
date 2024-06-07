@@ -3,6 +3,11 @@
     <div class="container mx-auto text-center mt-5">
         <img src="<?= $pokemon['art'] ?>" alt="Pokemon" class="w-48 h-48 mx-auto">
         <p id="id-pokemon" name="id_pokemon" class="mt-2 text-lg font-semibold"><?= $id_pokemon ?></p>
+        <?php foreach ($pokemon['tipos'] as $tipo): ?>
+            <p><?= $tipo ?></p>
+        <?php endforeach; ?>
+        <p>Height: <?= $pokemon['altura'] ?></p>
+        <p>Weight: <?= $pokemon['peso'] ?></p>
         <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
             id="open-checkbox-modal-btn">+</button>
     </div>

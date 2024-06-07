@@ -14,8 +14,6 @@ class FichaController extends PadreController {
     /**
      * saca los id de los equipos para poder ponerlos en el html del modal ??
      * saca los nombres de los equipos para poder ponerlos en el html
-     * 
-     * 
      * sacar datos del pokemon e insertarlos para acceder desde la vista
      */
     public function verFicha() {
@@ -31,29 +29,17 @@ class FichaController extends PadreController {
                 'nombre' => $p->getNombre(),
                 'tipos' => $p->getTipos(), //str array
                 'art' => $p->getArt(),
+                'altura' => $p->getAltura(),
+                'peso' => $p->getPeso(),
+                
 
             ];
         $e = new Equipo($this->pdo, $this->pokeapi);
-        $ep = new EquipoPokemon($this->pdo, $this->pokeapi); /*
-        $equiposDeUsuario = $e->verEquipos($this->s->obtenerSesion('username'));
-        $nombresEquipos = [];
-        $idsEquipos = [];
-        foreach ($equiposDeUsuario as $equipo) {
-            $nombresEquipos[] = $equipo['nombre'];
-            $idsEquipos[] = $equipo['id'];
-        }
-        $arrayNombresEquiposIndexado = array_values($nombresEquipos);
-        $arrayIdsEquiposIndexado = array_values($idsEquipos);*/
+        $ep = new EquipoPokemon($this->pdo, $this->pokeapi); 
         $equiposDeUsuario = $ep->getBucleEquipoConPokemon($this->s->obtenerSesion('username'));
         $this->renderView('ficha.php', [
             'title' => "Pokemon",
-            'id_pokemon' => $id_pokemon,/*
-            'idEquipo1' => $arrayIdsEquiposIndexado[0],
-            'idEquipo2' => $arrayIdsEquiposIndexado[1],
-            'idEquipo3' => $arrayIdsEquiposIndexado[2],
-            'nombreEquipo1' => $arrayNombresEquiposIndexado[0],
-            'nombreEquipo2' => $arrayNombresEquiposIndexado[1],
-            'nombreEquipo3' => $arrayNombresEquiposIndexado[2],*/
+            'id_pokemon' => $id_pokemon,
             'pokemon' => $pokemon,
             'equipos' => $equiposDeUsuario, //bucle inmenso perfecto con todo que uso en mis equipos
         ]);
@@ -80,8 +66,6 @@ class FichaController extends PadreController {
         }
         
         //var_dump($id_pokemon, $array_equipos_checkbox);
-        
-        
         $equiposDeUsuario = $ep->getBucleEquipoConPokemon($this->s->obtenerSesion('username')); //se queda, y se borra el resto
         //var_dump($equiposDeUsuario);
         
@@ -105,16 +89,5 @@ class FichaController extends PadreController {
         header("Location: /card?id_pokemon=$id_pokemon");
         exit();
 
-
-        //foreach ($array_equipos_checkbox as $id_equipo) { //[1, 2, 3]
-        //aqui es donde tiene que haber logica
-        /*if ($ep->crearEquipoPokemon($id_equipo, $id_pokemon)) {
-                $arrayConfirmaciones[] = true;
-            }*/
-        /*if (!in_array(false, $arrayConfirmaciones)) {
-            header("Location: home"); //cambio posterior a otra url, solo esta asi para saber cuando funciona y cuando no
-        } else {
-            header("Location: /card?id_pokemon=$id_pokemon");
-        }*/
     }
 }

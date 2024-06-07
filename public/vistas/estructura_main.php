@@ -17,7 +17,7 @@
 <body>
     <!-- Preloader -->
     <div id="preloader">
-        <img src="../img/abrir_3.gif">
+        <img src="../img/abrir_2.gif">
     </div>
 
     <header>

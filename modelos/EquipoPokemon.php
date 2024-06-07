@@ -153,7 +153,7 @@ class EquipoPokemon {
             foreach ($pokemonDelEquipo as &$pokemon) {
                 if ($pokemon['id_pokemon'] > 0){
                     $p->llamarPokemon($pokemon['id_pokemon']);
-                    $pokemon['art'] = $p->getArt();
+                    $pokemon['art'] = $p->getSprite();
                 } else{
                     $pokemon['art'] = "https://dummyimage.com/400/000/fff";
                 }
