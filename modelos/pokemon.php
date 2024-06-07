@@ -24,46 +24,35 @@ class Pokemon {
     private int $altura;
     private int $peso;
 
-    /*  //uso con curl
-        public function __construct(PokeApi $pokeapi) { //PDO $pdo = null
-            $this->pokeapi = $pokeapi;
-            //if (!$pdo) $this->pdo = $pdo;
-        }
 
-        public function llamarPokemon(int $id_pokemon): void {
-            $this->pokeapi->construirLlamada($id_pokemon);
-            $this->pokeapi->llamarApi();
-            $this->setRespuesta($this->pokeapi->response);
-            $this->setPokemonInfo();
-            $this->setId($id_pokemon);
-        }*/
+  
+ 
 
     //uso con guzzle
     public function __construct(PokeApi $pokeapi) {
         $this->pokeapi = $pokeapi;
     }
 
-    //uso con guzzle
     public function llamarPokemon(int $id_pokemon): void {
         $data = $this->pokeapi->getPokemonData($id_pokemon);
-
         if ($data) {
             $this->setRespuesta($data);
             $this->setPokemonInfo();
             $this->setId($id_pokemon);
         }
-    }
 
+    }
 
     private function setPokemonInfo() {
         $this->setNombre($this->respuesta['name']);
         $this->setPeso($this->respuesta['weight']);
         $this->setAltura($this->respuesta['height']);
-        $this->setTipos($this->respuesta['types']); //queda procesar esto
+        $this->setTipos($this->respuesta['types']); 
         $this->setArt($this->respuesta['sprites']['other']['official-artwork']['front_default']); //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png";
         $this->setSprite($this->respuesta['sprites']['front_default']);
-        //$this->setDescripcion($this->respuesta['species']['flavor_text_entries']);
         $this->setGrito($this->respuesta['cries']['latest']); //.ogg
+
+        //$this->setDescripcion($this->respuesta['flavor_text_entries']);
     }
 
 
@@ -96,23 +85,25 @@ class Pokemon {
         $this->nombre = $nombre;
     }
 
+
+    /**
+     * @param array response['flavor_text_entries'] matriz
+     */
+    public function setDescripcion(array $entries): void {
+        foreach ($entries as $entry) {
+            if ($entry['language']['name'] == 'en') {
+                $this->descripcion = $entry['flavor_text'];
+                break;
+            }
+        }
+    }
     // Getter and Setter for $descripcion
     public function getDescripcion(): string {
         return $this->descripcion;
     }
 
 
-    /**
-     * @param array response['flavor_text_entries'] matriz
-     */
-    public function setDescripcion($entries): void {
-        foreach ($entries as $entry) {
-            if ($entry['language']['name'] == 'en') {
-                $this->descripcion = $entry['flavor_text'];
-                exit;
-            }
-        }
-    }
+
 
     // Getter and Setter for $art
 

@@ -17,12 +17,19 @@ class FichaController extends PadreController {
      * sacar datos del pokemon e insertarlos para acceder desde la vista
      */
     public function verFicha() {
-        if (!$this->userLogeado) header("Location: login");
-        if ($_SERVER["REQUEST_METHOD"] != "GET") header("Location: myteams");
+        if (!$this->userLogeado)
+            header("Location: login");
+        if ($_SERVER["REQUEST_METHOD"] != "GET")
+            header("Location: myteams");
 
         $id_pokemon = $_GET['id_pokemon'];
         $p = new Pokemon($this->pokeapi);
         $p->llamarPokemon($id_pokemon);
+
+
+        
+
+
         $pokemon =
             [
                 'id' => $id_pokemon,
@@ -31,11 +38,13 @@ class FichaController extends PadreController {
                 'art' => $p->getArt(),
                 'altura' => $p->getAltura(),
                 'peso' => $p->getPeso(),
-                
+                //'descripcion' => $p->getDescripcion(),
+
 
             ];
+
         $e = new Equipo($this->pdo, $this->pokeapi);
-        $ep = new EquipoPokemon($this->pdo, $this->pokeapi); 
+        $ep = new EquipoPokemon($this->pdo, $this->pokeapi);
         $equiposDeUsuario = $ep->getBucleEquipoConPokemon($this->s->obtenerSesion('username'));
         $this->renderView('ficha.php', [
             'title' => "Pokemon",
@@ -58,17 +67,18 @@ class FichaController extends PadreController {
         $ep = new EquipoPokemon($this->pdo, $this->pokeapi);
         $e = new Equipo($this->pdo, $this->pokeapi);
 
-        if (!$this->userLogeado) header("Location: login");
+        if (!$this->userLogeado)
+            header("Location: login");
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_pokemon = $_POST['id_pokemon']; //pokemon de la ficha
             $array_equipos_checkbox = $_POST['equipos'];
         }
-        
+
         //var_dump($id_pokemon, $array_equipos_checkbox);
         $equiposDeUsuario = $ep->getBucleEquipoConPokemon($this->s->obtenerSesion('username')); //se queda, y se borra el resto
         //var_dump($equiposDeUsuario);
-        
+
 
         foreach ($array_equipos_checkbox as $id_equipo) {
             if ($id_equipo != null) { //o sea, si el checkbox esta marcado
