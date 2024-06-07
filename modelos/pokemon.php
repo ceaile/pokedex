@@ -18,38 +18,42 @@ class Pokemon {
     private string $nombre;
     private string $descripcion; //tengo que hacer una llamada aparte
     private string $art;
-    private string $sprite;
-    private array $tipos; //
+    private string $sprite;//!
+    private array $tipos; //!
     private string $grito;
     private int $altura;
     private int $peso;
 
-    public function __construct(PokeApi $pokeapi/*, PDO $pdo = null*/) {
+    /*  //uso con curl
+        public function __construct(PokeApi $pokeapi) { //PDO $pdo = null
+            $this->pokeapi = $pokeapi;
+            //if (!$pdo) $this->pdo = $pdo;
+        }
+
+        public function llamarPokemon(int $id_pokemon): void {
+            $this->pokeapi->construirLlamada($id_pokemon);
+            $this->pokeapi->llamarApi();
+            $this->setRespuesta($this->pokeapi->response);
+            $this->setPokemonInfo();
+            $this->setId($id_pokemon);
+        }*/
+
+    //uso con guzzle
+    public function __construct(PokeApi $pokeapi) {
         $this->pokeapi = $pokeapi;
-        //if (!$pdo) $this->pdo = $pdo;
     }
-/* //uso con curl
-    public function llamarPokemon(int $id_pokemon): void {
-        $this->pokeapi->construirLlamada($id_pokemon);
-        $this->pokeapi->llamarApi();
-        $this->setRespuesta($this->pokeapi->response);
-        $this->setPokemonInfo();
-        $this->setId($id_pokemon);
-    }*/
 
     //uso con guzzle
     public function llamarPokemon(int $id_pokemon): void {
-        $this->pokeapi->construirLlamada($id_pokemon);
-        $promise = $this->pokeapi->construirLlamada($id_pokemon); // Obtener la promesa
-        $response = $promise->wait(); // Esperar a que se resuelva la promesa
+        $data = $this->pokeapi->getPokemonData($id_pokemon);
 
-        if ($response) {
-            $this->setRespuesta(json_decode($response->getBody(), true));
+        if ($data) {
+            $this->setRespuesta($data);
             $this->setPokemonInfo();
             $this->setId($id_pokemon);
         }
     }
- 
+
 
     private function setPokemonInfo() {
         $this->setNombre($this->respuesta['name']);

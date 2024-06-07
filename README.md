@@ -3,6 +3,7 @@
 Se necesita tener instalado PHP.
 0. Abres XAMPP, inicias Apache y Mysql.
 1. Por consola vas a la raiz principal del proyecto.
+1.1 haz composer install en la consola (necesitas vendor y guzzle)
 2. Entras en la carpeta public/.
 3. Lanzas el siguiente comando: "php -S localhost:8080" lo que levanta un servidor lanzando el archivo index.php de public, porque es la carpeta donde te encuentras. (Importante la S mayúscula)
 4. Entras en el navegador y pruebas las URLs definidas en el index.php "localhost:8080", "localhost:8080/home" etc
