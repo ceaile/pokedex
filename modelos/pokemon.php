@@ -18,8 +18,8 @@ class Pokemon {
     private string $nombre;
     private string $descripcion; //tengo que hacer una llamada aparte
     private string $art;
-    private string $sprite;//!
-    private array $tipos; //!
+    private string $sprite;
+    private array $tipos;
     private string $grito;
     private int $altura;
     private int $peso;
@@ -40,7 +40,17 @@ class Pokemon {
             $this->setPokemonInfo();
             $this->setId($id_pokemon);
         }
+    }
 
+    /**
+     * Contenido "duplicado" porque las llamadas a la api 
+     * con los endpoints conjuntos daban problemas :(
+     * Esta version no revisa el dato en caché, para que exista el 'key'
+     */
+    public function llamarPokemonEspecies(int $id_pokemon) {
+        $data = $this->pokeapi->getPokemonEspeciesData($id_pokemon);
+        $this->setRespuesta($data);
+        if ($data) $this->setDescripcion($this->respuesta['flavor_text_entries']);
     }
 
     private function setPokemonInfo() {
@@ -51,8 +61,6 @@ class Pokemon {
         $this->setArt($this->respuesta['sprites']['other']['official-artwork']['front_default']); //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png";
         $this->setSprite($this->respuesta['sprites']['front_default']);
         $this->setGrito($this->respuesta['cries']['latest']); //.ogg
-
-        //$this->setDescripcion($this->respuesta['flavor_text_entries']);
     }
 
 
@@ -93,11 +101,9 @@ class Pokemon {
         foreach ($entries as $entry) {
             if ($entry['language']['name'] == 'en') {
                 $this->descripcion = $entry['flavor_text'];
-                break;
             }
         }
     }
-    // Getter and Setter for $descripcion
     public function getDescripcion(): string {
         return $this->descripcion;
     }

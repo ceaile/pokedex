@@ -8,7 +8,7 @@
         <?php endforeach; ?>
         <p>Height: <?= $pokemon['altura'] ?></p>
         <p>Weight: <?= $pokemon['peso'] ?></p>
-        
+        <p>Description: <?= $pokemon['descripcion'] ?></p>
         <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
             id="open-checkbox-modal-btn">+</button>
     </div>

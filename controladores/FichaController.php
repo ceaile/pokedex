@@ -25,10 +25,7 @@ class FichaController extends PadreController {
         $id_pokemon = $_GET['id_pokemon'];
         $p = new Pokemon($this->pokeapi);
         $p->llamarPokemon($id_pokemon);
-
-
-        
-
+        $p->llamarPokemonEspecies($id_pokemon);
 
         $pokemon =
             [
@@ -38,9 +35,7 @@ class FichaController extends PadreController {
                 'art' => $p->getArt(),
                 'altura' => $p->getAltura(),
                 'peso' => $p->getPeso(),
-                //'descripcion' => $p->getDescripcion(),
-
-
+                'descripcion' => $p->getDescripcion(),
             ];
 
         $e = new Equipo($this->pdo, $this->pokeapi);
@@ -98,6 +93,5 @@ class FichaController extends PadreController {
         }
         header("Location: /card?id_pokemon=$id_pokemon");
         exit();
-
     }
 }
