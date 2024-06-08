@@ -35,7 +35,7 @@
                 </li>
 
                 <li>
-                    <form action="" method="GET">
+                    <form action="home" method="GET">
                         <input type="text" name="search" placeholder="Search Pokémon" style="color:black">
                         <input type="submit" value="Buscar">
                     </form>
