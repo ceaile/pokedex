@@ -52,8 +52,9 @@ body {
     transition: opacity 0.5s ease-in-out;
 }
 
+/* fin estilos para .Preloader y fondo */
 
-/* .Preloader */
+
 
 
 
@@ -207,3 +208,4 @@ salga el simbolo - de quitar pokemon del equipo */
     content: '-';
     position: absolute;
 }
+
