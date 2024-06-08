@@ -1,12 +1,5 @@
 <?php
-if (isset($_GET['search'])) {
-    $search = $_GET['search'] ?? '';
-    if ($search !== '') {
-        $pokedex = array_filter($pokedex, function ($pokemon) use ($search) {
-            return strpos(strtolower($pokemon['nombre']), strtolower($search)) !== false;
-        });
-    }
-}
+
 ?>
 
 <div class="pokemon-container" style="opacity: 0;">

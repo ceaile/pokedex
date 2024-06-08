@@ -28,6 +28,7 @@ $router->get('/lista', [PrincipalController::class, 'lista']);
 
 $router->get('/', [HomeController::class, 'home']);
 $router->get('/home', [HomeController::class, 'home']);
+$router->get('/search', [HomeController::class, 'buscar']); //!
 $router->get('/404', [HomeController::class, 'notFound']);
 
 $router->get('/myteams', [EquiposController::class, 'misEquipos']);
