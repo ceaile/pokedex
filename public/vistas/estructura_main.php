@@ -36,10 +36,10 @@
 
         <li>
     <ul class="navbar">
-        <!-- Otros elementos de la barra de navegación -->
+        <!-- BARRA DE BUSQUEDA -->
         <li class="search-container">
             <form action="search" method="GET" class="search-form">
-                <input type="text" name="search" placeholder="Search Pokémon" class="search-input">
+                <input type="text" name="search" placeholder="search by name, ID, type..." class="search-input">
                 <input type="submit" value="Search" class="search-button">
             </form>
         </li>
@@ -59,7 +59,7 @@
     </main>
     <footer></footer>
 
-    <script src="../js/main.js" type="text/javascript"></script>
+    <script src="../js/efecto-ajedrez.js" type="text/javascript"></script>
 
 </body>
 

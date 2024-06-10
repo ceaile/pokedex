@@ -1,26 +1,22 @@
 <?php
-
 namespace Controladores;
 
 use controladores\PadreController;
 use modelos\Pokemon;
 
-
 class HomeController extends PadreController {
     public function home() {
         $pokedex = $this->crearPokedex();
-
         /* Comprueba si hay datos en caché
         $cacheFolder = '../public/cache';
         $files = scandir($cacheFolder);
         $hayCache = count($files) > 2; */
-
         $this->renderView('home.php', [
             'title' => "Lista Pokédex",
             'id_primer_pokemon' => 906,
             'id_ultimo_pokemon' => 1205,
             'pokedex' => $pokedex,
-            //'hayCache' => $hayCache, //no se esta usando aun
+            //'hayCache' => $hayCache, //no se esta usando al final
         ]);
     }
 
@@ -30,14 +26,31 @@ class HomeController extends PadreController {
         if (isset($_GET['search'])) {
             $search = $_GET['search'] ?? '';
             if ($search !== '') {
-                $pokedex = array_filter($pokedex, function ($pokemon) use ($search) {
-                    return strpos(strtolower($pokemon['nombre']), strtolower($search)) !== false;
-                });
+                if (!is_numeric($search)) {
+                    //BUSCAR POR TIPO
+                    if (strpos($search, 'type ') === 0) { //mira si 'type' está al principio del string
+                        $type = substr($search, 5); // quita de la busqueda el str 'type '
+                        $pokedex = array_filter($pokedex, function ($pokemon) use ($type) {
+                            return in_array(strtolower($type), array_map('strtolower', $pokemon['tipos']));
+                        });
+
+                    } else { //BUSCAR POR NOMBRE DE POKEMON
+                        $pokedex = array_filter($pokedex, function ($pokemon) use ($search) {
+                            return strpos(strtolower($pokemon['nombre']), strtolower($search)) !== false;
+                        });
+                    }
+
+                    //BUSCAR POR ID
+                } else if (is_numeric($search)) {
+                    $pokedex = array_filter($pokedex, function ($pokemon) use ($search) {
+                        return $pokemon['id'] == $search; // Corrected line
+                    });
+                }
+
             }
         }
         $this->renderView('home.php', [
             'title' => "Your Pokémon Search",
-
             'pokedex' => $pokedex,
         ]);
     }
