@@ -8,9 +8,8 @@ use Exception;
 require __DIR__ . '/../../vendor/autoload.php';
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise;
 use GuzzleHttp\Exception\RequestException;
-use modelos\SimpleCache;
+use conexiones\api\SimpleCache;
 
 
 class PokeApi {
@@ -56,6 +55,7 @@ class PokeApi {
 
     /**
      * Llamada exclusiva para conseguir la descripcion del pokemon
+     * Por separado porque daba problemas todo junto :(
      */
     public function construirLlamadaEspecies(int $pokemonId) {
         if ($pokemonId <= 0)

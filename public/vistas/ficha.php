@@ -148,7 +148,7 @@
 
 .tipo-dragon {
     background-color: darkred;
-    font-color: white;
+    color: white;
 }
 
 .tipo-ice {

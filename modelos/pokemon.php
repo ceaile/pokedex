@@ -1,11 +1,7 @@
 <?php
-
 namespace modelos;
-
-use conexiones\bbdd\Bbdd;
 use conexiones\api\PokeApi;
 use PDO;
-use Exception;
 
 /**
  * Llama a la pokeapi como si lo hiciera a BBDD
