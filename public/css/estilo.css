@@ -27,24 +27,28 @@
 
 /* Background Gradient */
 body {
-    background-image: linear-gradient(to bottom, #019fff, #74d5ff);
-    background-attachment: fixed;
-    z-index: -2; /* Behind background image */
-    opacity: 1; /* Always visible */
+  font-family: 'Rubik', sans-serif;
+  background: linear-gradient(to bottom, #019fff, #74d5ff), url('fondo.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Ensure the body covers the full viewport height */
+  position: relative;
 }
 
-/* Background Image */
 .background-image {
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.8s ease-in-out; /* Define transition for fade-in */
-    position: absolute; /* Position over the gradient */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('imagen-inexistente-a-proposito.jpg');
-    background-size: cover;
-    z-index: -1;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.8s ease-in-out; /* Define transition for fade-in */
+  position: absolute; /* Position over the gradient */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Ahora esto se refiere al 100% de la altura del elemento padre */
+  background-size: cover;
+  z-index: -1;
 }
 
 .pokemon-container {
@@ -117,6 +121,7 @@ nav ul li {
 nav ul li a {
     color: #ffffff;
     text-decoration: none;
+    margin-right: 10px; /* Añade un margen a la derecha para separar los enlaces */
 }
 
 nav ul li input[type="text"] {
@@ -208,4 +213,81 @@ salga el simbolo - de quitar pokemon del equipo */
     content: '-';
     position: absolute;
 }
+
+/* Estilos para vista móvil */
+@media (max-width: 870px) {
+    .pokemon-container p {
+        font-size: 12px;
+    }
+}
+
+/* Estilos para pantallas de tamaño PC */
+@media (min-width: 768px) {
+    nav ul li a {
+        margin-right: 70px; /* Añade más espacio a la derecha en pantallas grandes */
+    }
+}
+
+/* Estilos para pantallas de tamaño móvil */
+@media (max-width: 767px) {
+    nav ul li a {
+        margin-right: 10px; /* Añade menos espacio a la derecha en pantallas pequeñas */
+    }
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre los elementos */
+}
+
+.search-input, .search-button {
+    height: 40px; /* Altura común */
+    padding: 5px; /* Espacio interno común */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+    border: 1px solid #ccc; /* Bordes comunes */
+    border-radius: 5px; /* Bordes redondeados comunes */
+    font-size: 16px; /* Tamaño de fuente común */
+}
+
+.search-input {
+    color: black; /* Color de texto para el input */
+}
+
+.search-button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color de texto del botón */
+    cursor: pointer; /* Cursor de puntero para el botón */
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Color de fondo del botón al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column; /* Cambia la dirección del flex a columna en dispositivos móviles */
+        gap: 10px; /* Espacio entre los elementos en modo columna */
+    }
+
+
+    .search-button { 
+        width: 50%; /* Hace que los elementos ocupen todo el ancho disponible */
+    }
+}
+.navbar {
+    display: flex;
+    justify-content: center; /* Centrar los elementos de la barra de navegación */
+    align-items: center; /* Alinear los elementos verticalmente */
+    list-style: none; /* Eliminar el estilo de lista */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Asegura que la barra de navegación ocupe todo el ancho */
+}
+
 

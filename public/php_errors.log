@@ -1,0 +1,9 @@
+[05-Jun-2024 21:14:57 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'php_curl.dll' (tried: C:\php\ext\php_curl.dll (No se puede encontrar el módulo especificado), C:\php\ext\php_php_curl.dll.dll (No se puede encontrar el módulo especificado)) in Unknown on line 0
+[05-Jun-2024 21:16:48 UTC] PHP Fatal error:  Uncaught PDOException: could not find driver in C:\Users\alexa\OneDrive\Escritorio\proyectos\Proyectofinal\conexiones\bbdd\bbdd.php:14
+Stack trace:
+#0 C:\Users\alexa\OneDrive\Escritorio\proyectos\Proyectofinal\conexiones\bbdd\bbdd.php(14): PDO->__construct('mysql:host=loca...', 'root', Object(SensitiveParameterValue))
+#1 C:\Users\alexa\OneDrive\Escritorio\proyectos\Proyectofinal\controladores\PadreController.php(16): conexiones\bbdd\Bbdd->__construct()
+#2 C:\Users\alexa\OneDrive\Escritorio\proyectos\Proyectofinal\Router\Enrutador.php(60): Controladores\PadreController->__construct()
+#3 C:\Users\alexa\OneDrive\Escritorio\proyectos\Proyectofinal\public\index.php(31): Router\Enrutador->resolve()
+#4 {main}
+  thrown in C:\Users\alexa\OneDrive\Escritorio\proyectos\Proyectofinal\conexiones\bbdd\bbdd.php on line 14

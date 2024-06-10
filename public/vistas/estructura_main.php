@@ -23,29 +23,32 @@
     <header>
         <nav>
             <ul>
-                <li><a id="inicio" href="/home">Home</a>
-                    <img height=1px width=40px src="../img/spacer.gif" alt="">
-                    <a href="/myteams">
-                        <?php if (isset($_SESSION['username'])) : ?>
-                            <?php echo $_SESSION['username'] . "'s Teams"; ?>
-                        <?php else : ?>
-                            My Teams
-                        <?php endif; ?>
-                    </a>
-                </li>
+            <li>
+            <a id="inicio" href="/home">Home</a>
+            <a href="/myteams">
+                <?php if (isset($_SESSION['username'])) : ?>
+                    <?php echo $_SESSION['username'] . "'s Teams"; ?>
+                <?php else : ?>
+                    My Teams
+                <?php endif; ?>
+            </a>
+        </li>
 
-                <li>
-                    <form action="search" method="GET">
-                        <input type="text" name="search" placeholder="Search Pokémon" style="color:black">
-                        <input type="submit" value="Search">
-                    </form>
-
-                </li>
+        <li>
+    <ul class="navbar">
+        <!-- Otros elementos de la barra de navegación -->
+        <li class="search-container">
+            <form action="search" method="GET" class="search-form">
+                <input type="text" name="search" placeholder="Search Pokémon" class="search-input">
+                <input type="submit" value="Search" class="search-button">
+            </form>
+        </li>
+    </ul>
 
                 <?php if (!isset($_SESSION['username'])) { ?>
                     <li><a href="/login">Login</a></li>
                 <?php } else if (isset($_SESSION['username'])) { ?>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a style="background-color:#FFAA00;border-radius:20px;padding: 10px; text-decoration: none;" href="/logout">Logout</a></li>
                 <?php } ?>
             </ul>
         </nav>
