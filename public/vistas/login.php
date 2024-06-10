@@ -19,7 +19,7 @@
         <input type="password" id="password" name="password"
             style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;"><br>
         <input type="submit" value="Log In"
-            style="width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+            style="width: 100%; padding: 10px; background-color: #f3ab33; color: #000; border: none; border-radius: 5px; cursor: pointer;">
     </form><!-- .FORM -->
 
     <!-- mensaje de error -->

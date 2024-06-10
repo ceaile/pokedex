@@ -1,4 +1,6 @@
+/* Fuentes base, colores, 
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap'); /* test importacion de otra font */
 
 :root {
     --rojo: #ff3432;
@@ -25,9 +27,9 @@
     transition: opacity 0.5s ease-in-out; /* Transition for fade-out effect */
 }
 
-/* Background Gradient */
+/* gradiente de fondo */
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Tiny5", sans-serif, 'Rubik', sans-serif;
   background: linear-gradient(to bottom, #019fff, #74d5ff), url('fondo.jpg');
   background-size: cover;
   background-attachment: fixed;
@@ -38,6 +40,7 @@ body {
   min-height: 100vh; /* Ensure the body covers the full viewport height */
   position: relative;
 }
+
 
 .background-image {
   opacity: 0; /* Initially hidden */
@@ -70,6 +73,7 @@ h3,
 label,
 a {
     color: var(--negro);
+    font-family: 'Rubik', sans-serif;
 }
 
 button,
@@ -85,10 +89,8 @@ input[type="submit"] {
 
 button:hover,
 input[type="submit"]:hover {
-    background-color: #ffaa00;
-    /* Cambia el color de fondo al hacer hover */
+    background-color: #966a13;
     color: var(--negro);
-    /* Cambia el color del texto a blanco */
 }
 
 header {

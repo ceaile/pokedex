@@ -46,9 +46,9 @@
     </ul>
 
                 <?php if (!isset($_SESSION['username'])) { ?>
-                    <li><a href="/login">Login</a></li>
+                    <li><a style="background-color:#FFAA00;border-radius:10px;padding: 10px; text-decoration: none;" href="/login">Login</a></li>
                 <?php } else if (isset($_SESSION['username'])) { ?>
-                    <li><a style="background-color:#FFAA00;border-radius:20px;padding: 10px; text-decoration: none;" href="/logout">Logout</a></li>
+                    <li><a style="background-color:#FFAA00;border-radius:10px;padding: 10px; text-decoration: none;" href="/logout">Logout</a></li>
                 <?php } ?>
             </ul>
         </nav>

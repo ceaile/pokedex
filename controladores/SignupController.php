@@ -28,8 +28,7 @@ class SignupController extends PadreController{
             if ($password1==$password2) {
                 $u = new Usuario($this->pdo, $this->pokeapi);
                     if ($u->insertarUserCompleto($username, $password1)) {
-                        $this->s->poner('mensaje_bienvenida', "We're excited to have you");
-                        
+                        $this->s->poner('mensaje_bienvenida', "We're excited to have you");  
                         header("Location: login");
 
                 } else { //aviso de si el user ya existe

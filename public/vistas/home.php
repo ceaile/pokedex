@@ -38,7 +38,7 @@
     height: 350px;
     background-color: transparent;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0px 0px rgba(0,0,0,0.1);
     overflow: hidden;
     text-align: center;
     margin: 10px 0;

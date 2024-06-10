@@ -44,7 +44,6 @@ class LoginController extends PadreController {
             } else {
                 $this->s->poner('mensaje_login', "Sorry! You wrote your password wrong, or your username doesn't exist...");
                 header("Location: login");
-           
             }
         } catch (Exception $e) {
             echo $e->getMessage();
