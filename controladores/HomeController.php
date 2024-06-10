@@ -41,7 +41,7 @@ class HomeController extends PadreController {
                     }
 
                     //BUSCAR POR ID
-                } else if (is_numeric($search)) {
+                } else if (is_numeric($search)) { //no un else normal por si alguien mete un caracter raro que no sea ni letra ni numero
                     $pokedex = array_filter($pokedex, function ($pokemon) use ($search) {
                         return $pokemon['id'] == $search; // Corrected line
                     });
