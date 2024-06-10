@@ -41,8 +41,8 @@ botonConfirm.addEventListener('click', (event) => {
       if (data.removal_success) {
         showNotification('success', 'Your team was updated successfully.');
         setTimeout(() => {
-          window.location.reload(); // Recarga la página después de un cambio exitoso
-        }, 10); // Espera 2 segundos antes de recargar la página
+          window.location.reload(); 
+        }, 1500); //mismo numero para ambos modales y el alert de exito
       } else if (data.removal_success == false) {
         showNotification('error', 'There was a problem updating your team: ' + data.message);
       }
@@ -95,8 +95,8 @@ document.getElementById('teamRenameForm').addEventListener('submit', function (e
       if (data.success) {
         showNotification('success', 'Your team was renamed successfully.');
         setTimeout(() => {
-          window.location.reload(); // Recarga la página después de un cambio exitoso
-        }, 10); // Espera 2 segundos antes de recargar la página
+          window.location.reload();
+        }, 1500);
       } else {
         showNotification('error', 'There was a problem renaming your team: ' + data.message);
       }
@@ -129,6 +129,6 @@ if (type === 'success') {
 notification.classList.remove('hidden'); //sacar la notificacion y quitarla en 3 segundos
 setTimeout(() => {
   notification.classList.add('hidden');
-}, 3000);
+}, 1500);
 
 }

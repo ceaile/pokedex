@@ -23,7 +23,6 @@ class LoginController extends PadreController {
 
     public function mostrarLogin() {
         if ($this->userLogeado) header("Location: home");
-        //if($_SERVER['REQUEST_METHOD'] !== 'GET') exit; //set 404
         $this->renderView('login.php', [
             'title' => $this->title,
         ]);
@@ -43,11 +42,8 @@ class LoginController extends PadreController {
                  $s->poner('username', $username);
                  header("Location: myteams"); //los datos de sesion no se envian por aqui
             } else {
-                $this->renderView('login.php', [
-                    'title' => $this->title,
-                    'username' => $username,
-                    'password' => $password,
-                ]);
+                $this->s->poner('mensaje_login', "Sorry! You wrote your password wrong, or your username doesn't exist...");
+                header("Location: login");
            
             }
         } catch (Exception $e) {

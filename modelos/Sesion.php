@@ -24,8 +24,8 @@ int $_SESSION['id_user] ???
         return (isset($_SESSION[$nombreSesion])) ? true : false;
     }
 
-    public function poner(string $nombreSesion, $valor): bool {
-        return $_SESSION[$nombreSesion] = $valor;
+    public function poner(string $nombreSesion, $valor): void {
+        $_SESSION[$nombreSesion] = $valor;
     }
 
     public function obtenerSesion(string $nombreSesion): string {

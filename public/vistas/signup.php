@@ -12,6 +12,14 @@
     <input type="password" id="password2" name="password2" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;"><br>
     
     <input type="submit" value="Sign up" style="width: 100%; padding: 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+
+    <?php if (isset($_SESSION['mensaje_signup'])) { ?>
+        <p style="color:red;"><?=$_SESSION['mensaje_signup']?></p>
+        <?php unset($_SESSION['mensaje_signup']);?>
+    <?php } ?>
+
 </form>
-<p> Already have an account? <a href="/login">Log in here</a></p>
+<p> Already have an account?</p> 
+<p><a href="/login"><strong>Log in here</strong></a></p>
 </div>
+
