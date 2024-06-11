@@ -45,6 +45,7 @@
 
 <script src="../js/ficha-modal-equipos.js" type="text/javascript"></script>
 
+
 <style>
     #close-checkbox-modal-btn:hover {
     border-radius: 50%; /* Hace que el botón sea completamente redondo */
@@ -66,99 +67,6 @@
     background-color: red;
 }
 
-.tipo-fire {
-    background-color: red;
-    color: white;
-}
 
-.tipo-water {
-    background-color: blue;
-    color: white;
-}
-
-.tipo-grass {
-    background-color: green;
-    color: white;
-}
-
-.tipo-ghost {
-    background-color: purple;
-    color: white;
-}
-
-.tipo-normal {
-    background-color: gray;
-    color: white;
-}
-
-.tipo-fighting {
-    background-color: yellow;
-    color: black;
-}
-
-.tipo-bug {
-    background-color: darkgreen;
-    color: white;
-}
-
-.tipo-dark {
-    background-color: black;
-    color: white;
-}
-
-.tipo-electric {
-    background-color: yellow;
-    color: black;
-}
-
-.tipo-fairy {
-    background-color: pink;
-    color: white;
-}
-
-.tipo-rock {
-    background-color: gray;
-    color: white;
-}
-
-.tipo-flying {
-    background-color: lightblue;
-    color: black;
-}
-
-.tipo-psychic {
-    background-color: indigo;
-    color: white;
-}
-
-.tipo-poison {
-    background-color: darkpurple;
-    color: white;
-}
-
-.tipo-ground {
-    background-color: darkyellow;
-    color: white;
-}
-
-.tipo-steel {
-    background-color: lightgray;
-    color: black;
-}
-
-.tipo-dragon {
-    background-color: darkred;
-    color: white;
-}
-
-.tipo-ice {
-    background-color: lightblue;
-    color: black;
-}
-
-.tipo-unknown {
-    background-color: gray;
-    color: white; /* Color por defecto para tipos desconocidos */
-}
 </style>
 

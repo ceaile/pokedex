@@ -1,6 +1,7 @@
-/* Fuentes base, colores, 
+/* Fuentes base, colores */
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap'); /* test importacion de otra font */
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+/* test importacion de otra font */
 
 :root {
     --rojo: #ff3432;
@@ -12,46 +13,65 @@
     --negro: #2a2c30;
 }
 
-/* Preloader */
+/* Reset básico */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+/* PRELOADER, FONDO Y POKEMON-CONTAINER */
 #preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 9999; /* Ensure preloader is on top */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    z-index: 9999;
+    /* Ensure preloader is on top */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease-in-out; /* Transition for fade-out effect */
+    transition: opacity 0.5s ease-in-out;
+    /* Transition for fade-out effect */
 }
 
 /* gradiente de fondo */
 body {
-  font-family: 'Rubik', sans-serif;
-  background: linear-gradient(to bottom, #019fff, #74d5ff), url('fondo.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh; /* Ensure the body covers the full viewport height */
-  position: relative;
+    font-family: 'Rubik', 'Oswald', 'Helvetica', 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #019fff, #74d5ff), url('fondo.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Ensure the body covers the full viewport height */
+    position: relative;
 }
 
 
 .background-image {
-  opacity: 0; /* Initially hidden */
-  transition: opacity 0.8s ease-in-out; /* Define transition for fade-in */
-  position: absolute; /* Position over the gradient */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; /* Ahora esto se refiere al 100% de la altura del elemento padre */
-  background-size: cover;
-  z-index: -1;
+    opacity: 0;
+    /* Initially hidden */
+    transition: opacity 0.8s ease-in-out;
+    /* Define transition for fade-in */
+    position: absolute;
+    /* Position over the gradient */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ahora esto se refiere al 100% de la altura del elemento padre */
+    background-size: cover;
+    z-index: -1;
 }
 
 .pokemon-container {
@@ -59,237 +79,332 @@ body {
     transition: opacity 0.5s ease-in-out;
 }
 
-/* fin estilos para .Preloader y fondo */
+/* .fin estilos para .Preloader y fondo */
 
-
-
-
-
-/* Estilos base */
-p,
-h1,
-h2,
-h3,
-label,
-a {
-    color: var(--negro);
-    font-family: 'Rubik', sans-serif;
+/* NAVBAR Y FOOTER */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
 }
 
-button,
-input[type="submit"] {
-    background-color: var(--amarillo);
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-
-button,
-input[type="submit"] {
-    background-color: var(--amarillo);
+.navbar,
+.footer,
+.container {
+    width: 100%;
+    box-sizing: border-box;
 }
 
-button:hover,
-input[type="submit"]:hover {
-    background-color: #966a13;
-    color: var(--negro);
-}
-
-header {
-    background-color: var(--rojo);
-    color: var(--blanco);
-    padding: 10px 0;
-    text-align: center;
-}
-
-nav {
-    background-color: var(--rojo);
-    color: var(--blanco);
-    padding: 0 10px;
-}
-
-nav ul {
-    list-style-type: none;
+.navbar {
+    background-color: red;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
-nav ul li {
-    flex: 1;
-    text-align: center;
-}
-
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    margin-right: 10px; /* Añade un margen a la derecha para separar los enlaces */
-}
-
-nav ul li input[type="text"] {
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    margin-right: 5px;
-    width: 100%;
-    max-width: 200px;
-}
-
-nav ul li button {
-    background-color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-@media (max-width: 452px) {
-    nav ul li {
-        flex: 0 1 auto;
-        text-align: center;
-    }
-
-    nav ul li input[type="text"] {
-        width: 80%;
-        max-width: none;
-    }
-
-    nav ul li button {
-        display: block;
-        margin-top: 5px;
-        width: 80%;
-    }
-}
-
-
-footer {
-    background-color: var(--rojo);
-    color: var(--blanco);
-    padding: 30px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-
-
-a:link,
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    justify-content: center;
-    align-content: center;
-    margin: 20px;
-}
-
-.redondearbordes {
-    border-radius: 50px;
-}
-
-
-
-/* Estilos para las imágenes de los Pokémon */
-/* sacado de chatgpt, simplemente para ir tirando hasta que tengamos
-verdaderamente el diseño */
-
-.pokemon-img {
-    /* miniaturas para pag mis equipos, que en realidad quiero que sean
-las miniaturas de la api de pixel art */
-    width: 50px;
-    height: 50px;
-}
-
-.pokemon-img:hover::after {
-    /* para que cuando pase el raton por encima
-salga el simbolo - de quitar pokemon del equipo */
-    content: '-';
-    position: absolute;
-}
-
-/* Estilos para vista móvil */
-@media (max-width: 870px) {
-    .pokemon-container p {
-        font-size: 12px;
-    }
-}
-
-/* Estilos para pantallas de tamaño PC */
-@media (min-width: 768px) {
-    nav ul li a {
-        margin-right: 70px; /* Añade más espacio a la derecha en pantallas grandes */
-    }
-}
-
-/* Estilos para pantallas de tamaño móvil */
-@media (max-width: 767px) {
-    nav ul li a {
-        margin-right: 10px; /* Añade menos espacio a la derecha en pantallas pequeñas */
-    }
-}
-.search-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.search-form {
+.navbar-left,
+.navbar-center,
+.navbar-right {
     display: flex;
     align-items: center;
-    gap: 5px; /* Espacio entre los elementos */
 }
 
+/* Enlaces de la izquierda */
+.navbar-left .nav-link {
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+/* Barra de búsqueda en el centro */
+.navbar-center {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+
+
+/* Botón de login y menú hamburguesa a la derecha */
+.navbar-right {
+    position: relative;
+}
+
+.hamburger-menu {
+    display: none;
+    /* Oculto por defecto */
+    font-size: 24px;
+    background: none;
+    border: none;
+}
+
+/* Menú móvil */
+.mobile-menu {
+    display: none;
+    /* Oculto por defecto */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.mobile-menu .nav-link {
+    margin: 10px 0;
+}
+
+/* para pantallas no móviles!!! */
+@media (min-width: 769px) {
+    .navbar {
+        height: 10vh;
+        /* 10% del alto de la pantalla */
+    }
+
+    .footer {
+        height: 10vh;
+        /* 10% del alto de la pantalla */
+        background-color: red;
+    }
+}
+
+/* para pantallas móviles */
+@media (max-width: 768px) {
+    .navbar-left,
+    .navbar-center {
+        display: none;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+
+    .navbar,
+    .footer,
+    .container {
+        padding: 20px;
+        /* Puedes ajustar esto según sea necesario */
+    }
+
+    .footer {
+        background-color: red;
+    }
+}
+
+.container {
+    /* en el mismo div que la clase pokemon-container! */
+    flex: 1;
+}
+
+/* OTROS: */
 .search-input, .search-button {
-    height: 40px; /* Altura común */
-    padding: 5px; /* Espacio interno común */
-    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
-    border: 1px solid #ccc; /* Bordes comunes */
-    border-radius: 5px; /* Bordes redondeados comunes */
-    font-size: 16px; /* Tamaño de fuente común */
+    height: 40px; /* Ajustar la altura según tus necesidades */
+    border-radius: 15px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Color del borde inicial */
+    padding: 0 15px; /* Espaciado interno */
+    margin-right: 5px; /* Espacio entre el input y el botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    outline: none; /* Quitar el borde azul de enfoque por defecto */
 }
 
-.search-input {
-    color: black; /* Color de texto para el input */
+.search-input:focus {
+    border-color: #800000; /* Color del borde al enfocar (granate) */
 }
 
 .search-button {
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white; /* Color de texto del botón */
-    cursor: pointer; /* Cursor de puntero para el botón */
+    background-color: #800000; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    cursor: pointer; /* Cambiar el cursor al pasar por encima */
+    border: 1px solid #800000; /* Asegurar que el borde del botón sea del mismo color */
+    transition: background-color 0.3s, border-color 0.3s; /* Transición suave para el cambio de color */
 }
 
 .search-button:hover {
-    background-color: #0056b3; /* Color de fondo del botón al pasar el mouse */
+    background-color: #990000; /* Color de fondo del botón al pasar por encima */
+    border-color: #990000; /* Color del borde del botón al pasar por encima */
 }
 
-@media (max-width: 768px) {
-    .search-form {
-        flex-direction: column; /* Cambia la dirección del flex a columna en dispositivos móviles */
-        gap: 10px; /* Espacio entre los elementos en modo columna */
-    }
-
-
-    .search-button { 
-        width: 50%; /* Hace que los elementos ocupen todo el ancho disponible */
-    }
+.search-button:focus {
+    border-color: #800000; /* Asegurar que el borde del botón sea del mismo color al enfocar */
 }
-.navbar {
+
+
+
+.link-navegacion {
+    text-decoration-line: underline;
+    padding: 15px;
+    margin-left:10px;
+}
+
+.link-navegacion:hover {
+    background-color: #ff9f50;
+    border-radius: 10px;
+}
+
+.link-login {
+    background-color: #f2ff00;
+    text-decoration-line: none;
+    border-radius: 10px;
+    padding:15px;
+    margin-right:20px;
+}
+
+.link-login:hover {
+    background-color: #b7ff00;
+    text-decoration-line: none;
+}
+
+/* .OTROS */
+
+/* PAGINA HOME, PARA EL POKEMON-CONTAINER */
+.lista {
     display: flex;
-    justify-content: center; /* Centrar los elementos de la barra de navegación */
-    align-items: center; /* Alinear los elementos verticalmente */
-    list-style: none; /* Eliminar el estilo de lista */
-    padding: 0;
-    margin: 0;
-    width: 100%; /* Asegura que la barra de navegación ocupe todo el ancho */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 10px;
+    height: 80vh;
+    max-width: 100vw;
+    align-items: center;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
 }
 
+.pokemon-item {
+    flex: 0 0 auto;
+    width: 230px;
+    height: 350px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    margin: 5px 0;
+}
 
+.pokemon-image {
+    width: 100%;
+    height: auto;
+}
+
+.types-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Permite que los tipos se envuelvan */
+}
+
+.type-text {
+    text-align: center;
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+
+/* para los tipos, funciona */
+.tipo-fire {
+    background-color: red;
+    color: white;
+}
+
+.tipo-water {
+    background-color: blue;
+    color: white;
+}
+
+.tipo-grass {
+    background-color: green;
+    color: white;
+}
+
+.tipo-ghost {
+    background-color: purple;
+    color: white;
+}
+
+.tipo-normal {
+    background-color: gray;
+    color: white;
+}
+
+.tipo-fighting {
+    background-color: orange;
+    color: black;
+}
+
+.tipo-bug {
+    background-color: lime;
+    color: white;
+}
+
+.tipo-dark {
+    background-color: black;
+    color: white;
+}
+
+.tipo-electric {
+    background-color: gold;
+    color: black;
+}
+
+.tipo-fairy {
+    background-color: pink;
+    color: white;
+}
+
+.tipo-rock {
+    background-color: brown;
+    color: white;
+}
+
+.tipo-flying {
+    background-color: skyblue;
+    color: black;
+}
+
+.tipo-psychic {
+    background-color: magenta;
+    color: white;
+}
+
+.tipo-poison {
+    background-color: darkgreen;
+    color: white;
+}
+
+.tipo-ground {
+    background-color: sienna;
+    color: white;
+}
+
+.tipo-steel {
+    background-color: silver;
+    color: black;
+}
+
+.tipo-dragon {
+    background-color: indigo;
+    color: white;
+}
+
+.tipo-ice {
+    background-color: cyan;
+    color: black;
+}
+
+.tipo-unknown {
+    background-color: beige;
+    color: black;
+}
