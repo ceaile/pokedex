@@ -177,6 +177,7 @@ body {
 
 /* para pantallas móviles */
 @media (max-width: 768px) {
+
     .navbar-left,
     .navbar-center {
         display: none;
@@ -204,61 +205,72 @@ body {
 }
 
 /* OTROS: */
-.search-input, .search-button {
-    height: 40px; /* Ajustar la altura según tus necesidades */
-    border-radius: 15px; /* Bordes redondeados */
-    border: 1px solid #ccc; /* Color del borde inicial */
-    padding: 0 15px; /* Espaciado interno */
-    margin-right: 5px; /* Espacio entre el input y el botón */
-    font-size: 16px; /* Tamaño de la fuente */
-    outline: none; /* Quitar el borde azul de enfoque por defecto */
+.search-input,
+.search-button {
+    height: 40px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    padding: 0 15px;
+    margin-right: 5px;
+    font-size: 16px;
+    outline: none;
 }
 
 .search-input:focus {
-    border-color: #800000; /* Color del borde al enfocar (granate) */
+    border-color: #800000;
 }
 
 .search-button {
-    background-color: #800000; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    cursor: pointer; /* Cambiar el cursor al pasar por encima */
-    border: 1px solid #800000; /* Asegurar que el borde del botón sea del mismo color */
-    transition: background-color 0.3s, border-color 0.3s; /* Transición suave para el cambio de color */
+    background-color: #800000;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #800000;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .search-button:hover {
-    background-color: #990000; /* Color de fondo del botón al pasar por encima */
-    border-color: #990000; /* Color del borde del botón al pasar por encima */
+    background-color: #990000;
+    border-color: #990000;
 }
 
 .search-button:focus {
-    border-color: #800000; /* Asegurar que el borde del botón sea del mismo color al enfocar */
+    border-color: #800000;
 }
-
-
 
 .link-navegacion {
     text-decoration-line: underline;
-    padding: 15px;
+    padding: 8px;
+    padding-left:15px;
+    padding-right:15px;
     margin-left:10px;
+    border-radius: 15px;
+    color: var(--negro);
+    cursor: pointer;
+    border: 1px solid var(--rojo);
+    transition: background-color 0.5s, border-color 0.5s;
 }
-
 .link-navegacion:hover {
-    background-color: #ff9f50;
-    border-radius: 10px;
+    background-color: #9b2626;
+    border-radius: 15px;
+    color:var(--blanco);
 }
-
 .link-login {
     background-color: #f2ff00;
     text-decoration-line: none;
-    border-radius: 10px;
-    padding:15px;
+    border-radius: 15px;
+    padding:8px;
+    padding-left:15px;
+    padding-right:15px;
     margin-right:20px;
+    cursor: pointer;
+    border: 1px solid var(--rojo);
+    transition: background-color 0.5s, border-color 0.5s;
 }
-
 .link-login:hover {
-    background-color: #b7ff00;
+    background-color: #96c02b;
     text-decoration-line: none;
+    color:var(--negro);
+    border-radius: 15px;
 }
 
 /* .OTROS */
