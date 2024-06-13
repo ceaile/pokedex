@@ -53,24 +53,19 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    /* Ensure the body covers the full viewport height */
     position: relative;
 }
 
 
 .background-image {
     opacity: 0;
-    /* Initially hidden */
     transition: opacity 0.8s ease-in-out;
-    /* Define transition for fade-in */
     position: absolute;
-    /* Position over the gradient */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Ahora esto se refiere al 100% de la altura del elemento padre */
-    background-size: cover;
+    background: url('../img/fondo_transp.png') center center / cover no-repeat;
     z-index: -1;
 }
 
@@ -98,7 +93,7 @@ body {
 .footer,
 .container {
     width: 100%;
-    box-sizing: border-box;
+    box-sizing: border-box; /* en el css veo que no se esta aplicando, dejarlo porsiaca de todos modos de momento */
 }
 
 .navbar {
@@ -110,9 +105,13 @@ body {
     padding: 10px;
 }
 
-/* lunares */
-
-/*.lunares*/
+/* cambios a furza brutal manual */
+@media (min-width: 1536px) {
+    .container {
+      max-width: 2160px;
+    }
+  }
+/*.cambios a furza brutal manual*/
 
 
 .navbar-left,
@@ -203,6 +202,7 @@ body {
 
     .footer {
         background-color: var(--rojo);
+        background-image: url(../img/footer_3.png);
     }
 }
 

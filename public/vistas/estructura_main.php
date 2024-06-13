@@ -65,7 +65,7 @@
         </header>
         <main class="container">
             <?= $content ?>
-            <img src="../img/fondo_transp.png" alt="Background Image" class="background-image">
+            <img src="../img/foto_inexistente.png" alt="Background Image" class="background-image">
         </main>
         <footer class="footer"></footer>
     </div>
