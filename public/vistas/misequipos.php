@@ -140,39 +140,6 @@ array (
   </div>
 </div>
 
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
-
-  .modalEliminacion,
-  .modalRenombrar {
-    border-radius: 30px;
-  }
-
-  .modalRenombrar {
-    padding: 30px;
-  }
-
-  button,
-  .inputRenombrar {
-    border-radius: 15px;
-  }
-
-  .botonCancel:hover {
-    background-color: grey;
-  }
-
-  .inputRenombrar:focus {
-    outline: none;
-    border: 1px solid red;
-  }
-
-  .alerta {
-    padding: 30px;
-    font-size: larger;
-  }
-</style>
-
 <!-- Alerta oculta de éxito o fracaso -->
 <div id="notification-container" class="fixed top-1/2 right-1/2 transform translate-x-1/2 -translate-y-1/2">
   <div id="notification"
