@@ -52,7 +52,7 @@ html {
     transition: opacity 0.5s ease-in-out;
  */
 }
-#preloader img { /* test. funciona parece */
+#preloader img {
     max-width: 100%;
     height: auto;
 }
@@ -198,7 +198,6 @@ body {
 
 /* para pantallas móviles */
 @media (max-width: 768px) {
-
     .navbar-left,
     .navbar-center {
         display: none;
@@ -218,6 +217,15 @@ body {
     .footer {
         background-color: var(--rojo);
         background-image: url(../img/footer_3.png);
+    }
+
+    
+    .lista {
+        flex-direction: column;
+        height: auto;
+        max-width: 100%;
+        overflow-y: auto;
+        gap: 20px;
     }
 }
 
@@ -309,15 +317,13 @@ body {
     max-width: 100vw;
     align-items: center;
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
 }
 
 .pokemon-item {
     flex: 0 0 auto;
-    width: 230px;
-    height: 350px;
+    /*width: 230px;
+    height: 350px;*/
     background-color: transparent;
     border-radius: 10px;
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
