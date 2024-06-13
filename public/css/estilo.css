@@ -31,15 +31,30 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 9999; /* Ensure preloader is on top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out; /* Transition for fade-out effect */
+    background: url('../img/abrir_2.gif') center center / cover no-repeat;
+    /* ya no necesario
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
     z-index: 9999;
-    /* Ensure preloader is on top */
     display: flex;
     justify-content: center;
     align-items: center;
     transition: opacity 0.5s ease-in-out;
-    /* Transition for fade-out effect */
+ */
+}
+#preloader img { /* test. funciona parece */
+    max-width: 100%;
+    height: auto;
 }
 
 /* gradiente de fondo */
