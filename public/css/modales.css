@@ -28,3 +28,30 @@
     padding: 30px;
     font-size: larger;
   }
+
+/* modal de ficha pokemon de añadir a equipos */
+  #close-checkbox-modal-btn:hover {
+     /* Hace que el botón sea completamente redondo */
+}
+
+.boton-submit{
+  width: 100%;
+  padding: 10px;
+  background-color: var(--amarillo);
+  color: #000;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.5s, border-color 0.5s;
+}
+
+.boton-submit:hover{
+  background-color: #ffc258;
+  border-color: #ffc258;
+}
+.boton-submit:focus{
+  cursor: pointer;
+  border: 1px solid #f3ab33;
+  border-color:#f3ab33;
+}

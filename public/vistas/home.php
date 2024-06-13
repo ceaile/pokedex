@@ -27,15 +27,6 @@
 
 <script>
 // PARA EL SCROLL VERTICAL, que solo es necesario en esta pag!
-/*
-document.getElementById('pokemonContainer').addEventListener('wheel', function(event) {
-    if (event.deltaY > 0) {
-        this.scrollLeft += 100;
-    } else {
-        this.scrollLeft -= 100;
-    }
-    event.preventDefault();
-});*/
 document.getElementById('pokemonContainer').addEventListener('wheel', function(event) {
     if (window.innerWidth > 768) { // Solo para pantallas grandes
         if (event.deltaY > 0) {

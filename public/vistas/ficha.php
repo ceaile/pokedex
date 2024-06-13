@@ -20,36 +20,38 @@
 
 <!-- Modal -->
 <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden" id="add-pokemon-modal">
-    <div class="bg-white rounded shadow-lg max-w-md w-full">
-        <div class="flex justify-between items-center p-4 border-b">
-            <h5 class="text-xl font-bold">Add Pokemon to Teams</h5>
-            <button type="button" class="text-gray-600 hover:text-gray-900"
-                id="close-checkbox-modal-btn">&times;</button>
+    <div class="bg-white rounded shadow-lg max-w-md w-full rounded-lg">
+        <div class="flex justify-between items-start p-4 border-b"> <!-- Cambia 'items-center' a 'items-start' -->
+            <h2 class="text-xl font-semibold">Add Pokemon to Teams</h2> <!-- Elimina 'mb-4' -->
+            <button type="button" class="text-xl px-2 text-gray-600 bg-transparent hover:text-gray-900 hover:bg-gray-200"
+                id="close-checkbox-modal-btn">×</button>
         </div>
-        <div class="p-4">
-            <form id="equipoForm" method="post" action="/add">
+        <div class="p-6"> <!-- Aumenta el padding a 'p-6' -->
+            <form id="equipoForm" method="post" action="/add" >
                 <?php foreach ($equipos as $equipo): ?>
                     <div class="flex items-center mb-4">
-                        <input type="checkbox" value="<?= $equipo['id'] ?>" class="form-checkbox h-5 w-5 text-blue-600"
+                        <input type="checkbox" value="<?= $equipo['id'] ?>" class="form-checkbox h-5 w-5 text-red-800"
                             id="equipoCheckbox-<?= $equipo['id'] ?>" name="equipos[]">
                         <label for="equipoCheckbox-<?= $equipo['id'] ?>"
-                            class="ml-2 text-red-700"><?= $equipo['nombre'] ?></label>
+                            class="ml-2"><?= $equipo['nombre'] ?></label>
                     </div>
                 <?php endforeach; ?>
                 <input type="hidden" name="id_pokemon" value="<?= $id_pokemon ?>">
-                <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Submit</button>
+                <button type="submit" class="boton-submit">Submit</button>
             </form>
         </div>
     </div>
 </div>
 
+
 <script src="../js/ficha-modal-equipos.js" type="text/javascript"></script>
 
 
 <style>
-    #close-checkbox-modal-btn:hover {
-    border-radius: 50%; /* Hace que el botón sea completamente redondo */
-}
+
+
+
+
 /* ... tus otros estilos ... */
 #id-pokemon {
     font-size: 2em; /* Hace que el texto sea más grande */
