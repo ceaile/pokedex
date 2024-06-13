@@ -13,12 +13,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/forms.css">
 </head>
 
 <body>
     <!-- Preloader -->
     <div id="preloader">
-        <!-- <img src="../img/abrirrrr_2.gif">-->
+        <!-- <img src="../img/abrirrrr_2.gif"> ya no necesario -->
     </div>
 
     <div class="wrapper">

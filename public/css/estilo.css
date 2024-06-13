@@ -239,7 +239,8 @@ body {
 }
 
 .search-input:focus {
-    border-color: #800000;
+    outline: none;
+    border: 2px solid var(--amarillo);
 }
 
 .search-button {

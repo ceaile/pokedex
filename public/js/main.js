@@ -13,12 +13,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// PARA EL SCROLL VERTICAL
-document.getElementById('pokemonContainer').addEventListener('wheel', function(event) {
-    if (event.deltaY > 0) {
-        this.scrollLeft += 100;
-    } else {
-        this.scrollLeft -= 100;
-    }
-    event.preventDefault();
-});

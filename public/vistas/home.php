@@ -21,13 +21,18 @@
 <style>
 
 
-/*
-}*/
-
 
 
 </style>
 
 <script>
-
+// PARA EL SCROLL VERTICAL, que solo es necesario en esta pag!
+document.getElementById('pokemonContainer').addEventListener('wheel', function(event) {
+    if (event.deltaY > 0) {
+        this.scrollLeft += 100;
+    } else {
+        this.scrollLeft -= 100;
+    }
+    event.preventDefault();
+});
 </script>

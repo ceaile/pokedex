@@ -1,0 +1,55 @@
+.form-signup, .form-login {
+    margin: 90px auto;
+    width: 300px;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-signup, .input-login {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+    outline: none;
+}
+.input-signup:focus, .input-login:focus {
+    outline: none;
+    border: 1px solid var(--rojo);
+}
+
+.input-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--amarillo);
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.5s, border-color 0.5s;
+}
+
+.input-submit:hover{
+    background-color: #ffc258;
+    border-color: #ffc258;
+}
+.input-submit:focus{
+    cursor: pointer;
+    border: 1px solid #f3ab33;
+    border-color:#f3ab33;
+}
+
+.pokemon-container-login { /* not being used right now */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    width: 100%;
+}
+
+
