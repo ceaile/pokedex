@@ -1,21 +1,29 @@
 <!-- Código HTML -->
-<div class="pokemon-container pokemon-container-ficha">
-    <div class="container text-center mt-5">
-        <img src="<?= $pokemon['art'] ?>" alt="Pokemon" class="w-48 h-48 mx-auto">
-        <p id="id-pokemon" name="id_pokemon" class="mt-2 text-lg font-semibold"><?= $id_pokemon ?></p>
-        <br>
-        <div class="flex justify-center">
+<div class="pokemon-container pokemon-container-ficha overflow-y-auto">
+    <div class="container p-4 container-ficha">
+        <div class="flex">
             <?php foreach ($pokemon['tipos'] as $tipo): ?>
                 <div class="tipo-<?= strtolower($tipo) ?> rounded-full px-3 py-1 mx-1">
                     <p style="color: white;"><?= $tipo ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
-        <p>Height: <?= $pokemon['altura'] ?> dm</p>
-        <p>Weight: <?= $pokemon['peso'] ?> kg</p>
-        <p>Description: <?= $pokemon['descripcion'] ?></p>
-        <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-full"
-            id="open-checkbox-modal-btn">+</button>
+
+        <div class="flex justify-center">
+            <img src="<?= $pokemon['art'] ?>" alt="Pokemon" class="object-contain imagen-pkmn">
+        </div>
+
+        <div class="flex justify-end">
+            <button type="button" id="open-checkbox-modal-btn" class="boton-submit-checkbox-addPkmn">+</button>
+            <p id="id-pokemon" name="id_pokemon" class="numero-pkmn"><strong><?= $id_pokemon ?></strong></p>
+        </div>
+
+        <div class="datos-pkmn-container">
+            <p>Height: <span class="datos"><?= $pokemon['altura'] ?> dm</span></p>
+            <p>Weight: <span class="datos"><?= $pokemon['peso'] ?> kg</span></p>
+            <p>Description:</p>
+            <p class="datos"><?= $pokemon['descripcion'] ?></p>
+        </div>
     </div>
 </div>
 
@@ -50,30 +58,66 @@
 
 <style>
     .pokemon-container-ficha {
-        width: 30%;
         margin: 0 auto;
+        border-radius: 20px;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+        height: 70vh;
+        overflow-y: auto;
+        width: 50%;
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .datos-pkmn-container {
+        margin: 0 auto;
+        padding: 20px;
         background-color: white;
         border-radius: 20px;
+        margin-top: 2vh;
+    }
+
+    /*
+    @media (min-width: 769px) {
+        .pokemon-container-ficha {
+           
+        }
+    }*/
+
+    /* para pantallas móviles */
+    @media (max-width: 1240px) {
+        .pokemon-container-ficha {
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .numero-pkmn,
+        .boton-submit-checkbox-addPkmn {
+            font-size: 2em;
+        }
+
+        .imagen-pkmn {}
+
     }
 
 
+    .container-ficha {
+        padding: 0px;
+    }
+
+    .imagen-pkmn {
+        height: 40%;
+        width: 40%;
+    }
+
+    .datos {
+        font-weight: bold;
+        background-color: rgba(0, 255, 255, 0.5);
+        border-radius: 15px;
+    }
 
     /* ... tus otros estilos ... */
-    #id-pokemon {
-        font-size: 2em;
-        background: linear-gradient(to bottom, var(--amarillo), #ffff99);
-        /* Fondo degradado de amarillo a amarillo claro de arriba a abajo */
-        color: darkblue;
-        /* Letra azul oscuro */
-    }
-
-    #open-checkbox-modal-btn {
-        background-color: var(--amarillo);
-        color: black;
-        width: 100%;
-    }
-
-    #open-checkbox-modal-btn:hover {
-        background-color: #ffff99;
-    }
 </style>

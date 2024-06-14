@@ -1,7 +1,6 @@
 /* Fuentes base, colores */
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
-/* test importacion de otra font */
 
 :root {
     --rojo: #ff3432;
@@ -13,7 +12,7 @@
     --negro: #2a2c30;
 }
 
-/* Reset básico */
+/* Reset básico, aunque hay normalize puesto tambien */
 body,
 html {
     margin: 0;
@@ -32,28 +31,13 @@ html {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent background */
     z-index: 9999;
-    /* Ensure preloader is on top */
     display: flex;
     justify-content: center;
     align-items: center;
     transition: opacity 0.5s ease-in-out;
-    /* Transition for fade-out effect */
     background: url('../img/abrir_2.gif') center center / cover no-repeat;
-    /* ya no necesario
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease-in-out;
- */
+
 }
 
 #preloader img {
@@ -126,12 +110,13 @@ body {
 }
 
 /* cambios a furza brutal manual */
+/* esto esta hecho porque por algun motivo cuando la pantalla se estrecha por los lados,
+se crea un margen raro a la derecha. solo lo he solucionado en el tamaño completo de pantalla así */
 @media (min-width: 1536px) {
     .container {
         max-width: 2160px;
     }
 }
-
 
 /*.cambios a furza brutal manual*/
 
@@ -242,7 +227,7 @@ body {
     flex: 1;
 }
 
-/* OTROS: */
+/* BARRA NAV ESTILOS: */
 .search-input,
 .search-button {
     height: 40px;
@@ -459,4 +444,45 @@ body {
 .tipo-unknown {
     background-color: beige;
     color: black;
+}
+
+/* pagina de ficha */
+
+.boton-submit-checkbox-addPkmn {
+    padding-left: 17px;
+    padding-right: 17px;
+    margin: 5px;
+    background-color: rgb(140, 184, 75);
+    color: var(--blanco);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 0.5s, border-color 0.5s;
+    font-size: 40px;
+}
+
+.boton-submit-checkbox-addPkmn:hover {
+    background-color: rgb(160, 209, 86);
+    border-color: rgb(160, 209, 86);
+    color:var(--negro);
+}
+
+.boton-submit-checkbox-addPkmn:focus {
+    cursor: pointer;
+    border: 1px solid rgb(160, 209, 86);
+    border-color: rgb(160, 209, 86);color:var(--negro);
+}
+
+.numero-pkmn {
+    margin: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: darkblue;
+    font-size: 40px;
+    background: linear-gradient(to bottom, var(--amarillo), #fceb58);
+    border-radius: 15px; 
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+              
+                
 }
