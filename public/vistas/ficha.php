@@ -19,6 +19,7 @@
         </div>
 
         <div class="datos-pkmn-container">
+        <p>Name: <span class="datos"><?= ucfirst($pokemon['nombre']) ?></span></p>
             <p>Height: <span class="datos"><?= $pokemon['altura'] ?> dm</span></p>
             <p>Weight: <span class="datos"><?= $pokemon['peso'] ?> kg</span></p>
             <p>Description:</p>

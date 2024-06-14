@@ -45,16 +45,13 @@ array (
 */
 ?>
 <div class="pokemon-container pokemon-container-equipos" style="opacity: 0;">
-  <!-- Iteración de equipos -->
   <?php foreach ($equipos as $equipo): ?>
     <div class="equipo div-equipo">
-      <!-- Estilo añadido para desplazamiento horizontal -->
-      <div class="div-intern-equipo"> <!-- Contenedor centrado para el título y el botón -->
+      <div class="div-intern-equipo"> 
         <div class="div-intern2-equipo">
-          <!-- Estilo para el contenedor del título y botón -->
           <h3 class="nombre-equipo">
             <?= htmlspecialchars($equipo['nombre']) ?>
-          </h3> <!-- Título -->
+          </h3> 
           <a href="#renameModal" class="link-renombre" data-id="<?= htmlspecialchars($equipo['id']) ?>">Rename</a>
           <!-- Botón -->
         </div>

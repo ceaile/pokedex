@@ -9,7 +9,7 @@
             <div class="types-container flex flex-wrap justify-center">
                 <?php foreach ($pokemon['tipos'] as $tipo) : ?>
                     <div class="tipo-<?= strtolower($tipo) ?> rounded-full px-3 py-1 mx-1">
-                        <p style="color: white;"><?= $tipo ?></p>
+                        <p><?= $tipo ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>

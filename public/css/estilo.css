@@ -338,7 +338,6 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    /* Permite que los tipos se envuelvan */
 }
 
 .type-text {
@@ -350,7 +349,7 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     background-color: #f0f0f0;
 }
 
-/* para los tipos, funciona */
+/* para los tipos */
 .tipo-fire {
     background-color: red;
     color: white;
@@ -471,6 +470,15 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 }
 
 
+.container-ficha {
+    padding: 0px;
+}
+
+.imagen-pkmn {
+    width: 40%;
+    height: auto;
+    max-width: 100%;
+}
 
 /* para pantallas móviles */
 @media (max-width: 1240px) {
@@ -484,20 +492,22 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
         font-size: 2em;
     }
 
-    .imagen-pkmn {}
-
+    .imagen-pkmn {
+        width: 80%; 
+        height: auto;
+    }
 }
 
-
-.container-ficha {
-    padding: 0px;
+@media (max-width: 768px) {
+    .imagen-pkmn {
+        width: 90%; /* Aún más grande en pantallas muy pequeñas */
+    }
 }
-
-.imagen-pkmn {
-    height: 40%;
-    width: 40%;
+@media (max-width: 480px) {
+    .imagen-pkmn {
+        width: 100%; /* Ocupa todo el ancho del contenedor en pantallas muy pequeñas */
+    }
 }
-
 .datos {
     font-weight: bold;
     background-color: rgba(0, 255, 255, 0.5);
