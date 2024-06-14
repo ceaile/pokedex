@@ -447,6 +447,62 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 }
 
 /* pagina de ficha */
+.pokemon-container-ficha {
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    height: 70vh;
+    overflow-y: auto;
+    width: 50%;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.datos-pkmn-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 2vh;
+}
+
+
+
+/* para pantallas móviles */
+@media (max-width: 1240px) {
+    .pokemon-container-ficha {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .numero-pkmn,
+    .boton-submit-checkbox-addPkmn {
+        font-size: 2em;
+    }
+
+    .imagen-pkmn {}
+
+}
+
+
+.container-ficha {
+    padding: 0px;
+}
+
+.imagen-pkmn {
+    height: 40%;
+    width: 40%;
+}
+
+.datos {
+    font-weight: bold;
+    background-color: rgba(0, 255, 255, 0.5);
+    border-radius: 15px;
+}
 
 .boton-submit-checkbox-addPkmn {
     padding-left: 17px;
@@ -482,7 +538,159 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     font-size: 40px;
     background: linear-gradient(to bottom, var(--amarillo), #fceb58);
     border-radius: 15px; 
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-              
-                
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;          
 }
+
+
+
+/* pagina de equipos */
+
+.pokemon-container-equipos {
+    background-color: var(--blanco);
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    height: 70vh;
+    overflow-y: auto;
+    width: 70%;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+
+  @media (max-width: 1240px) {
+    .pokemon-container-equipos {
+        margin: 0 auto;
+        width: 90%;
+    }
+    .div-intern-equipo {
+      margin-left:0px;
+      text-align: center;}
+  }
+  
+
+  .div-equipo {
+    margin-bottom: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .div-intern-equipo {
+    text-align: center;
+  }
+
+
+
+  .div-intern2-equipo {
+    border-radius: 15px;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .nombre-equipo {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+
+  .link-renombre {
+    margin-left: 10px;
+    font-size: smaller;
+    text-decoration-line: underline;
+    padding: 5px;
+  }
+
+  .link-renombre:hover {
+    background-color: aqua;
+    border-radius: 15px;
+  }
+
+  .sprite-pkmn {
+    display: block;
+    border-radius: inherit;
+    border-color: black;
+    border-width: 1px;
+    width: 400px;
+    height: auto;
+  }
+
+  .div-seis-pkmns {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .boton-menos-quitar-pkmn {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 2px;
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .boton-add-pkmn {
+    width: 12rem;
+    margin-right: 10px;
+  }
+
+
+  .boton-ver-pkmn {
+    width: 14em;
+    margin-right: 0px;
+    border-radius:15px;
+  }
+
+  .pokemon-img-container {
+    background-color: white;
+    border-radius: 25px;
+    padding: 0px;
+    display: inline-block;
+    position: relative;
+    border-color: var(--negro);
+    border-style: solid;
+  }
+
+  .pokemon-img-container:hover::after {
+    content: '-';
+    font-size: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding-left:30px;
+    padding-right:30px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  @media (max-width: 600px) {
+    .pokemon-img-container img {
+      width: 100px;
+      height: auto;
+    }
+
+    .pokemon-img-container:hover::after {
+      font-size: 10px;
+    }
+
+    .view-button-mobile {
+      display: none;
+    }
+  }
