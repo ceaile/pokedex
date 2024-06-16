@@ -57,11 +57,6 @@
                         <input type="text" name="search" placeholder="search..." class="search-input">
                         <input type="submit" value="Search" class="search-button">
                     </form>
-                    <?php if (!isset($_SESSION['username'])) { ?>
-                        <a href="/login" class="nav-link">Login</a>
-                    <?php } else if (isset($_SESSION['username'])) { ?>
-                        <a href="/logout" class="nav-link">Logout</a>
-                    <?php } ?>
                 </div><!-- .burger -->
             </nav>
         </header>
