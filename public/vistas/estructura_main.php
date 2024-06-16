@@ -52,9 +52,9 @@
                 </div>
                 <div class="mobile-menu" id="mobile-menu">
                     <a href="/home" class="nav-link">Home</a>
-                    <a href="/myteams" class="nav-link">Teams</a>
+                    <a href="/myteams" class="nav-link">My Teams</a>
                     <form action="search" method="GET" class="search-form">
-                        <input type="text" name="search" placeholder="search by name, ID, type..." class="search-input">
+                        <input type="text" name="search" placeholder="search..." class="search-input">
                         <input type="submit" value="Search" class="search-button">
                     </form>
                     <?php if (!isset($_SESSION['username'])) { ?>

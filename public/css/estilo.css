@@ -149,7 +149,6 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 
 .hamburger-menu {
     display: none;
-    /* Oculto por defecto */
     font-size: 24px;
     background: none;
     border: none;
@@ -158,7 +157,6 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 /* Menú móvil */
 .mobile-menu {
     display: none;
-    /* Oculto por defecto */
     flex-direction: column;
     position: absolute;
     top: 60px;
@@ -167,6 +165,7 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 5px;
+    z-index:30;
 }
 
 .mobile-menu .nav-link {
@@ -445,7 +444,7 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     color: black;
 }
 
-/* pagina de ficha: */
+/* pagina de ficha */
 .pokemon-container-ficha {
     margin: 0 auto;
     border-radius: 20px;
@@ -454,9 +453,11 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     height: 70vh;
     overflow-y: auto;
     width: 50%;
+
     ::-webkit-scrollbar {
         display: none;
     }
+
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -493,21 +494,25 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     }
 
     .imagen-pkmn {
-        width: 80%; 
+        width: 80%;
         height: auto;
     }
 }
 
 @media (max-width: 768px) {
     .imagen-pkmn {
-        width: 90%; /* Aún más grande en pantallas muy pequeñas */
+        width: 90%;
+        /* Aún más grande en pantallas muy pequeñas */
     }
 }
+
 @media (max-width: 480px) {
     .imagen-pkmn {
-        width: 100%; /* Ocupa todo el ancho del contenedor en pantallas muy pequeñas */
+        width: 100%;
+        /* Ocupa todo el ancho del contenedor en pantallas muy pequeñas */
     }
 }
+
 .datos {
     font-weight: bold;
     background-color: rgba(0, 255, 255, 0.5);
@@ -531,13 +536,14 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 .boton-submit-checkbox-addPkmn:hover {
     background-color: rgb(160, 209, 86);
     border-color: rgb(160, 209, 86);
-    color:var(--negro);
+    color: var(--negro);
 }
 
 .boton-submit-checkbox-addPkmn:focus {
     cursor: pointer;
     border: 1px solid rgb(160, 209, 86);
-    border-color: rgb(160, 209, 86);color:var(--negro);
+    border-color: rgb(160, 209, 86);
+    color: var(--negro);
 }
 
 .numero-pkmn {
@@ -547,8 +553,8 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     color: darkblue;
     font-size: 40px;
     background: linear-gradient(to bottom, var(--amarillo), #fceb58);
-    border-radius: 15px; 
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;          
+    border-radius: 15px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 
@@ -566,114 +572,119 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     width: 70%;
 
     ::-webkit-scrollbar {
-      display: none;
+        display: none;
     }
 
     -ms-overflow-style: none;
     scrollbar-width: none;
-  }
+}
 
 
-  @media (max-width: 1240px) {
+@media (max-width: 1240px) {
     .pokemon-container-equipos {
         margin: 0 auto;
         width: 90%;
     }
-    .div-intern-equipo {
-      margin-left:0px;
-      text-align: center;}
-  }
-  
 
-  .div-equipo {
+    .div-intern-equipo {
+        margin-left: 0px;
+        text-align: center;
+    }
+}
+
+
+@media (min-width: 769px) and (max-width: 1240px) {
+    .pokemon-container-equipos {
+        
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+    .pokemon-container-equipos {
+        
+        width: 90%;
+    }
+}
+
+
+.div-equipo {
     margin-bottom: 15px;
     overflow-x: auto;
     white-space: nowrap;
-  }
+}
 
-  .div-intern-equipo {
+.div-intern-equipo {
     text-align: center;
-  }
+}
 
 
 
-  .div-intern2-equipo {
+.div-intern2-equipo {
     border-radius: 15px;
     display: inline-block;
     padding: 10px;
     margin-top: 10px;
-  }
+}
 
-  .nombre-equipo {
+.nombre-equipo {
     margin: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
     font-weight: bolder;
-  }
+}
 
-  .link-renombre {
+.link-renombre {
     margin-left: 10px;
     font-size: smaller;
     text-decoration-line: underline;
     padding: 5px;
-  }
+}
 
-  .link-renombre:hover {
+.link-renombre:hover {
     background-color: aqua;
     border-radius: 15px;
-  }
+}
 
-  .sprite-pkmn {
+.sprite-pkmn {
     display: block;
     border-radius: inherit;
     border-color: black;
     border-width: 1px;
     height: auto;
-  }
-/*
-  .div-seis-pkmns {
+}
+
+.div-seis-pkmns {
     text-align: center;
     display: flex;
     align-items: center;
     overflow-x: auto;
-  }*/
-  .div-seis-pkmns {
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
 }
 
-.pokemon-view-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-  .boton-menos-quitar-pkmn {
+.boton-menos-quitar-pkmn {
     display: inline-block;
     margin-right: 10px;
     padding: 2px;
     background-color: white;
     border-radius: 5px;
     position: relative;
-  }
+}
 
-  .boton-add-pkmn {
+.boton-add-pkmn {
     width: 12rem;
     margin-right: 10px;
-  }
+}
 
 
-  .boton-ver-pkmn {
+.boton-ver-pkmn {
     margin-right: 0px;
-    border-radius:15px;
-  }
+    border-radius: 15px;
+}
 
-  .pokemon-img-container {
+.pokemon-img-container {
     background-color: white;
     border-radius: 25px;
     padding: 0px;
@@ -681,16 +692,16 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     position: relative;
     border-color: var(--negro);
     border-style: solid;
-  }
+}
 
-  .pokemon-img-container:hover::after {
+.pokemon-img-container:hover::after {
     content: '-';
     font-size: 50px;
     position: absolute;
     top: 50%;
     left: 50%;
-    padding-left:30px;
-    padding-right:30px;
+    padding-left: 30px;
+    padding-right: 30px;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -698,21 +709,19 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     border-radius: 10px;
     white-space: nowrap;
     z-index: 10;
-  }
+}
 
-  @media (max-width: 600px) {
+@media (max-width: 600px) {
     .pokemon-img-container img {
-      width: 60px;
-      height: auto;
+        width: 60px;
+        height: auto;
     }
 
     .pokemon-img-container:hover::after {
-      font-size: 10px;
+        font-size: 10px;
     }
 
     .view-button-mobile {
-      display: none;
+        display: none;
     }
-  }
-
-  
+}

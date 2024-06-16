@@ -62,10 +62,10 @@ array (
           <?php if ($pokemon['id_pokemon'] != 0) : ?>
             <div class="pokemon-view-container">
               <div class="pokemon-img-container" onclick="confirmarEliminacion(<?= htmlspecialchars($pokemon['id_equipopokemon']) ?>)" class="boton-menos-quitar-pkmn">
-                <img src="<?= htmlspecialchars($pokemon['art']) ?>" id="<?= htmlspecialchars($pokemon['id_equipopokemon']) ?>" name="<?= htmlspecialchars($pokemon['id_equipopokemon']) ?>" class="w-20 sm:w-28 md:w-32 lg:w-36 xl:w-40 sprite-pkmn">
+                <img src="<?= htmlspecialchars($pokemon['art']) ?>" id="<?= htmlspecialchars($pokemon['id_equipopokemon']) ?>" name="<?= htmlspecialchars($pokemon['id_equipopokemon']) ?>" class="w-16 sm:w-24 md:w-20 lg:w-32 xl:w-36 sprite-pkmn">
               </div>
               <a href="card?id_pokemon=<?= htmlspecialchars($pokemon['id_pokemon']) ?>" class="view-button-mobile bg-yellow-500 hover:bg-yellow-700 text-white px-2 py-1 
-          block text-center w-20 sm:w-28 md:w-32 lg:w-36 xl:w-40 boton-ver-pkmn">View</a>
+          block text-center w-16 sm:w-24 md:w-20 lg:w-32 xl:w-36 boton-ver-pkmn">View</a>
             </div>
           <?php endif; ?>
         <?php endforeach; ?>
