@@ -13,7 +13,7 @@
         <input type="submit" value="Sign up" class="input-submit">
         <!-- link a registro -->
         <p style="margin-top: 10px;">Already have an account? </p>
-        <p><strong><a href="/login">Register here</a></strong></p>
+        <p><strong><a href="/login">Login here</a></strong></p>
         <!-- mensaje de error -->
         <?php if (isset($_SESSION['mensaje_signup'])) { ?>
             <p style="color:red;"><?= $_SESSION['mensaje_signup'] ?></p>
