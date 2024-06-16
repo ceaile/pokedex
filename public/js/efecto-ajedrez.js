@@ -11,23 +11,19 @@ window.addEventListener('load', function() {
   
     // Mostrar el preloader durante la duración del GIF menos el tiempo de fade out
     setTimeout(function() {
-        // Iniciar fade out
         preloader.style.opacity = '0';
-  
-        // Ocultar el preloader después del fade out
         setTimeout(function() {
             preloader.style.display = 'none';
-  
-            // Fade in background image
+
             setTimeout(function() {
                 backgroundImage.style.opacity = '1';
-            }, 80); // Ajusta el retraso para la transición de la imagen de fondo
+            }, 80);
   
-            // Fade in content after background image
+           
             setTimeout(function() {
                 content.style.opacity = '1';
-            }, 700); // Ajusta el retraso para la transición del contenido
+            }, 700);
         }, fadeOutDuration);
   
-    }, gifDuration - fadeOutDuration); // Iniciar el fade out antes de que termine el GIF
+    }, gifDuration - fadeOutDuration);
   });

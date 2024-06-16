@@ -630,14 +630,12 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     border-radius: inherit;
     border-color: black;
     border-width: 1px;
-    width: 400px;
     height: auto;
   }
 
   .div-seis-pkmns {
     text-align: center;
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow-x: auto;
   }
@@ -658,7 +656,6 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 
 
   .boton-ver-pkmn {
-    width: 14em;
     margin-right: 0px;
     border-radius:15px;
   }
