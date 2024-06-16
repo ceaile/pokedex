@@ -445,7 +445,7 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     color: black;
 }
 
-/* pagina de ficha */
+/* pagina de ficha: */
 .pokemon-container-ficha {
     margin: 0 auto;
     border-radius: 20px;
@@ -632,13 +632,26 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
     border-width: 1px;
     height: auto;
   }
-
+/*
   .div-seis-pkmns {
     text-align: center;
     display: flex;
     align-items: center;
     overflow-x: auto;
-  }
+  }*/
+  .div-seis-pkmns {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.pokemon-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 
   .boton-menos-quitar-pkmn {
     display: inline-block;
@@ -689,7 +702,7 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
 
   @media (max-width: 600px) {
     .pokemon-img-container img {
-      width: 100px;
+      width: 60px;
       height: auto;
     }
 
@@ -701,3 +714,5 @@ se crea un margen raro a la derecha. solo lo he solucionado en el tamaño comple
       display: none;
     }
   }
+
+  
